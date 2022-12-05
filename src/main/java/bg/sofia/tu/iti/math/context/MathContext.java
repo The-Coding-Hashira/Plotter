@@ -1,8 +1,8 @@
 package bg.sofia.tu.iti.math.context;
 
 import bg.sofia.tu.iti.math.core.calculator.spec.CalculatorSpec;
-import bg.sofia.tu.iti.math.function.Function;
 import bg.sofia.tu.iti.math.expression.input.token.TokenType;
+import bg.sofia.tu.iti.math.function.Function;
 
 import java.util.List;
 

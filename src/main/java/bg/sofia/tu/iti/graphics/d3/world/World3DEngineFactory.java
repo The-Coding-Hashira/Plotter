@@ -20,7 +20,7 @@ public class World3DEngineFactory{
 
     private Camera createCamera(){
         //@formatter:off
-        return new Camera(new Point4D(0, -1, 0),
+        return new Camera(new Point4D(0, -5, 0),
                           new Point4D(0, 0, 0),
                           new Point4D(0, 0, 1));
         //@formatter:on

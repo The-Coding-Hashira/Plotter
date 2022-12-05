@@ -1,11 +1,10 @@
 package bg.sofia.tu.iti.graphics.d3.transform;
 
 import bg.sofia.tu.iti.graphics.d3.geometry.Point4D;
-import javafx.scene.input.MouseEvent;
 
 import java.util.List;
 
-public class WorldTransformManager implements WorldRotationEventListener{
+public class WorldTransformManager{
     private final TransformFactory          transformFactory;
     private       Matrix4x4                 cameraTransform;
     private final Matrix4x4                 projection;
@@ -13,10 +12,7 @@ public class WorldTransformManager implements WorldRotationEventListener{
     private final Matrix4x4                 viewingTransform;
     private       Matrix4x4                 objectTransform;
     private       Matrix4x4                 worldTransform;
-    private       Matrix4x4                 xRotationTransform;
-    private       Matrix4x4                 zRotationTransform;
     private       Matrix4x4                 totalTransform;
-    private final WorldRotationEventHandler worldRotationEventHandler;
 
     public WorldTransformManager(Builder builder){
         //TODO fix this somehow :) just make it work
@@ -28,30 +24,6 @@ public class WorldTransformManager implements WorldRotationEventListener{
         this.objectTransform      = builder.objectTransform;
         this.worldTransform       = builder.worldTransform;
         this.totalTransform       = builder.totalTransform;
-        this.xRotationTransform   = builder.xRotationTransform;
-        this.zRotationTransform   = builder.zRotationTransform;
-        worldRotationEventHandler = new WorldRotationEventHandler();
-        worldRotationEventHandler.addListener(this);
-    }
-
-    @Override
-    public void onXRotation(double degrees){
-        xRotationTransform = transformFactory.createRotationX(degrees);
-        updateTransforms();
-    }
-
-    @Override
-    public void onZRotation(double degrees){
-        zRotationTransform = transformFactory.createRotationZ(degrees);
-        updateTransforms();
-    }
-
-    public void onMousePressed(MouseEvent mouseEvent){
-        worldRotationEventHandler.onMousePressed(mouseEvent);
-    }
-
-    public void onMouseDragged(MouseEvent mouseEvent){
-        worldRotationEventHandler.onMouseDragged(mouseEvent);
     }
 
     public Point4D applyTotalTransform(Point4D point){
@@ -70,14 +42,10 @@ public class WorldTransformManager implements WorldRotationEventListener{
         return worldTransform;
     }
 
-    public Matrix4x4 getTotalTransform(){
-        return totalTransform;
-    }
-
-    private void updateTransforms(){
-        objectTransform = xRotationTransform.multiply(zRotationTransform);
-        worldTransform  = cameraTransform.multiply(objectTransform);
-        totalTransform  = viewingTransform.multiply(worldTransform);
+    public void updateCameraTransform(Matrix4x4 transform){
+        cameraTransform = transform;
+        worldTransform = cameraTransform;
+        totalTransform  = viewingTransform.multiply(cameraTransform);
     }
 
     public static class Builder{
@@ -88,8 +56,6 @@ public class WorldTransformManager implements WorldRotationEventListener{
         private Matrix4x4        viewingTransform;
         private Matrix4x4        objectTransform;
         private Matrix4x4        worldTransform;
-        private Matrix4x4        xRotationTransform;
-        private Matrix4x4        zRotationTransform;
         private Matrix4x4        totalTransform;
 
         public Builder withTransformFactory(TransformFactory transformFactory){
@@ -114,8 +80,6 @@ public class WorldTransformManager implements WorldRotationEventListener{
 
         public WorldTransformManager build(){
             viewingTransform   = viewport.multiply(projection);
-            xRotationTransform = Matrix4x4.generateIdentity();
-            zRotationTransform = Matrix4x4.generateIdentity();
             objectTransform    = Matrix4x4.generateIdentity();
             worldTransform     = Matrix4x4.generateIdentity();
             totalTransform     = viewingTransform.multiply(cameraTransform);

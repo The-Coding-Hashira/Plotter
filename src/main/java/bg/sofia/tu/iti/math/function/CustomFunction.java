@@ -3,9 +3,9 @@ package bg.sofia.tu.iti.math.function;
 import bg.sofia.tu.iti.math.core.Calculation;
 import bg.sofia.tu.iti.math.core.calculator.Calculator;
 import bg.sofia.tu.iti.math.core.input.token.Token;
-import bg.sofia.tu.iti.math.expression.result.ExpressionResult;
-import bg.sofia.tu.iti.math.expression.interpreter.ExpressionInterpreter;
 import bg.sofia.tu.iti.math.expression.input.token.MathElementType;
+import bg.sofia.tu.iti.math.expression.interpreter.ExpressionInterpreter;
+import bg.sofia.tu.iti.math.expression.result.ExpressionResult;
 
 import java.util.ArrayList;
 import java.util.List;

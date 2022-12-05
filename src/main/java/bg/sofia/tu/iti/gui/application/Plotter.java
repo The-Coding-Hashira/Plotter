@@ -2,11 +2,11 @@ package bg.sofia.tu.iti.gui.application;
 
 import bg.sofia.tu.iti.gui.canvas.manager.CanvasManager;
 import bg.sofia.tu.iti.gui.canvas.manager.CanvasManagerFactory;
-import bg.sofia.tu.iti.math.core.Calculation;
-import bg.sofia.tu.iti.math.function.Function;
 import bg.sofia.tu.iti.math.context.MathContext;
 import bg.sofia.tu.iti.math.context.MathContextFactory;
+import bg.sofia.tu.iti.math.core.Calculation;
 import bg.sofia.tu.iti.math.expression.input.parser.FunctionDefinitionParser;
+import bg.sofia.tu.iti.math.function.Function;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;

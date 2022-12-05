@@ -1,15 +1,15 @@
 package bg.sofia.tu.iti.math.expression.interpreter;
 
-import bg.sofia.tu.iti.math.core.Calculation;
-import bg.sofia.tu.iti.math.expression.compiler.InfixToPostfixNotationExpressionCompiler;
 import bg.sofia.tu.iti.math.context.MathContext;
 import bg.sofia.tu.iti.math.context.MathContextFactory;
-import bg.sofia.tu.iti.math.expression.result.ExpressionResult;
-import bg.sofia.tu.iti.math.expression.input.parser.ExpressionParser;
+import bg.sofia.tu.iti.math.core.Calculation;
 import bg.sofia.tu.iti.math.core.calculator.spec.CalculatorSpec;
 import bg.sofia.tu.iti.math.core.input.token.Token;
-import bg.sofia.tu.iti.math.expression.input.token.TokenType;
+import bg.sofia.tu.iti.math.expression.compiler.InfixToPostfixNotationExpressionCompiler;
 import bg.sofia.tu.iti.math.expression.input.Tokenizer;
+import bg.sofia.tu.iti.math.expression.input.parser.ExpressionParser;
+import bg.sofia.tu.iti.math.expression.input.token.TokenType;
+import bg.sofia.tu.iti.math.expression.result.ExpressionResult;
 
 import java.util.List;
 

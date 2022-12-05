@@ -1,13 +1,13 @@
 package bg.sofia.tu.iti.gui.canvas.manager;
 
+import bg.sofia.tu.iti.graph.d2.Graph2D;
 import bg.sofia.tu.iti.graph.d2.axis.AxisColorScheme;
 import bg.sofia.tu.iti.graph.d2.axis.AxisColorSchemeFactory;
 import bg.sofia.tu.iti.graph.d2.plot.PlotAreaColorSchemeFactory;
-import bg.sofia.tu.iti.graph.d2.Graph2D;
-import bg.sofia.tu.iti.gui.canvas.region.HorizontalAxisCanvasRegion;
-import bg.sofia.tu.iti.gui.canvas.region.PlotAreaCanvasRegion;
 import bg.sofia.tu.iti.graphics.d2.world.Dimension2D;
 import bg.sofia.tu.iti.gui.canvas.region.CanvasRegionManager;
+import bg.sofia.tu.iti.gui.canvas.region.HorizontalAxisCanvasRegion;
+import bg.sofia.tu.iti.gui.canvas.region.PlotAreaCanvasRegion;
 import bg.sofia.tu.iti.gui.canvas.region.VerticalAxisCanvasRegion;
 import bg.sofia.tu.iti.math.function.Function;
 import javafx.scene.canvas.GraphicsContext;

@@ -1,8 +1,8 @@
 package bg.sofia.tu.iti.math.operator;
 
-import bg.sofia.tu.iti.math.operator.notation.OperatorNotation;
 import bg.sofia.tu.iti.math.core.Calculation;
 import bg.sofia.tu.iti.math.core.calculator.Calculator;
+import bg.sofia.tu.iti.math.operator.notation.OperatorNotation;
 import bg.sofia.tu.iti.math.operator.type.OperatorType;
 
 import java.util.Stack;

@@ -1,11 +1,11 @@
 package bg.sofia.tu.iti;
 
 import bg.sofia.tu.iti.graphics.d3.geometry.Point4D;
-import bg.sofia.tu.iti.math.function.Function;
-import bg.sofia.tu.iti.math.function.formula.FunctionFormula;
 import bg.sofia.tu.iti.math.context.MathContext;
 import bg.sofia.tu.iti.math.context.MathContextFactory;
 import bg.sofia.tu.iti.math.expression.interpreter.ExpressionInterpreter;
+import bg.sofia.tu.iti.math.function.Function;
+import bg.sofia.tu.iti.math.function.formula.FunctionFormula;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;

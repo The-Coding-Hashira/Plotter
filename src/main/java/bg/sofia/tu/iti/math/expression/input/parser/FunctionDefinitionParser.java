@@ -1,13 +1,13 @@
 package bg.sofia.tu.iti.math.expression.input.parser;
 
-import bg.sofia.tu.iti.math.operator.notation.OperatorNotation;
-import bg.sofia.tu.iti.math.function.CustomFunction;
-import bg.sofia.tu.iti.math.expression.input.token.type.BracketType;
-import bg.sofia.tu.iti.math.core.input.token.Token;
 import bg.sofia.tu.iti.math.core.input.evaluator.TokenizationIntegrityEvaluator;
+import bg.sofia.tu.iti.math.core.input.token.Token;
+import bg.sofia.tu.iti.math.expression.input.Tokenizer;
 import bg.sofia.tu.iti.math.expression.input.token.MathElementType;
 import bg.sofia.tu.iti.math.expression.input.token.TokenType;
-import bg.sofia.tu.iti.math.expression.input.Tokenizer;
+import bg.sofia.tu.iti.math.expression.input.token.type.BracketType;
+import bg.sofia.tu.iti.math.function.CustomFunction;
+import bg.sofia.tu.iti.math.operator.notation.OperatorNotation;
 
 import java.util.ArrayList;
 import java.util.List;

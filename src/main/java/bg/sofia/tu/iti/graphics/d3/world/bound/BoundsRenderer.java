@@ -20,11 +20,11 @@ public class BoundsRenderer{
                    .forEach(quad -> {
                        Point4D n = quad.getNormal();
                        double  d = n.dotProduct(camera.getW());
-//                       System.out.println(n);
-                       if(d <= 0){
+                       //                       System.out.println(n);
+                       if(d >= 0){
                            quad.transform(worldTransformManager.getViewingTransform())
                                .rasterize(graphicsContext3D);
-//                           System.out.println(n);
+                           //                           System.out.println(n);
                        }
                    });
     }

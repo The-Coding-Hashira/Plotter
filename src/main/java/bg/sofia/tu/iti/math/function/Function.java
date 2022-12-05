@@ -1,7 +1,7 @@
 package bg.sofia.tu.iti.math.function;
 
-import bg.sofia.tu.iti.math.operator.type.OperatorType;
 import bg.sofia.tu.iti.math.core.calculator.Calculator;
+import bg.sofia.tu.iti.math.operator.type.OperatorType;
 
 public abstract class Function implements Calculator{
     private final String identifier;

@@ -2,8 +2,8 @@ package bg.sofia.tu.iti.math.expression.input.token.evaluator;
 
 import bg.sofia.tu.iti.math.core.input.evaluator.TokenizationIntegrityEvaluator;
 import bg.sofia.tu.iti.math.core.input.token.Token;
-import bg.sofia.tu.iti.math.expression.input.token.TokenType;
 import bg.sofia.tu.iti.math.expression.input.token.TokenOperations;
+import bg.sofia.tu.iti.math.expression.input.token.TokenType;
 
 import java.util.List;
 

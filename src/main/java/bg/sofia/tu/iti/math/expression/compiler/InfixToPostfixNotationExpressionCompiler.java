@@ -1,10 +1,10 @@
 package bg.sofia.tu.iti.math.expression.compiler;
 
-import bg.sofia.tu.iti.math.core.calculator.spec.CalculatorSpec;
-import bg.sofia.tu.iti.math.operator.type.OperatorType;
 import bg.sofia.tu.iti.math.core.calculator.Calculator;
-import bg.sofia.tu.iti.math.expression.input.token.type.BracketType;
+import bg.sofia.tu.iti.math.core.calculator.spec.CalculatorSpec;
 import bg.sofia.tu.iti.math.expression.input.token.MathElementType;
+import bg.sofia.tu.iti.math.expression.input.token.type.BracketType;
+import bg.sofia.tu.iti.math.operator.type.OperatorType;
 
 import java.util.HashMap;
 import java.util.List;

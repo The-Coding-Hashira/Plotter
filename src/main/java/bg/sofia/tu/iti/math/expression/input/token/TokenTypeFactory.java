@@ -1,17 +1,17 @@
 package bg.sofia.tu.iti.math.expression.input.token;
 
-import bg.sofia.tu.iti.math.function.Function;
+import bg.sofia.tu.iti.math.core.input.token.extractor.RegexTokenValueExtractor;
+import bg.sofia.tu.iti.math.expression.input.extractor.BracketTokenValueExtractor;
 import bg.sofia.tu.iti.math.expression.input.token.evaluator.DummyTokenEvaluator;
 import bg.sofia.tu.iti.math.expression.input.token.evaluator.NumberTokenEvaluator;
-import bg.sofia.tu.iti.math.expression.input.extractor.BracketTokenValueExtractor;
-import bg.sofia.tu.iti.math.operator.input.extractor.OperatorTokenValueExtractor;
-import bg.sofia.tu.iti.math.core.input.token.extractor.RegexTokenValueExtractor;
 import bg.sofia.tu.iti.math.expression.input.token.parser.BracketParser;
 import bg.sofia.tu.iti.math.expression.input.token.parser.IdentifierParser;
 import bg.sofia.tu.iti.math.expression.input.token.parser.NumberParser;
-import bg.sofia.tu.iti.math.operator.input.parser.OperatorParser;
 import bg.sofia.tu.iti.math.expression.input.token.parser.SeparatorParser;
 import bg.sofia.tu.iti.math.expression.input.token.type.SeparatorType;
+import bg.sofia.tu.iti.math.function.Function;
+import bg.sofia.tu.iti.math.operator.input.extractor.OperatorTokenValueExtractor;
+import bg.sofia.tu.iti.math.operator.input.parser.OperatorParser;
 
 import java.util.ArrayList;
 import java.util.List;

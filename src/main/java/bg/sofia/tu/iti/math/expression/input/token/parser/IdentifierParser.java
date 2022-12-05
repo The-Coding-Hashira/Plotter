@@ -1,9 +1,9 @@
 package bg.sofia.tu.iti.math.expression.input.token.parser;
 
-import bg.sofia.tu.iti.math.core.input.token.TokenParser;
-import bg.sofia.tu.iti.math.function.Function;
 import bg.sofia.tu.iti.math.core.calculator.Calculator;
 import bg.sofia.tu.iti.math.core.input.token.Token;
+import bg.sofia.tu.iti.math.core.input.token.TokenParser;
+import bg.sofia.tu.iti.math.function.Function;
 
 import java.util.List;
 

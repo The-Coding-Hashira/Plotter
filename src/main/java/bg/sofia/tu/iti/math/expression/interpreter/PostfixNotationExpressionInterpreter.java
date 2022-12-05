@@ -2,8 +2,8 @@ package bg.sofia.tu.iti.math.expression.interpreter;
 
 import bg.sofia.tu.iti.math.core.Calculation;
 import bg.sofia.tu.iti.math.core.calculator.Calculator;
-import bg.sofia.tu.iti.math.expression.input.token.type.SeparatorType;
 import bg.sofia.tu.iti.math.expression.input.token.MathElementType;
+import bg.sofia.tu.iti.math.expression.input.token.type.SeparatorType;
 
 import java.util.ArrayList;
 import java.util.List;

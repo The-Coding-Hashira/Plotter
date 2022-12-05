@@ -1,9 +1,9 @@
 package bg.sofia.tu.iti.gui.canvas.region;
 
 import bg.sofia.tu.iti.graph.core.axis.Axis;
-import bg.sofia.tu.iti.gui.event.axis.AxisEventHandlerFactory;
-import bg.sofia.tu.iti.gui.event.CanvasRegionEventHandler;
 import bg.sofia.tu.iti.graph.d2.axis.AxisPainter;
+import bg.sofia.tu.iti.gui.event.CanvasRegionEventHandler;
+import bg.sofia.tu.iti.gui.event.axis.AxisEventHandlerFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
 

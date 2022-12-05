@@ -1,12 +1,12 @@
 package bg.sofia.tu.iti.graph.d2;
 
+import bg.sofia.tu.iti.graph.core.axis.tick.Tick;
 import bg.sofia.tu.iti.graph.core.range.CalculationRange;
+import bg.sofia.tu.iti.graph.d2.painter.Graph2DPainter;
 import bg.sofia.tu.iti.gui.canvas.region.AxisCanvasRegion;
 import bg.sofia.tu.iti.gui.canvas.region.HorizontalAxisCanvasRegion;
 import bg.sofia.tu.iti.gui.canvas.region.PlotAreaCanvasRegion;
 import bg.sofia.tu.iti.gui.canvas.region.VerticalAxisCanvasRegion;
-import bg.sofia.tu.iti.graph.d2.painter.Graph2DPainter;
-import bg.sofia.tu.iti.graph.core.axis.tick.Tick;
 import bg.sofia.tu.iti.math.function.Function;
 
 import java.util.ArrayList;

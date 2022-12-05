@@ -89,6 +89,10 @@ public class Matrix4x4{
         return transposedCofactorMatrix.divide(determinant);
     }
 
+    public double[] getElements(){
+        return elements;
+    }
+
     private Matrix4x4 transpose(){
         double[] transposedMatrix = new double[16];
         for(int row = 0; row < 4; row++){

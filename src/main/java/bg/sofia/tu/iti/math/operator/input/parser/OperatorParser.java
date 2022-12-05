@@ -1,5 +1,7 @@
 package bg.sofia.tu.iti.math.operator.input.parser;
 
+import bg.sofia.tu.iti.math.core.calculator.Calculator;
+import bg.sofia.tu.iti.math.core.input.token.Token;
 import bg.sofia.tu.iti.math.core.input.token.TokenParser;
 import bg.sofia.tu.iti.math.operator.Addition;
 import bg.sofia.tu.iti.math.operator.Division;
@@ -7,8 +9,6 @@ import bg.sofia.tu.iti.math.operator.EqualsOperator;
 import bg.sofia.tu.iti.math.operator.Factorial;
 import bg.sofia.tu.iti.math.operator.Multiplication;
 import bg.sofia.tu.iti.math.operator.Power;
-import bg.sofia.tu.iti.math.core.calculator.Calculator;
-import bg.sofia.tu.iti.math.core.input.token.Token;
 import bg.sofia.tu.iti.math.operator.notation.OperatorNotation;
 
 import java.util.List;

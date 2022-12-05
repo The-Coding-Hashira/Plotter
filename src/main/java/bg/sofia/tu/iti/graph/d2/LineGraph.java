@@ -1,8 +1,8 @@
 package bg.sofia.tu.iti.graph.d2;
 
-import bg.sofia.tu.iti.graphics.d2.geometry.Point2D;
 import bg.sofia.tu.iti.graph.core.range.CalculationRange;
 import bg.sofia.tu.iti.graph.core.range.Range;
+import bg.sofia.tu.iti.graphics.d2.geometry.Point2D;
 import bg.sofia.tu.iti.graphics.d2.world.Dimension2D;
 import bg.sofia.tu.iti.math.function.Function;
 import javafx.scene.canvas.GraphicsContext;

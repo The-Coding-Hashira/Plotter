@@ -2,13 +2,13 @@ package bg.sofia.tu.iti.math.context;
 
 import bg.sofia.tu.iti.math.core.calculator.spec.CalculatorAssociativity;
 import bg.sofia.tu.iti.math.core.calculator.spec.CalculatorSpec;
+import bg.sofia.tu.iti.math.expression.input.parser.FunctionDefinitionParser;
+import bg.sofia.tu.iti.math.expression.input.token.TokenTypeFactory;
 import bg.sofia.tu.iti.math.function.Cosine;
 import bg.sofia.tu.iti.math.function.DegreesToRadiansConverter;
 import bg.sofia.tu.iti.math.function.Function;
 import bg.sofia.tu.iti.math.function.Sine;
 import bg.sofia.tu.iti.math.operator.type.OperatorType;
-import bg.sofia.tu.iti.math.expression.input.parser.FunctionDefinitionParser;
-import bg.sofia.tu.iti.math.expression.input.token.TokenTypeFactory;
 
 import java.util.ArrayList;
 import java.util.List;

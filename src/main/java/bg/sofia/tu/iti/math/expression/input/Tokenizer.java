@@ -1,8 +1,8 @@
 package bg.sofia.tu.iti.math.expression.input;
 
-import bg.sofia.tu.iti.math.expression.input.token.evaluator.ExpressionTokenEvaluator;
 import bg.sofia.tu.iti.math.core.input.token.Token;
 import bg.sofia.tu.iti.math.expression.input.token.TokenType;
+import bg.sofia.tu.iti.math.expression.input.token.evaluator.ExpressionTokenEvaluator;
 
 import java.util.ArrayList;
 import java.util.HashMap;

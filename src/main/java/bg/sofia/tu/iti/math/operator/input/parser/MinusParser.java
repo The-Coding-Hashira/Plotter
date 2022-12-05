@@ -1,12 +1,12 @@
 package bg.sofia.tu.iti.math.operator.input.parser;
 
+import bg.sofia.tu.iti.math.core.calculator.Calculator;
+import bg.sofia.tu.iti.math.core.input.token.Token;
 import bg.sofia.tu.iti.math.core.input.token.TokenParser;
+import bg.sofia.tu.iti.math.expression.input.token.MathElementType;
 import bg.sofia.tu.iti.math.expression.input.token.type.BracketType;
 import bg.sofia.tu.iti.math.operator.Negation;
 import bg.sofia.tu.iti.math.operator.Subtraction;
-import bg.sofia.tu.iti.math.core.calculator.Calculator;
-import bg.sofia.tu.iti.math.core.input.token.Token;
-import bg.sofia.tu.iti.math.expression.input.token.MathElementType;
 
 import java.util.List;
 
