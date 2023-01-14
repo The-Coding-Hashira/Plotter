@@ -47,7 +47,6 @@ public class BoundingBox implements Transformable<BoundingBox>,
 
     public void rasterizeOccluded(GraphicsContext3D graphicsContext3D, Camera camera){
         sideQuads.forEach(quad -> {
-            System.out.println(quad.getNormal());
             double d = quad.getNormal()
                            .dotProduct(camera.getW());
             if(d >= 0){

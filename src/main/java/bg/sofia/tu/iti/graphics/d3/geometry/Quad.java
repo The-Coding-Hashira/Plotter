@@ -46,7 +46,7 @@ public class Quad implements Rasterizable{
 //        Point4D line2 = points.get(3)
 //                              .subtract(points.get(0));
 //        return line1.crossProduct(line2);
-        return points.get(0).crossProduct(points.get(1));
+        return points.get(0).crossProduct(points.get(1)).normalize();
     }
 
     public List<Point4D> getPoints(){

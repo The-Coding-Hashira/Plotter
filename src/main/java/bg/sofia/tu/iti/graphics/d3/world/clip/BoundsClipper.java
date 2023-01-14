@@ -16,16 +16,24 @@ public class BoundsClipper{
     }
 
     public List<Point4D> clipAgainstBoundingBox(List<Point4D> points, BoundingBox boundingBox){
-        return clipAgainstPlane(clipAgainstPlane(points, boundingBox.getTopPlane()), boundingBox.getBottomPlane());
+        return clipAgainstBottomPlane(clipAgainstPlane(points,
+                                                       boundingBox.getTopPlane()
+                                                                  .getNormal()), boundingBox.getBottomPlane());
     }
 
-    private List<Point4D> clipAgainstPlane(List<Point4D> points, Quad quad){
+    private List<Point4D> clipAgainstBottomPlane(List<Point4D> points, Quad bottomPlane){
+        return clipAgainstPlane(points,
+                                bottomPlane.getNormal()
+                                           .negate());
+    }
+
+    private List<Point4D> clipAgainstPlane(List<Point4D> points, Point4D normal){
         List<Point4D> clippedPoints = new ArrayList<>();
         Geometry3DUtils.iterateTriangles(points,
                                          ((p0, p1, p2) -> clippedPoints.addAll(triangleClipper.clip(p0,
                                                                                                     p1,
                                                                                                     p2,
-                                                                                                    quad))));
+                                                                                                    normal))));
         return clippedPoints;
     }
 }

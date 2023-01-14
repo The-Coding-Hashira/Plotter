@@ -20,8 +20,7 @@
             </TextArea>
             <Button mnemonicParsing="false" text="Plot" onAction="#onPlotButtonClicked"/>
 
-            <Canvas fx:id="plot" height="653.0" onMousePressed="#plotOnMousePressed"
-                    onMouseDragged="#plotOnMouseDragged" onScroll="#plotOnMouseScrolled"
+            <Canvas
                     scaleX="0.9" scaleY="0.9" scaleZ="0.9" width="1381.0">
                 <VBox.margin>
                     <Insets top="20.0"/>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.canvas.Canvas?>
+<?import javafx.scene.layout.BorderPane?>
+
+<BorderPane xmlns="http://javafx.com/javafx/8.0.351" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bg.sofia.tu.iti.gui.application.Plotter3D">
+    <center>
+        <Canvas fx:id="plot" height="600.0" nodeOrientation="INHERIT" onMouseDragged="#plotOnMouseDragged" onMousePressed="#plotOnMousePressed" onScroll="#plotOnMouseScrolled" width="700.0" BorderPane.alignment="CENTER">
+         <BorderPane.margin>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+         </BorderPane.margin></Canvas>
+    </center>
+</BorderPane>

@@ -1,14 +1,12 @@
 package bg.sofia.tu.iti.graphics.d3.world.clip;
 
 import bg.sofia.tu.iti.graphics.d3.geometry.Point4D;
-import bg.sofia.tu.iti.graphics.d3.geometry.Quad;
 
 import java.util.List;
 
 public class TriangleClipper{
-    public List<Point4D> clip(Point4D p0, Point4D p1, Point4D p2, Quad clippingPlane){
-        Point4D  clippingPlaneNormal = clippingPlane.getNormal();
-        ClipData clipData            = generateClipData(p0, p1, p2, clippingPlaneNormal);
+    public List<Point4D> clip(Point4D p0, Point4D p1, Point4D p2, Point4D clippingPlaneNormal){
+        ClipData clipData = generateClipData(p0, p1, p2, clippingPlaneNormal);
         if(clipData.getAcceptedPoints()
                    .size() == 3 || clipData.getRejectedPoints()
                                            .size() == 3){

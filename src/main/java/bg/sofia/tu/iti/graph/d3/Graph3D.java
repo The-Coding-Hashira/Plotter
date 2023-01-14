@@ -57,7 +57,6 @@ public class Graph3D{
                 data.add(new Point4D(x, y, z));
             }
         }
-        System.out.println("after calculation " + data.size());
     }
 
     public List<Point4D> normalizeDataPoints(){

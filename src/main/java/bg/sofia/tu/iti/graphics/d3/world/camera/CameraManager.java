@@ -1,6 +1,5 @@
 package bg.sofia.tu.iti.graphics.d3.world.camera;
 
-import bg.sofia.tu.iti.graphics.d3.geometry.Point4D;
 import bg.sofia.tu.iti.graphics.d3.transform.Matrix4x4;
 import javafx.scene.input.MouseEvent;
 

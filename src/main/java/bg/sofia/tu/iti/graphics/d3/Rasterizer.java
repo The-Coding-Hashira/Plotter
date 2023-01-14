@@ -32,20 +32,6 @@ public class Rasterizer{
         clearDepthBuffer();
     }
 
-    //
-    //        for(int i = 0, flag = 1; i < ts.size(); i++, flag *= -1){
-    //           t = ts.get(i);
-    //            drawCurveForTriangle(t, flag);
-    //        }
-    //        for(Line3D l : lines){
-    //            l = l.transform(worldOriginTransform);
-    //            //            rasterizer.drawLine(l.getA(), l.getB(), toInt(l.getColor()));
-    //        }
-
-    //    public void drawTriangle(Triangle triangle){
-    //        fillTriangle(triangle);
-    //        strokeTriangle(triangle);
-    //    }
     public void strokeTriangle(Point4D p0, Point4D p1, Point4D p2){
         int color = 0xff000000;
         drawLine(p0.getX(), p0.getY(), p0.getZ(), p1.getX(), p1.getY(), p1.getZ(), color);
@@ -210,27 +196,6 @@ public class Rasterizer{
         pixelWriter.setPixels(0, 0, width, height, pixelFormat, frameBuffer, 0, width);
         return writableImage;
     }
-    //    private int interpolateColor(final double u, final double v, final double w, final Color c0, final Color c1,
-    //                                 final Color c2){
-    //        final double c0a = c0.getOpacity() * u;
-    //        final double c0r = c0.getRed() * u;
-    //        final double c0g = c0.getGreen() * u;
-    //        final double c0b = c0.getBlue() * u;
-    //        final double c1a = c1.getOpacity() * v;
-    //        final double c1r = c1.getRed() * v;
-    //        final double c1g = c1.getGreen() * v;
-    //        final double c1b = c1.getBlue() * v;
-    //        final double c2a = c2.getOpacity() * w;
-    //        final double c2r = c2.getRed() * w;
-    //        final double c2g = c2.getGreen() * w;
-    //        final double c2b = c2.getBlue() * w;
-    //        final int    a   = (int) ((c0a + c1a + c2a) * 255);
-    //        final int    r   = (int) ((c0r + c1r + c2r) * 255);
-    //        final int    g   = (int) ((c0g + c1g + c2g) * 255);
-    //        final int    b   = (int) ((c0b + c1b + c2b) * 255);
-    //        //TODO check java COlor implementation for interpolation
-    //        return (a << 24) | (r << 16) | (g << 8) | b;
-    //    }
 
     private void clearDepthBuffer(){
         for(int y = 0; y < height; y++){

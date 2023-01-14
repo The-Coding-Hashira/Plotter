@@ -28,17 +28,16 @@ public class Plot3DCanvasManager implements CanvasManager{
         backgroundColor   = graphicsContext3D.toInt(ColorScheme.BEIGE_YELLOWISH);
         graph3D.calculateData();
         points = GraphUtils.mapToHeat(world3DEngine.convertToWorldPoints(graph3D.normalizeDataPoints()));
-        System.out.println("after clipping " + points.size());
     }
 
     @Override
     public void onMousePressed(MouseEvent mouseEvent){
-        world3DEngine.onMousePressed(mouseEvent);
+//        world3DEngine.onMousePressed(mouseEvent);
     }
 
     @Override
     public void onMouseDragged(MouseEvent mouseEvent){
-        world3DEngine.onMouseDragged(mouseEvent);
+//        world3DEngine.onMouseDragged(mouseEvent);
         paint();
     }
 

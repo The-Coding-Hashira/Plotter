@@ -42,6 +42,10 @@ public class WorldTransformManager{
         return worldTransform;
     }
 
+    public Matrix4x4 getTotalTransform(){
+        return totalTransform;
+    }
+
     public void updateCameraTransform(Matrix4x4 transform){
         cameraTransform = transform;
         worldTransform = cameraTransform;

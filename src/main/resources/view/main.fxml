@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
+<BorderPane xmlns="http://javafx.com/javafx/8.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bg.sofia.tu.iti.gui.application.PlotterApplicationController">
+   <center>
+         <TabPane fx:id="tabPane" prefHeight="654.0" prefWidth="1366.0" tabClosingPolicy="UNAVAILABLE">
+             <tabs>
+                 <Tab text="Plot" />
+                 <Tab text="Solution" />
+             </tabs>
+         </TabPane>
+   </center>
+   <top>
+      <BorderPane prefHeight="100.0" prefWidth="1366.0" BorderPane.alignment="CENTER">
+         <center>
+                 <TextArea fx:id="expressionTextArea" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="100.0" prefWidth="1253.0" text="sin(x)" BorderPane.alignment="CENTER">
+                     <font>
+                         <Font name="Calibri" size="34.0" />
+                     </font>
+                 </TextArea>
+         </center>
+         <right>
+                 <Button alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#onPlotButtonClicked" prefHeight="100.0" prefWidth="100.0" text="Plot" textAlignment="CENTER" BorderPane.alignment="CENTER" />
+         </right>
+      </BorderPane>
+   </top>
+</BorderPane>

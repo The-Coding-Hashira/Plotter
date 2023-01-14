@@ -32,7 +32,6 @@ public class Geometry3DUtils{
                 sortedPoints.add(gridDataPoints.get(p2));
             }
         }
-        System.out.println("after sorting " + sortedPoints.size());
         return sortedPoints;
     }
 

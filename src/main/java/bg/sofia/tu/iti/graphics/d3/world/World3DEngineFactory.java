@@ -10,6 +10,8 @@ import bg.sofia.tu.iti.graphics.d3.world.camera.CameraManager;
 import javafx.scene.paint.Color;
 
 public class World3DEngineFactory{
+    private static final Point4D worldOrigin = new Point4D(0, 0, 0);
+
     public World3DEngine create(double width, double height){
         //TODO use camera with proper UP vector
         Camera camera = createCamera();
@@ -20,14 +22,14 @@ public class World3DEngineFactory{
 
     private Camera createCamera(){
         //@formatter:off
-        return new Camera(new Point4D(0, -5, 0),
-                          new Point4D(0, 0, 0),
+        return new Camera(worldOrigin.add(new Point4D(-3,-5,3)),
+                          worldOrigin,
                           new Point4D(0, 0, 1));
         //@formatter:on
     }
 
     private BoundingBox createBoundingBox(){
-        return new BoundingBoxFactory().createBoundingBox(new Point4D(0, 0, 0), 1, Color.BLACK);
+        return new BoundingBoxFactory().createBoundingBox(worldOrigin, 1, Color.BLACK);
     }
 
     private WorldTransformManager createWorldTransformManager(Camera camera, double width, double height){

@@ -17,6 +17,7 @@ public class GraphUtils{
     }
 
     public static List<Point4D> mapToHeat(List<Point4D> points){
+        //TODO sort the points and have a safe get cuz it blew up
         HeatMap heatMap = new HeatMap(Color.BLUE,
                                       Color.RED,
                                       points.stream()
