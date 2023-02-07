@@ -22,9 +22,7 @@ public class BoundsClipper{
     }
 
     private List<Point4D> clipAgainstBottomPlane(List<Point4D> points, Quad bottomPlane){
-        return clipAgainstPlane(points,
-                                bottomPlane.getNormal()
-                                           .negate());
+        return clipAgainstPlane(points, bottomPlane.getNormal());
     }
 
     private List<Point4D> clipAgainstPlane(List<Point4D> points, Point4D normal){

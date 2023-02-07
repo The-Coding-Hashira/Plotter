@@ -1,19 +1,12 @@
 package bg.sofia.tu.iti;
 
-import bg.sofia.tu.iti.math.context.MathContext;
 import bg.sofia.tu.iti.math.context.MathContextFactory;
 import bg.sofia.tu.iti.math.expression.input.parser.FunctionDefinitionParser;
-import bg.sofia.tu.iti.math.expression.input.token.TokenTypeFactory;
-import bg.sofia.tu.iti.math.expression.interpreter.ExpressionInterpreter;
 import bg.sofia.tu.iti.math.function.Function;
-import bg.sofia.tu.iti.math.function.formula.FunctionFormula;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import java.util.Stack;
 
 public class PlotterApplication extends Application{

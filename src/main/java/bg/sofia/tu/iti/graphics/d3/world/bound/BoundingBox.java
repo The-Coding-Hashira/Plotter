@@ -46,13 +46,13 @@ public class BoundingBox implements Transformable<BoundingBox>,
     }
 
     public void rasterizeOccluded(GraphicsContext3D graphicsContext3D, Camera camera){
-        sideQuads.forEach(quad -> {
-            double d = quad.getNormal()
-                           .dotProduct(camera.getW());
-            if(d >= 0){
+        quads.forEach(quad -> {
+            if(quad.getNormal()
+                   .dotProduct(camera.getW()) >= 0){
                 quad.rasterize(graphicsContext3D);
             }
         });
+        //TODO check this cuz sketchy af, these normals n shit dont make sense, idk if rendering is correct
     }
 
     public Point4D getPosition(){

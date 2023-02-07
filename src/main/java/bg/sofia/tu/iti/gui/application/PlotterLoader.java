@@ -1,9 +1,7 @@
 package bg.sofia.tu.iti.gui.application;
 
 import bg.sofia.tu.iti.FXMLUtil;
-import bg.sofia.tu.iti.math.context.MathContextFactory;
 import bg.sofia.tu.iti.math.expression.input.FunctionFactory;
-import bg.sofia.tu.iti.math.expression.input.parser.FunctionDefinitionParser;
 import bg.sofia.tu.iti.math.function.Function;
 import javafx.scene.control.Tab;
 

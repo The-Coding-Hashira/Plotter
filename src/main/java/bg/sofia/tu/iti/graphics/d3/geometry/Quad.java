@@ -41,12 +41,11 @@ public class Quad implements Rasterizable{
     }
 
     public Point4D getNormal(){
-//        Point4D line1 = points.get(1)
-//                              .subtract(points.get(0));
-//        Point4D line2 = points.get(3)
-//                              .subtract(points.get(0));
-//        return line1.crossProduct(line2);
-        return points.get(0).crossProduct(points.get(1)).normalize();
+        Point4D line1 = points.get(1)
+                              .subtract(points.get(0));
+        Point4D line2 = points.get(3)
+                              .subtract(points.get(0));
+        return line1.crossProduct(line2).normalize();
     }
 
     public List<Point4D> getPoints(){

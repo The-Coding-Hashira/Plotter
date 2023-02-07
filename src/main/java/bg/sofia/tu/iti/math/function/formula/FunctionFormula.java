@@ -1,6 +1,5 @@
 package bg.sofia.tu.iti.math.function.formula;
 
-import bg.sofia.tu.iti.math.context.MathContextFactory;
 import bg.sofia.tu.iti.math.expression.input.parser.FunctionDefinitionParser;
 import bg.sofia.tu.iti.math.expression.input.token.TokenType;
 import bg.sofia.tu.iti.math.function.Function;
