@@ -37,7 +37,7 @@ public class PostfixNotationExpressionInterpreter{
 
     private Calculation interpretCalculator(Calculator calculator, Stack<Double> result){
         Stack<Double> arguments = new Stack<>();
-        for(int i = 0; i < calculator.getNumberOfArguments(); i++){
+        for(int i = 0; i < calculator.getNumberOfParameters(); i++){
             arguments.push(result.pop());
         }
         return calculator.calculate(arguments);

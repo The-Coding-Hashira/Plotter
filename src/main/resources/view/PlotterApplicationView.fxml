@@ -13,7 +13,7 @@
     <VBox prefHeight="800.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
           AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <children>
-            <TextArea fx:id="expressionTextArea" prefHeight="200.0" prefWidth="200.0" text="sin(x)">
+            <TextArea fx:id="expressionTextArea" prefHeight="200.0" prefWidth="200.0" text="sin(x)+cos(y)">
                 <font>
                     <Font name="Calibri" size="34.0"/>
                 </font>

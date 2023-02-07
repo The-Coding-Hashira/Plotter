@@ -27,8 +27,18 @@ public class MinusParser implements TokenParser{
             return createNegateCalculator();
         }
         if(tokens.get(tokenIndex - 1)
+                 .getValue()
+                 .contentEquals(BracketType.CLOSE_BRACKET.getNotation())){
+            return createSubtractionCalculator();
+        }
+        if(tokens.get(tokenIndex - 1)
                  .getType()
                  .contentEquals(MathElementType.NUMBER.toString())){
+            return createSubtractionCalculator();
+        }
+        if(tokens.get(tokenIndex - 1)
+                 .getType()
+                 .contentEquals(MathElementType.IDENTIFIER.toString())){
             return createSubtractionCalculator();
         }
         throw new RuntimeException("Unknown minus");

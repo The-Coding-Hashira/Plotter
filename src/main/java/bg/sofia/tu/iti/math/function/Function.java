@@ -5,11 +5,11 @@ import bg.sofia.tu.iti.math.operator.type.OperatorType;
 
 public abstract class Function implements Calculator{
     private final String identifier;
-    private final int    numberOfArguments;
+    private final int    numberOfParameters;
 
-    public Function(String identifier, int numberOfArguments){
-        this.identifier        = identifier;
-        this.numberOfArguments = numberOfArguments;
+    public Function(String identifier, int numberOfParameters){
+        this.identifier         = identifier;
+        this.numberOfParameters = numberOfParameters;
     }
 
     @Override
@@ -18,8 +18,8 @@ public abstract class Function implements Calculator{
     }
 
     @Override
-    public int getNumberOfArguments(){
-        return numberOfArguments;
+    public int getNumberOfParameters(){
+        return numberOfParameters;
     }
 
     public String getIdentifier(){

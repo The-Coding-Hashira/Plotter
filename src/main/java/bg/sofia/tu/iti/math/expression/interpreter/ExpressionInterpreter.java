@@ -3,6 +3,7 @@ package bg.sofia.tu.iti.math.expression.interpreter;
 import bg.sofia.tu.iti.math.context.MathContext;
 import bg.sofia.tu.iti.math.context.MathContextFactory;
 import bg.sofia.tu.iti.math.core.Calculation;
+import bg.sofia.tu.iti.math.core.calculator.Calculator;
 import bg.sofia.tu.iti.math.core.calculator.spec.CalculatorSpec;
 import bg.sofia.tu.iti.math.core.input.token.Token;
 import bg.sofia.tu.iti.math.expression.compiler.InfixToPostfixNotationExpressionCompiler;
@@ -42,6 +43,11 @@ public class ExpressionInterpreter{
         return interpret(buildExpressionDescription(expression), expression);
     }
 
+    public ExpressionResult interpretCalculators(List<Calculator> calculators){
+        return buildExpressionResult("",
+                                     postfixExpressionInterpreter.interpret(infixToPostfixCompiler.compile(calculators)));
+    }
+
     private String buildExpressionDescription(List<Token> expression){
         StringBuilder description = new StringBuilder();
         for(Token token : expression){
@@ -52,11 +58,14 @@ public class ExpressionInterpreter{
 
     private ExpressionResult interpret(String expression, List<Token> tokenizedExpression){
         return buildExpressionResult(expression,
-                                     postfixExpressionInterpreter.interpret(infixToPostfixCompiler.compile(expressionParser.parse(tokenizedExpression))));
+                                     postfixExpressionInterpreter.interpret(infixToPostfixCompiler.compile(
+                                             expressionParser.parse(tokenizedExpression))));
     }
 
     private ExpressionResult buildExpressionResult(String expression, List<Calculation> calculations){
-        return new ExpressionResult(expression, calculations, calculations.get(calculations.size() - 1)
-                                                                          .getResult());
+        return new ExpressionResult(expression,
+                                    calculations,
+                                    calculations.get(calculations.size() - 1)
+                                                .getResult());
     }
 }

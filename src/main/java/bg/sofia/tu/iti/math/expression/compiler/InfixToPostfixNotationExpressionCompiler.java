@@ -19,6 +19,7 @@ public class InfixToPostfixNotationExpressionCompiler{
         compileHandlers         = new HashMap<>();
         //TODO sort this mess out with the different enums here
         compileHandlers.put(MathElementType.NUMBER.toString(), this::handleConstantCalculation);
+        compileHandlers.put(OperatorType.PARAMETER.toString(), this::handleConstantCalculation);
         compileHandlers.put(OperatorType.FUNCTION.toString(), this::handleFunctionCalculation);
         compileHandlers.put(BracketType.OPEN_BRACKET.toString(), this::handleOpenBracketCalculation);
         compileHandlers.put(BracketType.CLOSE_BRACKET.toString(), this::handleCloseBracketCalculation);

@@ -6,7 +6,7 @@ import java.util.Stack;
 
 public abstract class UnaryMathCalculator extends MathCalculator{
     @Override
-    public int getNumberOfArguments(){
+    public int getNumberOfParameters(){
         return 1;
     }
 

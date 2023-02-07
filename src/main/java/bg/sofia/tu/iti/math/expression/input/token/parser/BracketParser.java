@@ -33,7 +33,7 @@ public class BracketParser implements TokenParser{
             }
 
             @Override
-            public int getNumberOfArguments(){
+            public int getNumberOfParameters(){
                 return 0;
             }
 

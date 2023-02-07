@@ -6,7 +6,7 @@ import java.util.Stack;
 
 public abstract class BinaryMathCalculator extends MathCalculator{
     @Override
-    public int getNumberOfArguments(){
+    public int getNumberOfParameters(){
         return 2;
     }
 

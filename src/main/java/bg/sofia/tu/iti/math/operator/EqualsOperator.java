@@ -14,7 +14,7 @@ public class EqualsOperator implements Calculator{
     }
 
     @Override
-    public int getNumberOfArguments(){
+    public int getNumberOfParameters(){
         return 0;
     }
 

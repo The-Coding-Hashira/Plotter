@@ -1,16 +1,22 @@
 package bg.sofia.tu.iti.math.expression.input.parser;
 
+import bg.sofia.tu.iti.math.core.calculator.Calculator;
 import bg.sofia.tu.iti.math.core.input.evaluator.TokenizationIntegrityEvaluator;
 import bg.sofia.tu.iti.math.core.input.token.Token;
+import bg.sofia.tu.iti.math.expression.ParameterValueSupplier;
 import bg.sofia.tu.iti.math.expression.input.Tokenizer;
 import bg.sofia.tu.iti.math.expression.input.token.MathElementType;
 import bg.sofia.tu.iti.math.expression.input.token.TokenType;
 import bg.sofia.tu.iti.math.expression.input.token.type.BracketType;
 import bg.sofia.tu.iti.math.function.CustomFunction;
+import bg.sofia.tu.iti.math.function.Parameter;
 import bg.sofia.tu.iti.math.operator.notation.OperatorNotation;
+import bg.sofia.tu.iti.math.operator.type.OperatorType;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class FunctionDefinitionParser{
     private final List<TokenType> tokenTypes;
@@ -22,12 +28,42 @@ public class FunctionDefinitionParser{
     public CustomFunction parse(String definition){
         List<Token> tokens = new Tokenizer(tokenTypes).tokenize(definition);
         new TokenizationIntegrityEvaluator().evaluate(tokens, definition);
-        //TODO optimize: pass cut string to only express id args and expr, maybe after extract id cut the id, after
-        // extract args cut the args and leave expr only
-        String       identifier = extractIdentifier(tokens);
-        List<String> arguments  = extractArguments(tokens);
-        List<Token>  expression = extractExpression(tokens);
-        return new CustomFunction(identifier, arguments, expression);
+        if(definition.contains(OperatorNotation.EQUALS.getNotation())){
+            String                       identifier              = extractIdentifier(tokens);
+            List<String>                 parameterIdentifiers    = extractParameterIdentifiers(tokens);
+            List<Calculator>             expression              = extractExpression(tokens);
+            List<ParameterValueSupplier> parameterValueSuppliers = setUpParameters(parameterIdentifiers, expression);
+            return new CustomFunction(identifier, parameterValueSuppliers, expression);
+        }
+        else{
+            List<String>                 parameterIdentifiers    = Arrays.asList("x", "y");
+            List<Calculator>             expression              = new ExpressionParser(tokenTypes).parse(tokens);
+            List<ParameterValueSupplier> parameterValueSuppliers = setUpParameters(parameterIdentifiers, expression);
+            return new CustomFunction("", parameterValueSuppliers, expression);
+        }
+//        String                       identifier              = extractIdentifier(tokens);
+//        List<String>                 parameterIdentifiers    = extractParameterIdentifiers(tokens);
+//        List<Calculator>             expression              = extractExpression(tokens);
+//        List<ParameterValueSupplier> parameterValueSuppliers = setUpParameters(parameterIdentifiers, expression);
+//        return new CustomFunction(identifier, parameterValueSuppliers, expression);
+    }
+
+    private List<ParameterValueSupplier> setUpParameters(List<String> parameterIdentifiers,
+                                                         List<Calculator> expression){
+        List<ParameterValueSupplier> parameterValueSuppliers = new ArrayList<>(parameterIdentifiers.size());
+        List<Calculator> parameters = expression.stream()
+                                                .filter(calculator -> calculator.getType()
+                                                                                .contentEquals(OperatorType.PARAMETER.toString()))
+                                                .collect(Collectors.toList());
+        parameterIdentifiers.forEach(identifier -> parameterValueSuppliers.add(new ParameterValueSupplier(parameters.stream()
+                                                                                                                    .filter(calculator -> ((Parameter) calculator).getIdentifier()
+                                                                                                                                                                  .contentEquals(
+                                                                                                                                                                          identifier))
+                                                                                                                    .map(calculator -> (Parameter) calculator)
+                                                                                                                    .collect(
+                                                                                                                            Collectors.toList()))));
+
+        return parameterValueSuppliers;
     }
 
     private String extractIdentifier(List<Token> tokens){
@@ -41,8 +77,8 @@ public class FunctionDefinitionParser{
                                                                                 .getType());
     }
 
-    private List<String> extractArguments(List<Token> tokens){
-        List<String> arguments = new ArrayList<>();
+    private List<String> extractParameterIdentifiers(List<Token> tokens){
+        List<String> parameters = new ArrayList<>();
         if(!tokens.get(1)
                   .getValue()
                   .contentEquals(BracketType.OPEN_BRACKET.getNotation())){
@@ -57,25 +93,25 @@ public class FunctionDefinitionParser{
             if(tokens.get(i)
                      .getType()
                      .contentEquals(MathElementType.IDENTIFIER.toString())){
-                arguments.add(tokens.get(i)
-                                    .getValue());
+                parameters.add(tokens.get(i)
+                                     .getValue());
                 continue;
             }
             if(tokens.get(i)
                      .getType()
                      .contentEquals(MathElementType.NUMBER.toString())){
-                throw new RuntimeException("Cannot have a number as a function argument in the function definition");
+                throw new RuntimeException("Cannot have a number as a function parameter in the function definition");
             }
             if(!tokens.get(i)
                       .getType()
                       .contentEquals(MathElementType.SEPARATOR.toString())){
-                throw new RuntimeException("Invalid function definition, expected argument not separator");
+                throw new RuntimeException("Invalid function definition, expected parameter, got separator");
             }
         }
-        return arguments;
+        return parameters;
     }
 
-    private List<Token> extractExpression(List<Token> tokens){
+    private List<Calculator> extractExpression(List<Token> tokens){
         for(int i = 0; i < tokens.size(); i++){
             if(tokens.get(i)
                      .getType()
@@ -83,10 +119,10 @@ public class FunctionDefinitionParser{
                 if(tokens.get(i)
                          .getValue()
                          .contentEquals(OperatorNotation.EQUALS.getNotation())){
-                    return tokens.subList(i + 1, tokens.size());
+                    return new ExpressionParser(tokenTypes).parse(tokens.subList(i + 1, tokens.size()));
                 }
             }
         }
-        throw new RuntimeException("invalid function definition");
+        throw new RuntimeException("Invalid function definition");
     }
 }

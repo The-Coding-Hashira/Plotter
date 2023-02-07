@@ -16,9 +16,9 @@ public class PlotterApplicationController implements Initializable{
     public static final String SOLUTION_TAB = "Solution";
 
     @FXML
-    private TextArea       expressionTextArea;
+    private TextArea      expressionTextArea;
     @FXML
-    private TabPane        tabPane;
+    private TabPane       tabPane;
     private List<Tab>     tabs;
     private PlotterLoader plotterLoader;
 

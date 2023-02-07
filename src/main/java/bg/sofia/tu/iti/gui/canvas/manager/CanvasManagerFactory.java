@@ -16,12 +16,12 @@ public class CanvasManagerFactory{
 
     public CanvasManager createCanvasManager(Function function){
         //TODO if integral new AreaGraph else LineGraph
-        if(function.getNumberOfArguments() == 1){
+        if(function.getNumberOfParameters() == 1){
             return new Plot2DCanvasManager(canvasDimension, graphicsContext, function);
         }
-        if(function.getNumberOfArguments() == 2){
+        if(function.getNumberOfParameters() == 2){
             return new Plot3DCanvasManager(canvasDimension, graphicsContext, function);
         }
-        throw new IllegalArgumentException("Compatible functions are with 1 and 2 args, got " + function.getNumberOfArguments() + " args.");
+        throw new IllegalArgumentException("Compatible functions are with 1 and 2 args, got " + function.getNumberOfParameters() + " args.");
     }
 }

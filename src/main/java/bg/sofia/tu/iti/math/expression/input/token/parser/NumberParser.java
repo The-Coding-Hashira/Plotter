@@ -13,21 +13,22 @@ public class NumberParser implements TokenParser{
     @Override
     public Calculator parse(int tokenIndex, List<Token> tokens){
         return new Calculator(){
+            private final double value = Double.parseDouble(tokens.get(tokenIndex)
+                                                                  .getValue());
+
             @Override
             public String getType(){
                 return MathElementType.NUMBER.toString();
             }
 
             @Override
-            public int getNumberOfArguments(){
+            public int getNumberOfParameters(){
                 return 0;
             }
 
             @Override
             public Calculation calculate(Stack<Double> arguments){
-                return new Calculation(tokens.get(tokenIndex)
-                                             .getValue(), Double.parseDouble(tokens.get(tokenIndex)
-                                                                                   .getValue()));
+                return new Calculation(Double.toString(value), value);
             }
         };
     }

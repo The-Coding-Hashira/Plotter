@@ -19,7 +19,7 @@ public class SeparatorParser implements TokenParser{
             }
 
             @Override
-            public int getNumberOfArguments(){
+            public int getNumberOfParameters(){
                 return 0;
             }
 

@@ -19,7 +19,7 @@
    <top>
       <BorderPane prefHeight="100.0" prefWidth="1366.0" BorderPane.alignment="CENTER">
          <center>
-                 <TextArea fx:id="expressionTextArea" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="100.0" prefWidth="1253.0" text="sin(x)" BorderPane.alignment="CENTER">
+                 <TextArea fx:id="expressionTextArea" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="100.0" prefWidth="1253.0" text="sin(x)+cos(y)" BorderPane.alignment="CENTER">
                      <font>
                          <Font name="Calibri" size="34.0" />
                      </font>

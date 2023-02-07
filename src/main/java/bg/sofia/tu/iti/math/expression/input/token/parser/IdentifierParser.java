@@ -4,6 +4,7 @@ import bg.sofia.tu.iti.math.core.calculator.Calculator;
 import bg.sofia.tu.iti.math.core.input.token.Token;
 import bg.sofia.tu.iti.math.core.input.token.TokenParser;
 import bg.sofia.tu.iti.math.function.Function;
+import bg.sofia.tu.iti.math.function.Parameter;
 
 import java.util.List;
 
@@ -16,14 +17,15 @@ public class IdentifierParser implements TokenParser{
 
     @Override
     public Calculator parse(int tokenIndex, List<Token> tokens){
+        Token token = tokens.get(tokenIndex);
         for(Function function : functions){
             if(function.getIdentifier()
-                       .contentEquals(tokens.get(tokenIndex)
-                                            .getValue())){
+                       .contentEquals(token.getValue())){
                 return function;
             }
         }
-        throw new RuntimeException("Unknown Identifier:" + tokens.get(tokenIndex)
-                                                                 .getValue());
+        return new Parameter(token.getValue());
+//        throw new RuntimeException("Unknown Identifier:" + tokens.get(tokenIndex)
+//                                                                   .getValue());
     }
 }

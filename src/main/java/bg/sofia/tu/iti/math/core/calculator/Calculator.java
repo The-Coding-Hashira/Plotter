@@ -7,7 +7,7 @@ import java.util.Stack;
 public interface Calculator{
     String getType();
 
-    int getNumberOfArguments();
+    int getNumberOfParameters();
 
     Calculation calculate(Stack<Double> arguments);
 }
