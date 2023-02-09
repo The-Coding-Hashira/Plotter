@@ -11,7 +11,7 @@ public class WorldTransformManager{
     private final Matrix4x4                 viewport;
     private final Matrix4x4                 viewingTransform;
     private       Matrix4x4                 objectTransform;
-    private       Matrix4x4                 worldTransform;
+//    private       Matrix4x4                 worldTransform;
     private       Matrix4x4                 totalTransform;
 
     public WorldTransformManager(Builder builder){
@@ -22,7 +22,7 @@ public class WorldTransformManager{
         this.viewport             = builder.viewport;
         this.viewingTransform     = builder.viewingTransform;
         this.objectTransform      = builder.objectTransform;
-        this.worldTransform       = builder.worldTransform;
+//        this.worldTransform       = builder.worldTransform;
         this.totalTransform       = builder.totalTransform;
     }
 
@@ -38,9 +38,9 @@ public class WorldTransformManager{
         return viewingTransform;
     }
 
-    public Matrix4x4 getWorldTransform(){
-        return worldTransform;
-    }
+//    public Matrix4x4 getWorldTransform(){
+//        return worldTransform;
+//    }
 
     public Matrix4x4 getTotalTransform(){
         return totalTransform;
@@ -48,7 +48,7 @@ public class WorldTransformManager{
 
     public void updateCameraTransform(Matrix4x4 transform){
         cameraTransform = transform;
-        worldTransform = cameraTransform;
+//        worldTransform = cameraTransform;
         totalTransform  = viewingTransform.multiply(cameraTransform);
     }
 

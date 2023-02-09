@@ -36,12 +36,12 @@ public class World3DEngine{
     }
 
     public void onMousePressed(MouseEvent mouseEvent){
-//        cameraManager.onMousePressed(mouseEvent);
+        cameraManager.onMousePressed(mouseEvent);
     }
 
     public void onMouseDragged(MouseEvent mouseEvent){
-//        cameraManager.onMouseDragged(mouseEvent);
-//        worldTransformManager.updateCameraTransform(cameraManager.createTransform());
+        cameraManager.onMouseDragged(mouseEvent);
+        worldTransformManager.updateCameraTransform(cameraManager.createTransform());
     }
 
     public List<Point4D> transform(List<Point4D> points){

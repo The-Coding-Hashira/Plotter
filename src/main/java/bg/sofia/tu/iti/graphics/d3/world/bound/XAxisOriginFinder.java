@@ -21,13 +21,23 @@ public class XAxisOriginFinder implements AxisBoundOriginFinder{
     public Point4D find(Camera camera){
         double xDotU = xAxis.dotProduct(camera.getU());
         double xDotW = xAxis.dotProduct(camera.getW());
-        if(xDotU > 0 && xDotW > 0){
-            return find(camera, (p0, p1) -> Geometry3DUtils.compareLeftOfCamera(p0, p1, camera));
+        if(camera.getW()
+                 .getZ() > 0){
+            if(xDotU > 0 && xDotW > 0){
+                return find(camera, (p0, p1) -> Geometry3DUtils.compareLeftOfCamera(p0, p1, camera));
+            }
+            if(xDotW > 0){
+                return find(camera, (p0, p1) -> Geometry3DUtils.compareRightOfCamera(p0, p1, camera));
+            }
+            return find(camera, Geometry3DUtils::compareSmallestDistanceToCamera);
         }
-        if(xDotW > 0){
+        if(xDotU < 0 && xDotW < 0){
             return find(camera, (p0, p1) -> Geometry3DUtils.compareRightOfCamera(p0, p1, camera));
         }
-        return find(camera, Geometry3DUtils::compareSmallestDistanceToCamera);
+        if(xDotW < 0){
+            return find(camera, (p0, p1) -> Geometry3DUtils.compareLeftOfCamera(p0, p1, camera));
+        }
+        return find(camera, Geometry3DUtils::compareFarthestDistanceToCamera);
     }
 
     private Point4D find(Camera camera, Comparator<Point4D> comparator){

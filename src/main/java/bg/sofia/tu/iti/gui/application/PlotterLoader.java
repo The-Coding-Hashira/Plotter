@@ -9,10 +9,10 @@ public class PlotterLoader{
     private static final String PLOT_2D_VIEW = "plot2d";
     private static final String PLOT_3D_VIEW = "plot3d";
 
-    private final Tab             plotTab;
+    private final Tab plotTab;
 
     public PlotterLoader(Tab plotTab){
-        this.plotTab    = plotTab;
+        this.plotTab = plotTab;
     }
 
     public void load(String mathExpressionInput){

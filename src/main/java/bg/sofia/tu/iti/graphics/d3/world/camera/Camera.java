@@ -8,10 +8,11 @@ public class Camera{
         //TODO maybe move camera far away and rotate the world to avoid vector inversion
         double[] els = cameraTransform.getElements();
         Point4D  pos = new Point4D(els[3], els[7], els[11]);
-        Point4D  u   = new Point4D(els[0], els[4], els[8]);
-        Point4D  v   = new Point4D(els[1], els[5], els[9]);
-        Point4D  w   = new Point4D(els[2], els[6], els[10]);
+        Point4D  u   = new Point4D(els[0], els[4], els[8], 0);
+        Point4D  v   = new Point4D(els[1], els[5], els[9], 0);
+        Point4D  w   = new Point4D(els[2], els[6], els[10], 0);
         return new Camera(pos, u, v, w);
+
     }
 
     private final Point4D   position;
@@ -78,5 +79,10 @@ public class Camera{
 
     public Matrix4x4 createTransform(){
         return matrix.invert();
+    }
+
+    @Override
+    public String toString(){
+        return "Camera{" + "position=" + position + ", u=" + u + ", v=" + v + ", w=" + w + '}';
     }
 }

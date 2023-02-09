@@ -62,6 +62,10 @@ public class Geometry3DUtils{
         });
     }
 
+    public static int compareFarthestDistanceToCamera(Point4D pointer0, Point4D pointer1){
+        return -compareSmallestDistanceToCamera(pointer0, pointer1);
+    }
+
     public static int compareSmallestDistanceToCamera(Point4D pointer0, Point4D pointer1){
         double mag0 = pointer0.magnitude();
         double mag1 = pointer1.magnitude();

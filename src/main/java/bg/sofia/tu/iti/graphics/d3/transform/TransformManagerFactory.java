@@ -8,8 +8,13 @@ public class TransformManagerFactory{
         return new WorldTransformManager.Builder().withTransformFactory(new TransformFactory())
                                                   .withCameraTransform(camera.createTransform())
                                                   .withViewport(transformFactory.createViewport(width, height))
+                                                  //                                                  .withProjection
+                                                  //                                                  (transformFactory.createPerspectiveProjection(80,
+                                                  //                                                                                                               width / height,
+                                                  //                                                                                                               -10,
+                                                  //                                                                                                               0))
                                                   .withProjection(transformFactory.createOrthographicProjection(0.8,
-                                                                                                           width / height))
+                                                                                                                width / height))
                                                   .build();
     }
 }

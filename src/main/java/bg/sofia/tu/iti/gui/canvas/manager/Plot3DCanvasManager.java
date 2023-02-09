@@ -32,12 +32,12 @@ public class Plot3DCanvasManager implements CanvasManager{
 
     @Override
     public void onMousePressed(MouseEvent mouseEvent){
-//        world3DEngine.onMousePressed(mouseEvent);
+        world3DEngine.onMousePressed(mouseEvent);
     }
 
     @Override
     public void onMouseDragged(MouseEvent mouseEvent){
-//        world3DEngine.onMouseDragged(mouseEvent);
+        world3DEngine.onMouseDragged(mouseEvent);
         paint();
     }
 

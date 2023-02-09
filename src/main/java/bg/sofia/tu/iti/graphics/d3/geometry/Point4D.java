@@ -10,7 +10,11 @@ public class Point4D{
     private final Color  color;
 
     public Point4D(double x, double y, double z){
-        this(x, y, z, 1, Color.TRANSPARENT);
+        this(x, y, z, 1);
+    }
+
+    public Point4D(double x, double y, double z, double w){
+        this(x, y, z, w, Color.TRANSPARENT);
     }
 
     public Point4D(double x, double y, double z, Color color){
@@ -29,7 +33,7 @@ public class Point4D{
         final double px = point.getX();
         final double py = point.getY();
         final double pz = point.getZ();
-        return new Point4D(y * pz - z * py, z * px - x * pz, x * py - y * px, point.getColor());
+        return new Point4D(y * pz - z * py, z * px - x * pz, x * py - y * px, w, point.getColor());
     }
 
     public Point4D normalize(){
@@ -42,19 +46,19 @@ public class Point4D{
     }
 
     public Point4D negate(){
-        return multiply(-1);
+        return new Point4D(-x, -y, -z, w, color);
     }
 
     public Point4D multiply(double scalar){
-        return new Point4D(x * scalar, y * scalar, z * scalar, color);
+        return new Point4D(x * scalar, y * scalar, z * scalar, w, color);
     }
 
     public Point4D add(Point4D point){
-        return new Point4D(x + point.getX(), y + point.getY(), z + point.getZ(), color);
+        return new Point4D(x + point.getX(), y + point.getY(), z + point.getZ(), w, color);
     }
 
     public Point4D subtract(Point4D point){
-        return new Point4D(x - point.getX(), y - point.getY(), z - point.getZ(), color);
+        return new Point4D(x - point.getX(), y - point.getY(), z - point.getZ(), w, color);
     }
 
     public double dotProduct(Point4D point){
@@ -86,7 +90,7 @@ public class Point4D{
     }
 
     public boolean equals(Point4D point){
-        return x == point.x && y == point.y && z == point.z;
+        return x == point.x && y == point.y && z == point.z && w == point.w;
     }
 
     @Override

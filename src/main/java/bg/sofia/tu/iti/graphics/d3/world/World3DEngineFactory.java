@@ -22,9 +22,9 @@ public class World3DEngineFactory{
 
     private Camera createCamera(){
         //@formatter:off
-        return new Camera(worldOrigin.add(new Point4D(-3,-5,3)),
+        return new Camera(worldOrigin.add(new Point4D(-3,-5,0)),
                           worldOrigin,
-                          new Point4D(0, 0, 1));
+                          new Point4D(0, 0, 1,0));
         //@formatter:on
     }
 
