@@ -68,6 +68,7 @@ public class Plot2DCanvasManager implements CanvasManager{
         graphicsContext.fillRect(0, 0, canvasDimension.getWidth(), canvasDimension.getHeight());
         canvasRegionManager.paint();
         graph.paint();
+        System.out.println("DONE - 2D");
     }
 
     private Dimension2D createXAxisDimension(Dimension2D canvasDimension, double padding){

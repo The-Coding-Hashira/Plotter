@@ -13,7 +13,7 @@ public class ZTickDataRenderer{
             graphicsContext3D.fillText(tick3D.getTick()
                                              .getText(),
                                        tick3D.getPosition()
-                                             .getX() - 50,
+                                             .getX() - 55,
                                        tick3D.getPosition()
                                              .getY());
         }

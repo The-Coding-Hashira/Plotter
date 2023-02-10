@@ -39,8 +39,8 @@ public class Rasterizer{
         drawLine(p2.getX(), p2.getY(), p2.getZ(), p0.getX(), p0.getY(), p0.getZ(), color);
     }
 
-    public void drawLine(Point4D from, Point4D to, int color){
-        drawLine(from.getX(), from.getY(), from.getZ(), to.getX(), to.getY(), to.getZ(), color);
+    public void drawLine(Point4D p0, Point4D p1, int color){
+        drawLine(p0.getX(), p0.getY(), p0.getZ(), p1.getX(), p1.getY(), p1.getZ(), color);
     }
 
     public void drawLine(double p0x, double p0y, double p0z, double p1x, double p1y, double p1z, int color){
@@ -193,6 +193,7 @@ public class Rasterizer{
     }
 
     public Image toImage(){
+        pixelWriter.setArgb(0,0,0xFF00FF00);
         pixelWriter.setPixels(0, 0, width, height, pixelFormat, frameBuffer, 0, width);
         return writableImage;
     }
@@ -203,14 +204,6 @@ public class Rasterizer{
                 setDepth(x, y, maxDepth);
             }
         }
-    }
-
-    private int toInt(Color color){
-        int intColor = ((int) (color.getOpacity() * 255)) << 24;
-        intColor |= ((int) (color.getRed() * 255) << 16);
-        intColor |= ((int) (color.getGreen() * 255) << 8);
-        intColor |= (int) (color.getBlue() * 255);
-        return intColor;
     }
 
     private boolean isValidIndex(int x, int y){

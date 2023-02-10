@@ -43,9 +43,8 @@ public class ExpressionInterpreter{
         return interpret(buildExpressionDescription(expression), expression);
     }
 
-    public ExpressionResult interpretCalculators(List<Calculator> calculators){
-        return buildExpressionResult("",
-                                     postfixExpressionInterpreter.interpret(infixToPostfixCompiler.compile(calculators)));
+    public ExpressionResult interpretCompiledCalculators(List<Calculator> calculators){
+        return buildExpressionResult("", postfixExpressionInterpreter.interpret(calculators));
     }
 
     private String buildExpressionDescription(List<Token> expression){

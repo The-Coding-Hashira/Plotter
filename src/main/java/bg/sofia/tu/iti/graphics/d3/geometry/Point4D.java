@@ -30,10 +30,10 @@ public class Point4D{
     }
 
     public Point4D crossProduct(Point4D point){
-        final double px = point.getX();
-        final double py = point.getY();
-        final double pz = point.getZ();
-        return new Point4D(y * pz - z * py, z * px - x * pz, x * py - y * px, w, point.getColor());
+        final double px = point.x;
+        final double py = point.y;
+        final double pz = point.z;
+        return new Point4D(y * pz - z * py, z * px - x * pz, x * py - y * px, w, point.color);
     }
 
     public Point4D normalize(){
@@ -54,15 +54,15 @@ public class Point4D{
     }
 
     public Point4D add(Point4D point){
-        return new Point4D(x + point.getX(), y + point.getY(), z + point.getZ(), w, color);
+        return new Point4D(x + point.x, y + point.y, z + point.z, w, color);
     }
 
     public Point4D subtract(Point4D point){
-        return new Point4D(x - point.getX(), y - point.getY(), z - point.getZ(), w, color);
+        return new Point4D(x - point.x, y - point.y, z - point.z, w, color);
     }
 
     public double dotProduct(Point4D point){
-        return dotProduct(point.getX(), point.getY(), point.getZ());
+        return dotProduct(point.x, point.y, point.z);
     }
 
     public double dotProduct(double x, double y, double z){

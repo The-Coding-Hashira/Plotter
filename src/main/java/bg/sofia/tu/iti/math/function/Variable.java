@@ -6,18 +6,18 @@ import bg.sofia.tu.iti.math.operator.type.OperatorType;
 
 import java.util.Stack;
 
-public class Parameter implements Calculator{
+public class Variable implements Calculator{
     private final String identifier;
     private       double value;
 
-    public Parameter(String identifier){
+    public Variable(String identifier){
         this.identifier = identifier;
         value           = Double.NaN;
     }
 
     @Override
     public String getType(){
-        return OperatorType.PARAMETER.toString();
+        return OperatorType.VARIABLE.toString();
     }
 
     @Override
@@ -27,7 +27,7 @@ public class Parameter implements Calculator{
 
     @Override
     public Calculation calculate(Stack<Double> arguments){
-        return new Calculation(Double.toString(value), value);
+        return new Calculation(identifier, value);
     }
 
     public String getIdentifier(){

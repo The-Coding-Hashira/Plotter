@@ -13,7 +13,7 @@ public class XTickDataRenderer{
                                        tick3D.getPosition()
                                              .getX(),
                                        tick3D.getPosition()
-                                             .getY() + 20);
+                                             .getY() + 21);
         }
     }
 }

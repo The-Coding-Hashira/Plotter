@@ -32,8 +32,8 @@ public class GraphicsContext3D{
         Geometry3DUtils.iterateTrianglesAsGrid(data, (p0, p1) -> rasterizer.drawLine(p0, p1, 0xff000000));
     }
 
-    public void drawLine(Point4D from, Point4D to, int color){
-        rasterizer.drawLine(from, to, color);
+    public void drawLine(Point4D p0, Point4D p1, int color){
+        rasterizer.drawLine(p0, p1, color);
     }
 
     public void fillText(String text, double x, double y){

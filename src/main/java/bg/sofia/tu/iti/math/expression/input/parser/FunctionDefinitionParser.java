@@ -3,13 +3,13 @@ package bg.sofia.tu.iti.math.expression.input.parser;
 import bg.sofia.tu.iti.math.core.calculator.Calculator;
 import bg.sofia.tu.iti.math.core.input.evaluator.TokenizationIntegrityEvaluator;
 import bg.sofia.tu.iti.math.core.input.token.Token;
-import bg.sofia.tu.iti.math.expression.ParameterValueSupplier;
+import bg.sofia.tu.iti.math.expression.VariableValueSupplier;
 import bg.sofia.tu.iti.math.expression.input.Tokenizer;
 import bg.sofia.tu.iti.math.expression.input.token.MathElementType;
 import bg.sofia.tu.iti.math.expression.input.token.TokenType;
 import bg.sofia.tu.iti.math.expression.input.token.type.BracketType;
 import bg.sofia.tu.iti.math.function.CustomFunction;
-import bg.sofia.tu.iti.math.function.Parameter;
+import bg.sofia.tu.iti.math.function.Variable;
 import bg.sofia.tu.iti.math.operator.notation.OperatorNotation;
 import bg.sofia.tu.iti.math.operator.type.OperatorType;
 
@@ -29,41 +29,35 @@ public class FunctionDefinitionParser{
         List<Token> tokens = new Tokenizer(tokenTypes).tokenize(definition);
         new TokenizationIntegrityEvaluator().evaluate(tokens, definition);
         if(definition.contains(OperatorNotation.EQUALS.getNotation())){
-            String                       identifier              = extractIdentifier(tokens);
-            List<String>                 parameterIdentifiers    = extractParameterIdentifiers(tokens);
-            List<Calculator>             expression              = extractExpression(tokens);
-            List<ParameterValueSupplier> parameterValueSuppliers = setUpParameters(parameterIdentifiers, expression);
-            return new CustomFunction(identifier, parameterValueSuppliers, expression);
+            String                      identifier             = extractIdentifier(tokens);
+            List<String>                parameterIdentifiers   = extractParameterIdentifiers(tokens);
+            List<Calculator>            expression             = extractExpression(tokens);
+            List<VariableValueSupplier> variableValueSuppliers = setUpParameters(parameterIdentifiers, expression);
+            return new CustomFunction(identifier, variableValueSuppliers, expression);
         }
         else{
-            List<String>                 parameterIdentifiers    = Arrays.asList("x", "y");
-            List<Calculator>             expression              = new ExpressionParser(tokenTypes).parse(tokens);
-            List<ParameterValueSupplier> parameterValueSuppliers = setUpParameters(parameterIdentifiers, expression);
-            return new CustomFunction("", parameterValueSuppliers, expression);
+            List<String>                parameterIdentifiers   = Arrays.asList("x", "y");
+            List<Calculator>            expression             = new ExpressionParser(tokenTypes).parse(tokens);
+            List<VariableValueSupplier> variableValueSuppliers = setUpParameters(parameterIdentifiers, expression);
+            return new CustomFunction("", variableValueSuppliers, expression);
         }
-//        String                       identifier              = extractIdentifier(tokens);
-//        List<String>                 parameterIdentifiers    = extractParameterIdentifiers(tokens);
-//        List<Calculator>             expression              = extractExpression(tokens);
-//        List<ParameterValueSupplier> parameterValueSuppliers = setUpParameters(parameterIdentifiers, expression);
-//        return new CustomFunction(identifier, parameterValueSuppliers, expression);
     }
 
-    private List<ParameterValueSupplier> setUpParameters(List<String> parameterIdentifiers,
-                                                         List<Calculator> expression){
-        List<ParameterValueSupplier> parameterValueSuppliers = new ArrayList<>(parameterIdentifiers.size());
+    private List<VariableValueSupplier> setUpParameters(List<String> parameterIdentifiers, List<Calculator> expression){
+        List<VariableValueSupplier> variableValueSuppliers = new ArrayList<>(parameterIdentifiers.size());
         List<Calculator> parameters = expression.stream()
                                                 .filter(calculator -> calculator.getType()
-                                                                                .contentEquals(OperatorType.PARAMETER.toString()))
+                                                                                .contentEquals(OperatorType.VARIABLE.toString()))
                                                 .collect(Collectors.toList());
-        parameterIdentifiers.forEach(identifier -> parameterValueSuppliers.add(new ParameterValueSupplier(parameters.stream()
-                                                                                                                    .filter(calculator -> ((Parameter) calculator).getIdentifier()
-                                                                                                                                                                  .contentEquals(
-                                                                                                                                                                          identifier))
-                                                                                                                    .map(calculator -> (Parameter) calculator)
-                                                                                                                    .collect(
-                                                                                                                            Collectors.toList()))));
+        parameterIdentifiers.forEach(identifier -> variableValueSuppliers.add(new VariableValueSupplier(parameters.stream()
+                                                                                                                  .filter(calculator -> ((Variable) calculator).getIdentifier()
+                                                                                                                                                               .contentEquals(
+                                                                                                                                                                       identifier))
+                                                                                                                  .map(calculator -> (Variable) calculator)
+                                                                                                                  .collect(
+                                                                                                                          Collectors.toList()))));
 
-        return parameterValueSuppliers;
+        return variableValueSuppliers;
     }
 
     private String extractIdentifier(List<Token> tokens){

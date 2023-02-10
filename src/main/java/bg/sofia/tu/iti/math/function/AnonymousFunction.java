@@ -9,13 +9,12 @@ import bg.sofia.tu.iti.math.expression.result.ExpressionResult;
 import java.util.List;
 import java.util.Stack;
 
-public class CustomFunction extends Function implements Calculator{
+public class AnonymousFunction extends Function{
     private final List<VariableValueSupplier> variableValueSuppliers;
     private final List<Calculator>            expression;
 
-    public CustomFunction(String identifier, List<VariableValueSupplier> variableValueSuppliers,
-                          List<Calculator> expression){
-        super(identifier, variableValueSuppliers.size());
+    public AnonymousFunction(List<VariableValueSupplier> variableValueSuppliers, List<Calculator> expression){
+        super(AnonymousFunction.class.getSimpleName(), variableValueSuppliers.size());
         this.variableValueSuppliers = variableValueSuppliers;
         this.expression             = expression;
     }
@@ -26,7 +25,7 @@ public class CustomFunction extends Function implements Calculator{
             variableValueSuppliers.get(i)
                                   .supply(arguments.pop());
         }
-        //TODO this guy has not precompiled its calculators so it explodes
+        //TODO calculators can be precompiled, so only interpreting is left to be done here, when calculate() is called
         ExpressionResult result = new ExpressionInterpreter().interpretCompiledCalculators(expression);
         return new Calculation(result.getFullDescription(), result.get());
     }

@@ -15,8 +15,6 @@ import java.util.ResourceBundle;
 public class Plotter3D extends Plotter{
     @FXML
     private Canvas              plot;
-    @FXML
-    private NumberAxis          xAxis;
     private Plot3DCanvasManager canvasManager;
 
     public Plotter3D(Function function){

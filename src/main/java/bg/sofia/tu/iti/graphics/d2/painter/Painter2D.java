@@ -33,22 +33,25 @@ public class Painter2D{
 
         graphicsContext.beginPath();
         graphicsContext.moveTo(startX + points.get(0)
-                                              .getX(), startY + points.get(0)
-                                                                      .getY());
-        for(Point2D point : points){
-            graphicsContext.lineTo(startX + point.getX(), startY + point.getY());
-        }
+                                              .getX(),
+                               startY + points.get(0)
+                                              .getY());
+        points.forEach(point -> graphicsContext.lineTo(startX + point.getX(), startY + point.getY()));
         graphicsContext.stroke();
     }
 
     public void strokeVerticalLine(double x, double y, double length){
-        graphicsContext.strokeLine(dimension.getStartX() + x, dimension.getStartY() + y, dimension.getStartX() + x,
+        graphicsContext.strokeLine(dimension.getStartX() + x,
+                                   dimension.getStartY() + y,
+                                   dimension.getStartX() + x,
                                    dimension.getStartY() + y + length);
     }
 
     public void strokeHorizontalLine(double x, double y, double length){
-        graphicsContext.strokeLine(dimension.getStartX() + x, dimension.getStartY() + y,
-                                   dimension.getStartX() + x + length, dimension.getStartY() + y);
+        graphicsContext.strokeLine(dimension.getStartX() + x,
+                                   dimension.getStartY() + y,
+                                   dimension.getStartX() + x + length,
+                                   dimension.getStartY() + y);
     }
 
     public void fill(){
@@ -64,7 +67,9 @@ public class Painter2D{
     }
 
     public void clear(){
-        graphicsContext.clearRect(dimension.getStartX(), dimension.getStartY(), dimension.getWidth(),
+        graphicsContext.clearRect(dimension.getStartX(),
+                                  dimension.getStartY(),
+                                  dimension.getWidth(),
                                   dimension.getHeight());
     }
 
