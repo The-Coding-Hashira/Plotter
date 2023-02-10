@@ -9,8 +9,9 @@ import javafx.scene.canvas.GraphicsContext;
 public class HorizontalAxisCanvasRegion extends AxisCanvasRegion{
     public HorizontalAxisCanvasRegion(Dimension2D dimension, GraphicsContext graphicsContext,
                                       AxisColorScheme colorScheme, int tickLength){
-        super(10, new HorizontalAxisEventHandlerFactory(), new HorizontalAxisPainter(graphicsContext, dimension,
-                                                                                     colorScheme, tickLength));
+        super(10,
+              new HorizontalAxisEventHandlerFactory(),
+              new HorizontalAxisPainter(graphicsContext, dimension, colorScheme, tickLength));
     }
 
     @Override

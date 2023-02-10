@@ -22,8 +22,6 @@ public abstract class AxisPainter extends Painter2D{
         this.tickLength  = tickLength;
     }
 
-    public abstract void strokeBaseLine();
-
     public abstract void strokeTickLine(double offset);
 
     public abstract void fillTickText(String text, double offset);
@@ -34,6 +32,18 @@ public abstract class AxisPainter extends Painter2D{
         getGraphicsContext().setLineDashes(0);
         paintBaseLine();
     }
+
+    private void paintBackground(){
+        getGraphicsContext().setFill(colorScheme.getBackground());
+        fill();
+    }
+
+    private void paintBaseLine(){
+        getGraphicsContext().setStroke(colorScheme.getBaseLine());
+        strokeBaseLine();
+    }
+
+    public abstract void strokeBaseLine();
 
     //tickCoordinates.clear();
     //    Range  axisRange     = axisTicksManager.getRange();
@@ -51,21 +61,11 @@ public abstract class AxisPainter extends Painter2D{
     }
 
     public void paintTick(Tick tick){
-//        strokeTickLine(tick.getCoordinate());
-//        fillTickText(tickTextFormat.format(tick.getValue()), tick.getCoordinate());
+        //        strokeTickLine(tick.getCoordinate());
+        //        fillTickText(tickTextFormat.format(tick.getValue()), tick.getCoordinate());
     }
 
     public double getTickLength(){
         return tickLength;
-    }
-
-    private void paintBackground(){
-        getGraphicsContext().setFill(colorScheme.getBackground());
-        fill();
-    }
-
-    private void paintBaseLine(){
-        getGraphicsContext().setStroke(colorScheme.getBaseLine());
-        strokeBaseLine();
     }
 }

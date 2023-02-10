@@ -12,8 +12,8 @@ import javafx.scene.input.ScrollEvent;
 
 public class PlotterTemp{
     private final CanvasManagerFactory     canvasManagerFactory;
-    private       CanvasManager            canvasManager;
     private final FunctionDefinitionParser functionDefinitionParser;
+    private       CanvasManager            canvasManager;
 
     public PlotterTemp(Canvas canvas){
         canvasManagerFactory = new CanvasManagerFactory(canvas);

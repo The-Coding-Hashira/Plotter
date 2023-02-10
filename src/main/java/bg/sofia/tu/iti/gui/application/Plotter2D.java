@@ -1,10 +1,7 @@
 package bg.sofia.tu.iti.gui.application;
 
 import bg.sofia.tu.iti.graphics.d2.world.Dimension2D;
-import bg.sofia.tu.iti.graphics.d3.world.camera.CameraManager;
-import bg.sofia.tu.iti.gui.canvas.manager.CanvasManager;
 import bg.sofia.tu.iti.gui.canvas.manager.Plot2DCanvasManager;
-import bg.sofia.tu.iti.gui.canvas.manager.Plot3DCanvasManager;
 import bg.sofia.tu.iti.math.function.Function;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;

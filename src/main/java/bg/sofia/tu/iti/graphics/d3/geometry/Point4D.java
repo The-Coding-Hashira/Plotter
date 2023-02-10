@@ -17,16 +17,16 @@ public class Point4D{
         this(x, y, z, w, Color.TRANSPARENT);
     }
 
-    public Point4D(double x, double y, double z, Color color){
-        this(x, y, z, 1, color);
-    }
-
     public Point4D(double x, double y, double z, double w, Color color){
         this.x     = x;
         this.y     = y;
         this.z     = z;
         this.w     = w;
         this.color = color;
+    }
+
+    public Point4D(double x, double y, double z, Color color){
+        this(x, y, z, 1, color);
     }
 
     public Point4D crossProduct(Point4D point){

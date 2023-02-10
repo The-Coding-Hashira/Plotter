@@ -26,9 +26,10 @@ public class FunctionFormula{
             if(indexOfParameter <= equalsSignIndex){
                 throw new RuntimeException("No such parameter in formula " + parameter);
             }
-            functionDefinition.replace(indexOfParameter, indexOfParameter + parameter.length(),
+            functionDefinition.replace(indexOfParameter,
+                                       indexOfParameter + parameter.length(),
                                        parameters.get(parameter)
-                                                                                                          .toString());
+                                                 .toString());
         }
         return new FunctionDefinitionParser(tokenTypes).parse(functionDefinition.toString());
     }

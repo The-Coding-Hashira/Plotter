@@ -25,16 +25,16 @@ public class Tokenizer{
         return tokens;
     }
 
-    private String stripWhitespace(String expression){
-        return expression.replaceAll("\\s", "");
-    }
-
     private List<Token> tokenizeExpression(String expression){
         Map<Integer, Token> tokenIndexes = new HashMap<>();
         for(TokenType tokenType : tokenTypes){
             fillTokens(tokenType.getName(), tokenType.extract(expression), tokenIndexes);
         }
         return groupTokens(tokenIndexes);
+    }
+
+    private String stripWhitespace(String expression){
+        return expression.replaceAll("\\s", "");
     }
 
     private void fillTokens(String tokenType, Map<Integer, String> tokenValueIndexes, Map<Integer, Token> tokenIndexes){

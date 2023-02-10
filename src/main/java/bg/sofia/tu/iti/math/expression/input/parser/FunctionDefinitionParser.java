@@ -43,23 +43,6 @@ public class FunctionDefinitionParser{
         }
     }
 
-    private List<VariableValueSupplier> setUpParameters(List<String> parameterIdentifiers, List<Calculator> expression){
-        List<VariableValueSupplier> variableValueSuppliers = new ArrayList<>(parameterIdentifiers.size());
-        List<Calculator> parameters = expression.stream()
-                                                .filter(calculator -> calculator.getType()
-                                                                                .contentEquals(OperatorType.VARIABLE.toString()))
-                                                .collect(Collectors.toList());
-        parameterIdentifiers.forEach(identifier -> variableValueSuppliers.add(new VariableValueSupplier(parameters.stream()
-                                                                                                                  .filter(calculator -> ((Variable) calculator).getIdentifier()
-                                                                                                                                                               .contentEquals(
-                                                                                                                                                                       identifier))
-                                                                                                                  .map(calculator -> (Variable) calculator)
-                                                                                                                  .collect(
-                                                                                                                          Collectors.toList()))));
-
-        return variableValueSuppliers;
-    }
-
     private String extractIdentifier(List<Token> tokens){
         if(tokens.get(0)
                  .getType()
@@ -118,5 +101,22 @@ public class FunctionDefinitionParser{
             }
         }
         throw new RuntimeException("Invalid function definition");
+    }
+
+    private List<VariableValueSupplier> setUpParameters(List<String> parameterIdentifiers, List<Calculator> expression){
+        List<VariableValueSupplier> variableValueSuppliers = new ArrayList<>(parameterIdentifiers.size());
+        List<Calculator> parameters = expression.stream()
+                                                .filter(calculator -> calculator.getType()
+                                                                                .contentEquals(OperatorType.VARIABLE.toString()))
+                                                .collect(Collectors.toList());
+        parameterIdentifiers.forEach(identifier -> variableValueSuppliers.add(new VariableValueSupplier(parameters.stream()
+                                                                                                                  .filter(calculator -> ((Variable) calculator).getIdentifier()
+                                                                                                                                                               .contentEquals(
+                                                                                                                                                                       identifier))
+                                                                                                                  .map(calculator -> (Variable) calculator)
+                                                                                                                  .collect(
+                                                                                                                          Collectors.toList()))));
+
+        return variableValueSuppliers;
     }
 }

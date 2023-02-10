@@ -11,11 +11,6 @@ public class VerticalAxisPainter extends AxisPainter{
     }
 
     @Override
-    public void strokeBaseLine(){
-        strokeVerticalLine(getDimension().getWidth(), 0, getDimension().getHeight());
-    }
-
-    @Override
     public void strokeTickLine(double offset){
         strokeHorizontalLine(getDimension().getWidth(), getDimension().getHeight() - offset, getTickLength());
     }
@@ -23,5 +18,10 @@ public class VerticalAxisPainter extends AxisPainter{
     @Override
     public void fillTickText(String value, double offset){
         fillText(value, getDimension().getWidth() - 21, getDimension().getHeight() - offset);
+    }
+
+    @Override
+    public void strokeBaseLine(){
+        strokeVerticalLine(getDimension().getWidth(), 0, getDimension().getHeight());
     }
 }

@@ -12,9 +12,9 @@ import java.util.List;
 import java.util.Stack;
 
 public class LineGraph extends Graph{
-    private final List<Point2D>    coordinates;
-    private final List<Double>     xValues;
-    private final List<Double>     yValues;
+    private final List<Point2D> coordinates;
+    private final List<Double>  xValues;
+    private final List<Double>  yValues;
 
     public LineGraph(GraphicsContext graphicsContext, Dimension2D plotAreaDimension, Function function){
         super(graphicsContext, plotAreaDimension, function);
@@ -52,8 +52,10 @@ public class LineGraph extends Graph{
                                                                  horizontalRange.getLowBoundary(),
                                                                  horizontalRange.calculate() / getPlotAreaDimension().getWidth());
         updateValues(calculationRange);
-        updateXCoordinates(horizontalRange.getLowBoundary(), horizontalRange.calculate() / getPlotAreaDimension().getWidth());
-        updateYCoordinates(verticalRange.getLowBoundary(), verticalRange.calculate() / getPlotAreaDimension().getHeight());
+        updateXCoordinates(horizontalRange.getLowBoundary(),
+                           horizontalRange.calculate() / getPlotAreaDimension().getWidth());
+        updateYCoordinates(verticalRange.getLowBoundary(),
+                           verticalRange.calculate() / getPlotAreaDimension().getHeight());
     }
 
     @Override
@@ -62,7 +64,8 @@ public class LineGraph extends Graph{
                                                                  horizontalRange.getLowBoundary(),
                                                                  horizontalRange.calculate() / getPlotAreaDimension().getWidth());
         updateValues(calculationRange);
-        updateYCoordinates(verticalRange.getLowBoundary(), verticalRange.calculate() / getPlotAreaDimension().getHeight());
+        updateYCoordinates(verticalRange.getLowBoundary(),
+                           verticalRange.calculate() / getPlotAreaDimension().getHeight());
     }
 
     private void updateValues(CalculationRange calculationRange){
@@ -86,6 +89,7 @@ public class LineGraph extends Graph{
         //    xCoordinates.add(pixelsOffset);
         //}
     }
+
     private void updateYCoordinates(double verticalLowBoundary, double verticalValuePerPixel){
         //yCoordinates.clear();
         //double lowBoundaryCoordinates = verticalLowBoundary / verticalValuePerPixel;
@@ -94,5 +98,4 @@ public class LineGraph extends Graph{
         //    yCoordinates.add(pixelsOffset);
         //}
     }
-
 }

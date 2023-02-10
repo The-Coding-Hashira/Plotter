@@ -53,6 +53,10 @@ public class World3DEngine{
                                                     boundingBox);
     }
 
+    private List<Point4D> bindToBoundingBox(List<Point4D> normalizedPoints){
+        return boundsBinder.bindToBoundingBox(normalizedPoints);
+    }
+
     public void renderOccludedBounds(GraphicsContext3D graphicsContext3D){
         boundsRenderer.renderOccludedBounds(graphicsContext3D, cameraManager.getCamera());
     }
@@ -77,9 +81,5 @@ public class World3DEngine{
 
     private Point4D transform(Point4D point){
         return worldTransformManager.applyTotalTransform(point);
-    }
-
-    private List<Point4D> bindToBoundingBox(List<Point4D> normalizedPoints){
-        return boundsBinder.bindToBoundingBox(normalizedPoints);
     }
 }

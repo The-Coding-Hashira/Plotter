@@ -5,14 +5,14 @@ import bg.sofia.tu.iti.graphics.d3.transform.Matrix4x4;
 import javafx.scene.input.MouseEvent;
 
 public class CameraManager implements CameraMovementEventListener{
-    private final CameraMovementEventHandler cameraMovementEventHandler;
-    private final Camera                     camera;
-    private       Camera                     tempCamera;
     public static Point4D                    cPos     = new Point4D(-1, 0, 0);
     public static Point4D                    lookPos  = new Point4D(0, 0, 0);
     public static Point4D                    upPos    = new Point4D(0, 0, 1, 0);
     public static Camera                     LECamera = new Camera(cPos, lookPos, upPos);
+    private final CameraMovementEventHandler cameraMovementEventHandler;
+    private final Camera                     camera;
     Matrix4x4 cameraTransform;
+    private       Camera                     tempCamera;
 
     public CameraManager(Camera camera){
         cameraMovementEventHandler = new CameraMovementEventHandler();

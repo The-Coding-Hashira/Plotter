@@ -19,6 +19,14 @@ public class ExpressionResult{
         return "Expression: " + getExpression() + '\n' + "Result: " + get() + '\n' + "Calculation " + "Steps:" + '\n' + getCalculationStepsDescription();
     }
 
+    public String getExpression(){
+        return expression;
+    }
+
+    public double get(){
+        return result;
+    }
+
     public String getCalculationStepsDescription(){
         StringBuilder calculationSteps = new StringBuilder();
         for(Calculation calculation : getCalculations()){
@@ -30,15 +38,7 @@ public class ExpressionResult{
         return calculationSteps.toString();
     }
 
-    public String getExpression(){
-        return expression;
-    }
-
     public List<Calculation> getCalculations(){
         return calculations;
-    }
-
-    public double get(){
-        return result;
     }
 }

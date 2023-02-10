@@ -19,8 +19,8 @@ public class AreaGraph extends Graph{
     private final double       from;
     private final double       to;
 
-    public AreaGraph(GraphicsContext graphicsContext, Dimension2D plotAreaDimension, Function function,
-                     double from, double to){
+    public AreaGraph(GraphicsContext graphicsContext, Dimension2D plotAreaDimension, Function function, double from,
+                     double to){
         super(graphicsContext, plotAreaDimension, function);
         xCoordinates = new ArrayList<>();
         yCoordinates = new ArrayList<>();
@@ -61,8 +61,10 @@ public class AreaGraph extends Graph{
                                                                  horizontalRange.getLowBoundary(),
                                                                  horizontalRange.calculate() / getPlotAreaDimension().getWidth());
         updateValues(calculationRange);
-        updateXCoordinates(horizontalRange.getLowBoundary(), horizontalRange.calculate() / getPlotAreaDimension().getWidth());
-        updateYCoordinates(verticalRange.getLowBoundary(), verticalRange.calculate() / getPlotAreaDimension().getHeight());
+        updateXCoordinates(horizontalRange.getLowBoundary(),
+                           horizontalRange.calculate() / getPlotAreaDimension().getWidth());
+        updateYCoordinates(verticalRange.getLowBoundary(),
+                           verticalRange.calculate() / getPlotAreaDimension().getHeight());
     }
 
     @Override
@@ -71,7 +73,8 @@ public class AreaGraph extends Graph{
                                                                  horizontalRange.getLowBoundary(),
                                                                  horizontalRange.calculate() / getPlotAreaDimension().getWidth());
         updateValues(calculationRange);
-        updateYCoordinates(verticalRange.getLowBoundary(), verticalRange.calculate() / getPlotAreaDimension().getHeight());
+        updateYCoordinates(verticalRange.getLowBoundary(),
+                           verticalRange.calculate() / getPlotAreaDimension().getHeight());
     }
 
     private void updateValues(CalculationRange calculationRange){
@@ -94,17 +97,6 @@ public class AreaGraph extends Graph{
         }
     }
 
-    private void updateYCoordinates(double verticalLowBoundary, double verticalValuePerPixel){
-        yCoordinates.clear();
-        double lowBoundaryCoordinates = verticalLowBoundary / verticalValuePerPixel;
-        for(double value : yValues){
-            double pixelsOffset = value / verticalValuePerPixel - lowBoundaryCoordinates;
-            yCoordinates.add(pixelsOffset);
-        }
-        yCoordinates.add(0 / verticalValuePerPixel - lowBoundaryCoordinates);
-        yCoordinates.add(0 / verticalValuePerPixel - lowBoundaryCoordinates);
-    }
-
     private void updateXCoordinates(double horizontalLowBoundary, double horizontalValuePerPixel){
         xCoordinates.clear();
         double lowBoundaryCoordinates = horizontalLowBoundary / horizontalValuePerPixel;
@@ -114,6 +106,17 @@ public class AreaGraph extends Graph{
         }
         xCoordinates.add(xCoordinates.get(xCoordinates.size() - 1));
         xCoordinates.add(xCoordinates.get(0));
+    }
+
+    private void updateYCoordinates(double verticalLowBoundary, double verticalValuePerPixel){
+        yCoordinates.clear();
+        double lowBoundaryCoordinates = verticalLowBoundary / verticalValuePerPixel;
+        for(double value : yValues){
+            double pixelsOffset = value / verticalValuePerPixel - lowBoundaryCoordinates;
+            yCoordinates.add(pixelsOffset);
+        }
+        yCoordinates.add(0 / verticalValuePerPixel - lowBoundaryCoordinates);
+        yCoordinates.add(0 / verticalValuePerPixel - lowBoundaryCoordinates);
     }
 }
 

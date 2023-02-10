@@ -35,17 +35,6 @@ public class Geometry3DUtils{
         return sortedPoints;
     }
 
-    public static void iterateTriangles(List<Point4D> points, TriangleConsumer triangleConsumer){
-        int pointsSize   = points.size();
-        int pointCounter = 1;
-        for(int i = 0; i < pointsSize; i++, pointCounter++){
-            if(pointCounter == 3){
-                triangleConsumer.accept(points.get(i - 2), points.get(i - 1), points.get(i));
-                pointCounter = 0;
-            }
-        }
-    }
-
     public static void iterateTrianglesAsGrid(List<Point4D> points, LineConsumer lineConsumer){
         //TODO check handedness of clipped triangles, so that when iterate as grid it works better
         final int[] lowerTriangle = {1};
@@ -60,6 +49,17 @@ public class Geometry3DUtils{
             }
             lowerTriangle[0] *= -1;
         });
+    }
+
+    public static void iterateTriangles(List<Point4D> points, TriangleConsumer triangleConsumer){
+        int pointsSize   = points.size();
+        int pointCounter = 1;
+        for(int i = 0; i < pointsSize; i++, pointCounter++){
+            if(pointCounter == 3){
+                triangleConsumer.accept(points.get(i - 2), points.get(i - 1), points.get(i));
+                pointCounter = 0;
+            }
+        }
     }
 
     public static int compareFarthestDistanceToCamera(Point4D pointer0, Point4D pointer1){

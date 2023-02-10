@@ -33,14 +33,6 @@ public class AnonymousFunctionExpressionParser{
         return compileExpression(parseExpression(expression));
     }
 
-    private List<Calculator> parseExpression(String expression){
-        return new ExpressionParser(tokenTypes).parse(new Tokenizer(tokenTypes).tokenize(expression));
-    }
-
-    private List<Calculator> compileExpression(List<Calculator> calculators){
-        return new InfixToPostfixNotationExpressionCompiler(calculatorSpecs).compile(calculators);
-    }
-
     private List<VariableValueSupplier> extractVariableValueSuppliers(List<Calculator> calculators){
         List<Variable>              variables              = extractVariables(calculators);
         List<VariableValueSupplier> variableValueSuppliers = new ArrayList<>();
@@ -50,6 +42,14 @@ public class AnonymousFunctionExpressionParser{
             throw new RuntimeException("Invalid number of variables in expression. Must be 1 or 2.");
         }
         return variableValueSuppliers;
+    }
+
+    private List<Calculator> compileExpression(List<Calculator> calculators){
+        return new InfixToPostfixNotationExpressionCompiler(calculatorSpecs).compile(calculators);
+    }
+
+    private List<Calculator> parseExpression(String expression){
+        return new ExpressionParser(tokenTypes).parse(new Tokenizer(tokenTypes).tokenize(expression));
     }
 
     private List<Variable> extractVariables(List<Calculator> calculators){

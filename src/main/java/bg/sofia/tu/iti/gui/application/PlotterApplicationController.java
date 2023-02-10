@@ -26,11 +26,6 @@ public class PlotterApplicationController implements Initializable{
         plotterLoader.load(expressionTextArea.getText());
     }
 
-    public void onPlotButtonClicked(ActionEvent actionEvent){
-        plotterLoader.load(expressionTextArea.getText());
-        actionEvent.consume();
-    }
-
     private Tab findTab(String text){
         return tabPane.getTabs()
                       .stream()
@@ -38,5 +33,10 @@ public class PlotterApplicationController implements Initializable{
                                         .contentEquals(text))
                       .findFirst()
                       .orElseThrow(() -> new RuntimeException("Cannot find tab: " + text));
+    }
+
+    public void onPlotButtonClicked(ActionEvent actionEvent){
+        plotterLoader.load(expressionTextArea.getText());
+        actionEvent.consume();
     }
 }

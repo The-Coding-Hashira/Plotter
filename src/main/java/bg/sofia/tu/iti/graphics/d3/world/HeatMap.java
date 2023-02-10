@@ -22,7 +22,6 @@ public class HeatMap{
         //            return Color.BLUE.interpolate(Color.YELLOW, t * 2);
         //        }
         //        return Color.YELLOW.interpolate(Color.RED, (t - 0.5) * 2);
-        return lowBoundaryColor.interpolate(highBoundaryColor,
-                                            t);
+        return lowBoundaryColor.interpolate(highBoundaryColor, t);
     }
 }

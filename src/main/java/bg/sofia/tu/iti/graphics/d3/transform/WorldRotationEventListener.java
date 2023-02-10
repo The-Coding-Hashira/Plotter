@@ -5,5 +5,4 @@ public interface WorldRotationEventListener{
     void onXRotation(double degrees);
 
     void onZRotation(double degrees);
-
 }

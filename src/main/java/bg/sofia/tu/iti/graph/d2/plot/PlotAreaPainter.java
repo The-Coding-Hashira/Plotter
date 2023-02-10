@@ -32,12 +32,12 @@ public class PlotAreaPainter extends Painter2D{
 
     private void paintVerticalGridLine(Tick tick){
         setUpGraphicsContext(tick.getValue());
-//        strokeVerticalGridLine(tick.getCoordinate());
+        //        strokeVerticalGridLine(tick.getCoordinate());
     }
 
     private void paintHorizontalGridLine(Tick tick){
         setUpGraphicsContext(tick.getValue());
-//        strokeHorizontalGridLine(tick.getCoordinate());
+        //        strokeHorizontalGridLine(tick.getCoordinate());
     }
 
     private void setUpGraphicsContext(double tickValue){

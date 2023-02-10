@@ -39,22 +39,6 @@ public class ExpressionInterpreter{
         return interpret(expression, tokenizer.tokenize(expression));
     }
 
-    public ExpressionResult interpret(List<Token> expression){
-        return interpret(buildExpressionDescription(expression), expression);
-    }
-
-    public ExpressionResult interpretCompiledCalculators(List<Calculator> calculators){
-        return buildExpressionResult("", postfixExpressionInterpreter.interpret(calculators));
-    }
-
-    private String buildExpressionDescription(List<Token> expression){
-        StringBuilder description = new StringBuilder();
-        for(Token token : expression){
-            description.append(token.getValue());
-        }
-        return description.toString();
-    }
-
     private ExpressionResult interpret(String expression, List<Token> tokenizedExpression){
         return buildExpressionResult(expression,
                                      postfixExpressionInterpreter.interpret(infixToPostfixCompiler.compile(
@@ -66,5 +50,21 @@ public class ExpressionInterpreter{
                                     calculations,
                                     calculations.get(calculations.size() - 1)
                                                 .getResult());
+    }
+
+    public ExpressionResult interpret(List<Token> expression){
+        return interpret(buildExpressionDescription(expression), expression);
+    }
+
+    private String buildExpressionDescription(List<Token> expression){
+        StringBuilder description = new StringBuilder();
+        for(Token token : expression){
+            description.append(token.getValue());
+        }
+        return description.toString();
+    }
+
+    public ExpressionResult interpretCompiledCalculators(List<Calculator> calculators){
+        return buildExpressionResult("", postfixExpressionInterpreter.interpret(calculators));
     }
 }

@@ -66,6 +66,10 @@ public class Matrix4x4{
         return new Matrix4x4(elements);
     }
 
+    private double get(int row, int column){
+        return elements[column + (row << 2)];
+    }
+
     public Point4D multiply(Point4D point){
         final double px = point.getX();
         final double py = point.getY();
@@ -89,20 +93,6 @@ public class Matrix4x4{
         return transposedCofactorMatrix.divide(determinant);
     }
 
-    public double[] getElements(){
-        return elements;
-    }
-
-    private Matrix4x4 transpose(){
-        double[] transposedMatrix = new double[16];
-        for(int row = 0; row < 4; row++){
-            for(int column = 0; column < 4; column++){
-                transposedMatrix[column + (row << 2)] = get(column, row);
-            }
-        }
-        return new Matrix4x4(transposedMatrix);
-    }
-
     private Matrix4x4 findCofactorMatrix(){
         double[] cofactorMatrix = new double[16];
         for(int row = 0; row < 4; row++){
@@ -115,6 +105,26 @@ public class Matrix4x4{
             }
         }
         return new Matrix4x4(cofactorMatrix);
+    }
+
+    private Matrix4x4 transpose(){
+        double[] transposedMatrix = new double[16];
+        for(int row = 0; row < 4; row++){
+            for(int column = 0; column < 4; column++){
+                transposedMatrix[column + (row << 2)] = get(column, row);
+            }
+        }
+        return new Matrix4x4(transposedMatrix);
+    }
+
+    private Matrix4x4 divide(double scalar){
+        double[] result = new double[16];
+        for(int row = 0; row < 4; row++){
+            for(int column = 0; column < 4; column++){
+                result[column + (row << 2)] = get(row, column) / scalar;
+            }
+        }
+        return new Matrix4x4(result);
     }
 
     private Matrix3x3 extractSubMatrix(int row, int column){
@@ -133,18 +143,8 @@ public class Matrix4x4{
         return new Matrix3x3(subMatrix);
     }
 
-    private Matrix4x4 divide(double scalar){
-        double[] result = new double[16];
-        for(int row = 0; row < 4; row++){
-            for(int column = 0; column < 4; column++){
-                result[column + (row << 2)] = get(row, column) / scalar;
-            }
-        }
-        return new Matrix4x4(result);
-    }
-
-    private double get(int row, int column){
-        return elements[column + (row << 2)];
+    public double[] getElements(){
+        return elements;
     }
 
     //TODO remove description methods

@@ -4,7 +4,7 @@ import bg.sofia.tu.iti.graph.core.axis.tick.Tick;
 import bg.sofia.tu.iti.graphics.d3.geometry.Point4D;
 
 public class Tick3D{
-    private final Tick tick;
+    private final Tick    tick;
     private final Point4D position;
 
     public Tick3D(Tick tick, Point4D position){

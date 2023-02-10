@@ -35,32 +35,6 @@ public class Graph2D{
         paintGraphElements();
     }
 
-    private CalculationRange findCalculationRange(){
-        return new CalculationRange(xAxisCanvasRegion.getAxis()
-                                                     .getRange()
-                                                     .getHighBoundary(),
-                                    xAxisCanvasRegion.getAxis()
-                                                     .getRange()
-                                                     .getLowBoundary(),
-                                    xAxisCanvasRegion.getAxis()
-                                                     .getRange()
-                                                     .calculate() / plotArea.getPlotAreaPainter()
-                                                                            .getDimension()
-                                                                            .getWidth());
-    }
-
-    private List<Double> calculateValues(CalculationRange calculationRange){
-        List<Double>  values    = new ArrayList<>();
-        Stack<Double> arguments = new Stack<>();
-        for(double argument = calculationRange.getLowBoundary(); argument <= calculationRange.getHighBoundary(); argument += calculationRange.getStep()){
-            arguments.push(argument);
-            values.add(function.calculate(arguments)
-                               .getResult());
-            //TODO add if !isNaN cuz some functions will return NaN like division by zero or sqrt(<0)
-        }
-        return values;
-    }
-
     private List<Double> calculateYCoordinates(List<Double> values){
         List<Double> yCoordinates = new ArrayList<>();
         //TODO use point2d cuz not all funcs have results across all of X and therefore it will be wrong
@@ -76,6 +50,51 @@ public class Graph2D{
             yCoordinates.add(pixelsOffset);
         }
         return yCoordinates;
+    }
+
+    private List<Double> calculateValues(CalculationRange calculationRange){
+        List<Double>  values    = new ArrayList<>();
+        Stack<Double> arguments = new Stack<>();
+        for(double argument = calculationRange.getLowBoundary(); argument <= calculationRange.getHighBoundary(); argument += calculationRange.getStep()){
+            arguments.push(argument);
+            values.add(function.calculate(arguments)
+                               .getResult());
+            //TODO add if !isNaN cuz some functions will return NaN like division by zero or sqrt(<0)
+        }
+        return values;
+    }
+
+    private CalculationRange findCalculationRange(){
+        return new CalculationRange(xAxisCanvasRegion.getAxis()
+                                                     .getRange()
+                                                     .getHighBoundary(),
+                                    xAxisCanvasRegion.getAxis()
+                                                     .getRange()
+                                                     .getLowBoundary(),
+                                    xAxisCanvasRegion.getAxis()
+                                                     .getRange()
+                                                     .calculate() / plotArea.getPlotAreaPainter()
+                                                                            .getDimension()
+                                                                            .getWidth());
+    }
+
+    private void paintGraphElements(){
+        //        List<Tick> xTicks = calculateAxisTicks(xAxisCanvasRegion,
+        //                                               xAxisCanvasRegion.getAxis()
+        //                                                                .generateTicks());
+        //        List<Tick> yTicks = calculateAxisTicks(yAxisCanvasRegion,
+        //                                               yAxisCanvasRegion.getAxis()
+        //                                                                .generateTicks());
+        //        plotArea.getPlotAreaPainter()
+        //                .paintGridLines(xTicks, yTicks);
+        //        xAxisCanvasRegion.getAxisPainter()
+        //                         .paintTicks(xTicks);
+        //        yAxisCanvasRegion.getAxisPainter()
+        //                         .paintTicks(yTicks);
+    }
+
+    private double calculateValuePerPixel(double valueRange, double pixelRange){
+        return valueRange / pixelRange;
     }
 
     private List<Tick> calculateAxisTicks(AxisCanvasRegion axisCanvasRegion, List<Double> tickValues){
@@ -94,26 +113,7 @@ public class Graph2D{
                          .collect(Collectors.toList());
     }
 
-    private double calculateValuePerPixel(double valueRange, double pixelRange){
-        return valueRange / pixelRange;
-    }
-
     private double calculatePixelPerValue(double valueRange, double pixelRange){
         return pixelRange / valueRange;
-    }
-
-    private void paintGraphElements(){
-//        List<Tick> xTicks = calculateAxisTicks(xAxisCanvasRegion,
-//                                               xAxisCanvasRegion.getAxis()
-//                                                                .generateTicks());
-//        List<Tick> yTicks = calculateAxisTicks(yAxisCanvasRegion,
-//                                               yAxisCanvasRegion.getAxis()
-//                                                                .generateTicks());
-//        plotArea.getPlotAreaPainter()
-//                .paintGridLines(xTicks, yTicks);
-//        xAxisCanvasRegion.getAxisPainter()
-//                         .paintTicks(xTicks);
-//        yAxisCanvasRegion.getAxisPainter()
-//                         .paintTicks(yTicks);
     }
 }

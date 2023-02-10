@@ -25,28 +25,28 @@ public class QueueCompiler{
         }
     }
 
+    public boolean isQueueEmpty(){
+        return queuedCalculators.empty();
+    }
+
     public void consumeQueueTop(){
         consume(popQueue());
-    }
-
-    public void discardQueueTop(){
-        popQueue();
-    }
-
-    public Calculator popQueue(){
-        return queuedCalculators.pop();
     }
 
     public void consume(Calculator calculator){
         consumedCalculators.add(calculator);
     }
 
-    public Calculator peekQueue(){
-        return queuedCalculators.peek();
+    public Calculator popQueue(){
+        return queuedCalculators.pop();
     }
 
-    public boolean isQueueEmpty(){
-        return queuedCalculators.empty();
+    public void discardQueueTop(){
+        popQueue();
+    }
+
+    public Calculator peekQueue(){
+        return queuedCalculators.peek();
     }
 
     public List<Calculator> getConsumedCalculators(){

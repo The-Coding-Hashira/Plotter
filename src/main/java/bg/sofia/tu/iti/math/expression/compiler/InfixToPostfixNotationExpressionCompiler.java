@@ -25,27 +25,12 @@ public class InfixToPostfixNotationExpressionCompiler{
         compileHandlers.put(BracketType.CLOSE_BRACKET.toString(), this::handleCloseBracketCalculation);
     }
 
-    public List<Calculator> compile(List<Calculator> calculators){
-        QueueCompiler queueCompiler = new QueueCompiler();
-        for(Calculator calculator : calculators){
-            if(compileHandlers.containsKey(calculator.getType())){
-                compileHandlers.get(calculator.getType())
-                               .handle(queueCompiler, calculator);
-            }
-            else{
-                handleOperatorCalculation(queueCompiler, calculator);
-            }
-        }
-        queueCompiler.consumeQueue();
-        return queueCompiler.getConsumedCalculators();
+    private void handleConstantCalculation(QueueCompiler queueCompiler, Calculator calculator){
+        queueCompiler.consume(calculator);
     }
 
     private void handleFunctionCalculation(QueueCompiler queueCompiler, Calculator calculator){
         queueCompiler.pushToQueue(calculator);
-    }
-
-    private void handleConstantCalculation(QueueCompiler queueCompiler, Calculator calculator){
-        queueCompiler.consume(calculator);
     }
 
     private void handleOpenBracketCalculation(QueueCompiler queueCompiler, Calculator calculator){
@@ -63,6 +48,21 @@ public class InfixToPostfixNotationExpressionCompiler{
             break;
         }
         queueCompiler.discardQueueTop();
+    }
+
+    public List<Calculator> compile(List<Calculator> calculators){
+        QueueCompiler queueCompiler = new QueueCompiler();
+        for(Calculator calculator : calculators){
+            if(compileHandlers.containsKey(calculator.getType())){
+                compileHandlers.get(calculator.getType())
+                               .handle(queueCompiler, calculator);
+            }
+            else{
+                handleOperatorCalculation(queueCompiler, calculator);
+            }
+        }
+        queueCompiler.consumeQueue();
+        return queueCompiler.getConsumedCalculators();
     }
 
     private void handleOperatorCalculation(QueueCompiler queueCompiler, Calculator calculator){

@@ -3,7 +3,6 @@ package bg.sofia.tu.iti.math.expression.input;
 import bg.sofia.tu.iti.math.context.MathContext;
 import bg.sofia.tu.iti.math.context.MathContextFactory;
 import bg.sofia.tu.iti.math.expression.input.parser.AnonymousFunctionExpressionParser;
-import bg.sofia.tu.iti.math.expression.input.parser.FunctionDefinitionParser;
 import bg.sofia.tu.iti.math.function.Function;
 
 public class FunctionFactory{

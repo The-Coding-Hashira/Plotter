@@ -7,10 +7,11 @@ import bg.sofia.tu.iti.gui.event.axis.VerticalAxisEventHandlerFactory;
 import javafx.scene.canvas.GraphicsContext;
 
 public class VerticalAxisCanvasRegion extends AxisCanvasRegion{
-    public VerticalAxisCanvasRegion(Dimension2D dimension, GraphicsContext graphicsContext,
-                                    AxisColorScheme colorScheme, int tickLength){
-        super(10, new VerticalAxisEventHandlerFactory(), new VerticalAxisPainter(graphicsContext, dimension,
-                                                                                 colorScheme, tickLength));
+    public VerticalAxisCanvasRegion(Dimension2D dimension, GraphicsContext graphicsContext, AxisColorScheme colorScheme,
+                                    int tickLength){
+        super(10,
+              new VerticalAxisEventHandlerFactory(),
+              new VerticalAxisPainter(graphicsContext, dimension, colorScheme, tickLength));
     }
 
     @Override

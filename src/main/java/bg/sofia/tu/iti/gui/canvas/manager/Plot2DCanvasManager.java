@@ -32,15 +32,35 @@ public class Plot2DCanvasManager implements CanvasManager{
         Dimension2D     yAxisDimension    = createYAxisDimension(canvasDimension, padding);
         AxisColorScheme axisColorScheme   = new AxisColorSchemeFactory().createDefaultAxisColorScheme();
         int             tickLength        = 8;
-        HorizontalAxisCanvasRegion xAxisCanvasRegion = new HorizontalAxisCanvasRegion(xAxisDimension, graphicsContext
-                , axisColorScheme, tickLength);
-        VerticalAxisCanvasRegion yAxisCanvasRegion = new VerticalAxisCanvasRegion(yAxisDimension, graphicsContext,
-                                                                                  axisColorScheme, tickLength);
-        PlotAreaCanvasRegion plotArea = new PlotAreaCanvasRegion(plotAreaDimension, graphicsContext,
+        HorizontalAxisCanvasRegion xAxisCanvasRegion = new HorizontalAxisCanvasRegion(xAxisDimension,
+                                                                                      graphicsContext,
+                                                                                      axisColorScheme,
+                                                                                      tickLength);
+        VerticalAxisCanvasRegion yAxisCanvasRegion = new VerticalAxisCanvasRegion(yAxisDimension,
+                                                                                  graphicsContext,
+                                                                                  axisColorScheme,
+                                                                                  tickLength);
+        PlotAreaCanvasRegion plotArea = new PlotAreaCanvasRegion(plotAreaDimension,
+                                                                 graphicsContext,
                                                                  new PlotAreaColorSchemeFactory().createDefaultPlotAreaColorScheme());
 
         canvasRegionManager = new CanvasRegionManager(Arrays.asList(plotArea, xAxisCanvasRegion, yAxisCanvasRegion));
         graph               = new Graph2D(xAxisCanvasRegion, yAxisCanvasRegion, plotArea, function);
+    }
+
+    private Dimension2D createPlotAreaDimension(Dimension2D canvasDimension, double padding){
+        return new Dimension2D(padding, 0, canvasDimension.getWidth(), canvasDimension.getHeight() - padding);
+    }
+
+    private Dimension2D createXAxisDimension(Dimension2D canvasDimension, double padding){
+        return new Dimension2D(padding,
+                               canvasDimension.getHeight() - padding,
+                               canvasDimension.getWidth(),
+                               canvasDimension.getHeight());
+    }
+
+    private Dimension2D createYAxisDimension(Dimension2D canvasDimension, double padding){
+        return new Dimension2D(0, 0, padding, canvasDimension.getHeight() - padding);
     }
 
     @Override
@@ -69,19 +89,6 @@ public class Plot2DCanvasManager implements CanvasManager{
         canvasRegionManager.paint();
         graph.paint();
         System.out.println("DONE - 2D");
-    }
-
-    private Dimension2D createXAxisDimension(Dimension2D canvasDimension, double padding){
-        return new Dimension2D(padding, canvasDimension.getHeight() - padding, canvasDimension.getWidth(),
-                               canvasDimension.getHeight());
-    }
-
-    private Dimension2D createYAxisDimension(Dimension2D canvasDimension, double padding){
-        return new Dimension2D(0, 0, padding, canvasDimension.getHeight() - padding);
-    }
-
-    private Dimension2D createPlotAreaDimension(Dimension2D canvasDimension, double padding){
-        return new Dimension2D(padding, 0, canvasDimension.getWidth(), canvasDimension.getHeight() - padding);
     }
     //    @Override
     //    public void movedHorizontally(double pixels){

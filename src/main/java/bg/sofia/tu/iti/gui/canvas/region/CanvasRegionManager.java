@@ -6,19 +6,28 @@ import javafx.scene.input.ScrollEvent;
 import java.util.List;
 
 public class CanvasRegionManager{
-    private final List<CanvasRegion>     canvasRegions;
-    private       CanvasRegion           selectedRegion;
+    private final List<CanvasRegion> canvasRegions;
+    private       CanvasRegion       selectedRegion;
 
     public CanvasRegionManager(List<CanvasRegion> canvasRegions){
         if(canvasRegions.isEmpty()){
             throw new IllegalArgumentException("Canvas regions list cannot be empty.");
         }
-        this.canvasRegions  = canvasRegions;
-        selectedRegion      = canvasRegions.get(0);
+        this.canvasRegions = canvasRegions;
+        selectedRegion     = canvasRegions.get(0);
     }
 
     public void paint(){
         canvasRegions.forEach(this::paintCanvasRegion);
+    }
+
+    private void paintCanvasRegion(CanvasRegion canvasRegion){
+        canvasRegion.paint();
+    }
+
+    public void onMousePressed(MouseEvent mouseEvent){
+        selectedRegion = getRegionAt(mouseEvent.getX(), mouseEvent.getY());
+        selectedRegion.onMousePressed(mouseEvent);
     }
 
     public CanvasRegion getRegionAt(double x, double y){
@@ -30,11 +39,6 @@ public class CanvasRegionManager{
         throw new RuntimeException("Unknown region at: " + x + ", " + y);
     }
 
-    public void onMousePressed(MouseEvent mouseEvent){
-        selectedRegion = getRegionAt(mouseEvent.getX(), mouseEvent.getY());
-        selectedRegion.onMousePressed(mouseEvent);
-    }
-
     public void onMouseDragged(MouseEvent mouseEvent){
         selectedRegion.onMouseDragged(mouseEvent);
     }
@@ -42,10 +46,5 @@ public class CanvasRegionManager{
     public void onMouseScrolled(ScrollEvent scrollEvent){
         selectedRegion = getRegionAt(scrollEvent.getX(), scrollEvent.getY());
         selectedRegion.onMouseScrolled(scrollEvent);
-    }
-
-
-    private void paintCanvasRegion(CanvasRegion canvasRegion){
-        canvasRegion.paint();
     }
 }

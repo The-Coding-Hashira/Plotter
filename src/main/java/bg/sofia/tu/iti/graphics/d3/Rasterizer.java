@@ -32,15 +32,23 @@ public class Rasterizer{
         clearDepthBuffer();
     }
 
+    private void clearDepthBuffer(){
+        for(int y = 0; y < height; y++){
+            for(int x = 0; x < width; x++){
+                setDepth(x, y, maxDepth);
+            }
+        }
+    }
+
+    private void setDepth(int x, int y, double depth){
+        depthBuffer[x + (y * width)] = depth;
+    }
+
     public void strokeTriangle(Point4D p0, Point4D p1, Point4D p2){
         int color = 0xff000000;
         drawLine(p0.getX(), p0.getY(), p0.getZ(), p1.getX(), p1.getY(), p1.getZ(), color);
         drawLine(p1.getX(), p1.getY(), p1.getZ(), p2.getX(), p2.getY(), p2.getZ(), color);
         drawLine(p2.getX(), p2.getY(), p2.getZ(), p0.getX(), p0.getY(), p0.getZ(), color);
-    }
-
-    public void drawLine(Point4D p0, Point4D p1, int color){
-        drawLine(p0.getX(), p0.getY(), p0.getZ(), p1.getX(), p1.getY(), p1.getZ(), color);
     }
 
     public void drawLine(double p0x, double p0y, double p0z, double p1x, double p1y, double p1z, int color){
@@ -90,6 +98,25 @@ public class Rasterizer{
                 }
             }
         }
+    }
+
+    private boolean isValidIndex(int x, int y){
+        if(y < 0 || y >= height){
+            return false;
+        }
+        return x >= 0 && x < width;
+    }
+
+    private boolean isVisible(int x, int y, double depth){
+        return depthBuffer[x + (y * width)] >= depth;
+    }
+
+    private void setPixel(int x, int y, int color){
+        frameBuffer[x + (y * width)] = color;
+    }
+
+    public void drawLine(Point4D p0, Point4D p1, int color){
+        drawLine(p0.getX(), p0.getY(), p0.getZ(), p1.getX(), p1.getY(), p1.getZ(), color);
     }
 
     public void fillTriangle(Point4D p0, Point4D p1, Point4D p2){
@@ -179,6 +206,11 @@ public class Rasterizer{
         }
     }
 
+    public void clear(int color){
+        fill(color);
+        clearDepthBuffer();
+    }
+
     public void fill(int color){
         for(int y = 0; y < height; y++){
             for(int x = 0; x < width; x++){
@@ -187,41 +219,9 @@ public class Rasterizer{
         }
     }
 
-    public void clear(int color){
-        fill(color);
-        clearDepthBuffer();
-    }
-
     public Image toImage(){
-        pixelWriter.setArgb(0,0,0xFF00FF00);
+        pixelWriter.setArgb(0, 0, 0xFF00FF00);
         pixelWriter.setPixels(0, 0, width, height, pixelFormat, frameBuffer, 0, width);
         return writableImage;
-    }
-
-    private void clearDepthBuffer(){
-        for(int y = 0; y < height; y++){
-            for(int x = 0; x < width; x++){
-                setDepth(x, y, maxDepth);
-            }
-        }
-    }
-
-    private boolean isValidIndex(int x, int y){
-        if(y < 0 || y >= height){
-            return false;
-        }
-        return x >= 0 && x < width;
-    }
-
-    private boolean isVisible(int x, int y, double depth){
-        return depthBuffer[x + (y * width)] >= depth;
-    }
-
-    private void setPixel(int x, int y, int color){
-        frameBuffer[x + (y * width)] = color;
-    }
-
-    private void setDepth(int x, int y, double depth){
-        depthBuffer[x + (y * width)] = depth;
     }
 }

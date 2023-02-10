@@ -39,8 +39,8 @@ public class PlotAreaEventHandler implements CanvasRegionEventHandler{
         notifyListenersPlotAreaScrolled(scrollEvent);
     }
 
-    public void addPlotAreaMovedListener(PlotAreaEventListener plotAreaEventListener){
-        plotAreaEventListeners.add(plotAreaEventListener);
+    private void notifyListenersPlotAreaScrolled(ScrollEvent scrollEvent){
+        plotAreaEventListeners.forEach(plotAreaEventListener -> plotAreaEventListener.scrolled(scrollEvent));
     }
 
     private void notifyListenersPlotAreaMovedHorizontally(double pixels){
@@ -51,7 +51,7 @@ public class PlotAreaEventHandler implements CanvasRegionEventHandler{
         plotAreaEventListeners.forEach(plotAreaEventListener -> plotAreaEventListener.movedVertically(pixels));
     }
 
-    private void notifyListenersPlotAreaScrolled(ScrollEvent scrollEvent){
-        plotAreaEventListeners.forEach(plotAreaEventListener -> plotAreaEventListener.scrolled(scrollEvent));
+    public void addPlotAreaMovedListener(PlotAreaEventListener plotAreaEventListener){
+        plotAreaEventListeners.add(plotAreaEventListener);
     }
 }

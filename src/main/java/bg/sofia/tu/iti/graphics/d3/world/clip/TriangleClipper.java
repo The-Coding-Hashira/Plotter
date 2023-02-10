@@ -27,16 +27,6 @@ public class TriangleClipper{
         return clipData;
     }
 
-    private void verifyPoint(ClipData clipData, Point4D clippingPlaneNormal, Point4D p){
-        double d = -clippingPlaneNormal.dotProduct(p) + 0.5;
-        if(d >= 0){
-            clipData.addAcceptedPoint(p);
-        }
-        else{
-            clipData.addRejectedPoint(p);
-        }
-    }
-
     private List<Point4D> createTriangleFromIntersections(Point4D clippingPlaneNormal, ClipData clipData){
         Point4D a = clipData.getAcceptedPoints()
                             .get(0);
@@ -65,6 +55,16 @@ public class TriangleClipper{
         clipData.addAcceptedPoint(a2R);
         clipData.addAcceptedPoint(a1R);
         return clipData.getAcceptedPoints();
+    }
+
+    private void verifyPoint(ClipData clipData, Point4D clippingPlaneNormal, Point4D p){
+        double d = -clippingPlaneNormal.dotProduct(p) + 0.5;
+        if(d >= 0){
+            clipData.addAcceptedPoint(p);
+        }
+        else{
+            clipData.addRejectedPoint(p);
+        }
     }
 
     private Point4D findIntersection(Point4D p0, Point4D p1, Point4D n){

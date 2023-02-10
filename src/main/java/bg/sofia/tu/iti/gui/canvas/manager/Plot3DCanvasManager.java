@@ -21,6 +21,7 @@ public class Plot3DCanvasManager implements CanvasManager{
     private final GraphicsContext3D graphicsContext3D;
     private final int               backgroundColor;
     List<Point4D> points;
+
     public Plot3DCanvasManager(Dimension2D canvasDimension, GraphicsContext graphicsContext, Function function){
         graph3D           = new Graph3D(function);
         world3DEngine     = new World3DEngineFactory().create(canvasDimension.getWidth(), canvasDimension.getHeight());

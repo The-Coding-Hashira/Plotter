@@ -5,7 +5,6 @@ import bg.sofia.tu.iti.gui.canvas.manager.Plot3DCanvasManager;
 import bg.sofia.tu.iti.math.function.Function;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
-import javafx.scene.chart.NumberAxis;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
 

@@ -1,13 +1,8 @@
 package bg.sofia.tu.iti;
 
-import bg.sofia.tu.iti.math.context.MathContextFactory;
-import bg.sofia.tu.iti.math.expression.input.parser.FunctionDefinitionParser;
-import bg.sofia.tu.iti.math.function.Function;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-
-import java.util.Stack;
 
 public class PlotterApplication extends Application{
     public static void main(String[] args){

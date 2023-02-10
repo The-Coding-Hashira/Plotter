@@ -10,11 +10,6 @@ public class HorizontalAxisPainter extends AxisPainter{
     }
 
     @Override
-    public void strokeBaseLine(){
-        strokeHorizontalLine(0, 0, getDimension().getWidth());
-    }
-
-    @Override
     public void strokeTickLine(double offset){
         strokeVerticalLine(0 + offset, 0, -getTickLength());
     }
@@ -22,5 +17,10 @@ public class HorizontalAxisPainter extends AxisPainter{
     @Override
     public void fillTickText(String value, double offset){
         fillText(value, offset, 20);
+    }
+
+    @Override
+    public void strokeBaseLine(){
+        strokeHorizontalLine(0, 0, getDimension().getWidth());
     }
 }

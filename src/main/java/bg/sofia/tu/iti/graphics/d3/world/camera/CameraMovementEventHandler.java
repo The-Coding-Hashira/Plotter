@@ -31,6 +31,10 @@ public class CameraMovementEventHandler{
         rotation          = Matrix4x4.generateIdentity();
     }
 
+    private void notifyListeners(CameraMovementEventListener cameraMovementEventListener){
+        cameraMovementEventListener.onCameraMoved(rotation);
+    }
+
     public void addListener(CameraMovementEventListener listener){
         listeners.add(listener);
     }
@@ -96,9 +100,5 @@ public class CameraMovementEventHandler{
     private Matrix4x4 createRotation(){
         return transformFactory.createRotationY(yRotation)
                                .multiply(transformFactory.createRotationX(xRotation));
-    }
-
-    private void notifyListeners(CameraMovementEventListener cameraMovementEventListener){
-        cameraMovementEventListener.onCameraMoved(rotation);
     }
 }

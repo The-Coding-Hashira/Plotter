@@ -20,10 +20,6 @@ public class FXMLUtil{
         }
     }
 
-    public static Parent load(String resource, Callback<Class<?>, Object> controllerFactory){
-        return load(new FXMLLoader(toFXMLResourceURL(resource), null, null, controllerFactory));
-    }
-
     private static URL toFXMLResourceURL(String resource){
         String path = String.format(FXML_RESOURCE, resource);
         try{
@@ -34,6 +30,10 @@ public class FXMLUtil{
         catch(IOException e){
             throw new RuntimeException("Invalid resource URL: " + path, e);
         }
+    }
+
+    public static Parent load(String resource, Callback<Class<?>, Object> controllerFactory){
+        return load(new FXMLLoader(toFXMLResourceURL(resource), null, null, controllerFactory));
     }
 
     private static Parent load(FXMLLoader loader){

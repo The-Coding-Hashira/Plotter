@@ -46,32 +46,6 @@ public class TickGenerator{
     //        return ticks;
     //    }
 
-    private void addPositiveTickValues(Range range, List<Tick> ticks){
-        double spacing           = calculateTickSpacing(range);
-        double rangeLowBoundary  = range.getLowBoundary();
-        double tick              = Math.floor(rangeLowBoundary / spacing) * spacing;
-        double rangeHighBoundary = range.getHighBoundary();
-        while(tick <= rangeHighBoundary){
-            if(tick >= rangeLowBoundary){
-                ticks.add(createTick(tick, range));
-            }
-            tick += spacing;
-        }
-    }
-
-    private void addNegativeTickValues(Range range, List<Tick> ticks){
-        double spacing           = calculateTickSpacing(range);
-        double rangeHighBoundary = range.getHighBoundary();
-        double tick              = Math.ceil(rangeHighBoundary / spacing) * spacing;
-        double rangeLowBoundary  = range.getLowBoundary();
-        while(tick >= rangeLowBoundary){
-            if(tick <= rangeHighBoundary){
-                ticks.add(createTick(tick, range));
-            }
-            tick -= spacing;
-        }
-    }
-
     private double calculateTickSpacing(Range range){
         double spacing = range.calculate() / numberOfTicks;
         if(spacing < 1){
@@ -110,5 +84,31 @@ public class TickGenerator{
             number /= 10;
         }
         return number;
+    }
+
+    private void addPositiveTickValues(Range range, List<Tick> ticks){
+        double spacing           = calculateTickSpacing(range);
+        double rangeLowBoundary  = range.getLowBoundary();
+        double tick              = Math.floor(rangeLowBoundary / spacing) * spacing;
+        double rangeHighBoundary = range.getHighBoundary();
+        while(tick <= rangeHighBoundary){
+            if(tick >= rangeLowBoundary){
+                ticks.add(createTick(tick, range));
+            }
+            tick += spacing;
+        }
+    }
+
+    private void addNegativeTickValues(Range range, List<Tick> ticks){
+        double spacing           = calculateTickSpacing(range);
+        double rangeHighBoundary = range.getHighBoundary();
+        double tick              = Math.ceil(rangeHighBoundary / spacing) * spacing;
+        double rangeLowBoundary  = range.getLowBoundary();
+        while(tick >= rangeLowBoundary){
+            if(tick <= rangeHighBoundary){
+                ticks.add(createTick(tick, range));
+            }
+            tick -= spacing;
+        }
     }
 }
