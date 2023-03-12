@@ -93,6 +93,16 @@ public class Matrix4x4{
         return transposedCofactorMatrix.divide(determinant);
     }
 
+    public Matrix4x4 transpose(){
+        double[] transposedMatrix = new double[16];
+        for(int row = 0; row < 4; row++){
+            for(int column = 0; column < 4; column++){
+                transposedMatrix[column + (row << 2)] = get(column, row);
+            }
+        }
+        return new Matrix4x4(transposedMatrix);
+    }
+
     private Matrix4x4 findCofactorMatrix(){
         double[] cofactorMatrix = new double[16];
         for(int row = 0; row < 4; row++){
@@ -105,16 +115,6 @@ public class Matrix4x4{
             }
         }
         return new Matrix4x4(cofactorMatrix);
-    }
-
-    private Matrix4x4 transpose(){
-        double[] transposedMatrix = new double[16];
-        for(int row = 0; row < 4; row++){
-            for(int column = 0; column < 4; column++){
-                transposedMatrix[column + (row << 2)] = get(column, row);
-            }
-        }
-        return new Matrix4x4(transposedMatrix);
     }
 
     private Matrix4x4 divide(double scalar){

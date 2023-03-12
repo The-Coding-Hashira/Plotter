@@ -32,12 +32,12 @@ public class PlotAreaPainter extends Painter2D{
 
     private void paintVerticalGridLine(Tick tick){
         setUpGraphicsContext(tick.getValue());
-        //        strokeVerticalGridLine(tick.getCoordinate());
+        strokeVerticalGridLine(tick.getNormalizedValue());
     }
 
     private void paintHorizontalGridLine(Tick tick){
         setUpGraphicsContext(tick.getValue());
-        //        strokeHorizontalGridLine(tick.getCoordinate());
+        strokeHorizontalGridLine(tick.getNormalizedValue());
     }
 
     private void setUpGraphicsContext(double tickValue){
@@ -59,11 +59,13 @@ public class PlotAreaPainter extends Painter2D{
         getGraphicsContext().setLineDashes(8, 5);
     }
 
-    private void strokeVerticalGridLine(double coordinate){
-        strokeVerticalLine(coordinate, 0, getDimension().getHeight());
+    private void strokeVerticalGridLine(double normalizedCoordinate){
+        strokeVerticalLine(normalizedCoordinate * getDimension().getWidth(), 0, getDimension().getHeight());
     }
 
-    private void strokeHorizontalGridLine(double coordinate){
-        strokeHorizontalLine(0, getDimension().getHeight() - coordinate, getDimension().getWidth());
+    private void strokeHorizontalGridLine(double normalizedCoordinate){
+        strokeHorizontalLine(0,
+                             getDimension().getHeight() - getDimension().getHeight() * normalizedCoordinate,
+                             getDimension().getWidth());
     }
 }

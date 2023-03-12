@@ -1,119 +1,82 @@
 package bg.sofia.tu.iti.graph.d2;
 
-import bg.sofia.tu.iti.graph.core.axis.tick.Tick;
+import bg.sofia.tu.iti.graph.core.axis.Axis;
 import bg.sofia.tu.iti.graph.core.range.CalculationRange;
-import bg.sofia.tu.iti.graph.d2.painter.Graph2DPainter;
-import bg.sofia.tu.iti.gui.canvas.region.AxisCanvasRegion;
-import bg.sofia.tu.iti.gui.canvas.region.HorizontalAxisCanvasRegion;
-import bg.sofia.tu.iti.gui.canvas.region.PlotAreaCanvasRegion;
-import bg.sofia.tu.iti.gui.canvas.region.VerticalAxisCanvasRegion;
+import bg.sofia.tu.iti.graph.core.range.Range;
+import bg.sofia.tu.iti.graph.d3.GraphUtils;
+import bg.sofia.tu.iti.graphics.d2.geometry.Point2D;
 import bg.sofia.tu.iti.math.function.Function;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Stack;
 import java.util.stream.Collectors;
 
 public class Graph2D{
-    private final HorizontalAxisCanvasRegion xAxisCanvasRegion;
-    private final VerticalAxisCanvasRegion   yAxisCanvasRegion;
-    private final PlotAreaCanvasRegion       plotArea;
-    private final Graph2DPainter             graph2DPainter;
-    private final Function                   function;
+    private final Axis          xAxis;
+    private final Axis          yAxis;
+    private final Function      function;
+    private       List<Point2D> data;
 
-    public Graph2D(HorizontalAxisCanvasRegion xAxisCanvasRegion, VerticalAxisCanvasRegion yAxisCanvasRegion,
-                   PlotAreaCanvasRegion plotArea, Function function){
-        this.xAxisCanvasRegion = xAxisCanvasRegion;
-        this.yAxisCanvasRegion = yAxisCanvasRegion;
-        this.plotArea          = plotArea;
-        graph2DPainter         = new Graph2DPainter(plotArea.getPlotAreaPainter());
-        this.function          = function;
+    public Graph2D(Axis xAxis, Axis yAxis, Function function){
+        this.xAxis    = xAxis;
+        this.yAxis    = yAxis;
+        this.function = function;
+        data          = new ArrayList<>();
     }
 
-    public void paint(){
-        graph2DPainter.paintLineForCoordinates(calculateYCoordinates(calculateValues(findCalculationRange())));
-        paintGraphElements();
+    public void autosizeYAxis(double xPoints){
+        calculateData(xPoints);
+        List<Point2D> sortedData = data.stream()
+                                       .sorted(Comparator.comparingDouble(Point2D::getY))
+                                       .collect(Collectors.toList());
+        double minY = sortedData.get(0)
+                                .getY();
+        double maxY = sortedData.get(sortedData.size() - 1)
+                                .getY();
+        yAxis.setRange(new Range(minY * 1.1, maxY * 1.1));
     }
 
-    private List<Double> calculateYCoordinates(List<Double> values){
-        List<Double> yCoordinates = new ArrayList<>();
-        //TODO use point2d cuz not all funcs have results across all of X and therefore it will be wrong
-        double verticalValuePerPixel = calculateValuePerPixel(yAxisCanvasRegion.getAxis()
-                                                                               .getRange()
-                                                                               .calculate(),
-                                                              yAxisCanvasRegion.getPixelRange());
-        double lowBoundaryCoordinates = yAxisCanvasRegion.getAxis()
-                                                         .getRange()
-                                                         .getLowBoundary() / verticalValuePerPixel;
-        for(Double value : values){
-            double pixelsOffset = value / verticalValuePerPixel - lowBoundaryCoordinates;
-            yCoordinates.add(pixelsOffset);
+    public void calculateData(double xPoints){
+        //TODO add a proper parameterized function to generate points
+        //TODO make a button to set Z range from max to min and render with proper heatmap
+        Stack<Double> args = new Stack<>();
+        data = new ArrayList<>((int) xPoints);
+        CalculationRange calculationRange = new CalculationRange(xAxis.getRange()
+                                                                      .getHighBoundary(),
+                                                                 xAxis.getRange()
+                                                                      .getLowBoundary(),
+                                                                 xAxis.getRange()
+                                                                      .calculate() / xPoints);
+        for(double x = calculationRange.getLowBoundary(); x <= calculationRange.getHighBoundary(); x += calculationRange.getStep()){
+            args.push(x);
+            data.add(new Point2D(x,
+                                 function.calculate(args)
+                                         .getResult()));
         }
-        return yCoordinates;
     }
 
-    private List<Double> calculateValues(CalculationRange calculationRange){
-        List<Double>  values    = new ArrayList<>();
-        Stack<Double> arguments = new Stack<>();
-        for(double argument = calculationRange.getLowBoundary(); argument <= calculationRange.getHighBoundary(); argument += calculationRange.getStep()){
-            arguments.push(argument);
-            values.add(function.calculate(arguments)
-                               .getResult());
-            //TODO add if !isNaN cuz some functions will return NaN like division by zero or sqrt(<0)
-        }
-        return values;
+    public List<Point2D> normalizeDataPoints(){
+        double xLowBoundary = xAxis.getRange()
+                                   .getLowBoundary();
+        double xRange = xAxis.getRange()
+                             .calculate();
+        double yLowBoundary = yAxis.getRange()
+                                   .getLowBoundary();
+        double yRange = yAxis.getRange()
+                             .calculate();
+        return data.stream()
+                   .map(point -> new Point2D(GraphUtils.findParameter(point.getX(), xLowBoundary, xRange),
+                                             GraphUtils.findParameter(point.getY(), yLowBoundary, yRange)))
+                   .collect(Collectors.toList());
     }
 
-    private CalculationRange findCalculationRange(){
-        return new CalculationRange(xAxisCanvasRegion.getAxis()
-                                                     .getRange()
-                                                     .getHighBoundary(),
-                                    xAxisCanvasRegion.getAxis()
-                                                     .getRange()
-                                                     .getLowBoundary(),
-                                    xAxisCanvasRegion.getAxis()
-                                                     .getRange()
-                                                     .calculate() / plotArea.getPlotAreaPainter()
-                                                                            .getDimension()
-                                                                            .getWidth());
+    public Axis getXAxis(){
+        return xAxis;
     }
 
-    private void paintGraphElements(){
-        //        List<Tick> xTicks = calculateAxisTicks(xAxisCanvasRegion,
-        //                                               xAxisCanvasRegion.getAxis()
-        //                                                                .generateTicks());
-        //        List<Tick> yTicks = calculateAxisTicks(yAxisCanvasRegion,
-        //                                               yAxisCanvasRegion.getAxis()
-        //                                                                .generateTicks());
-        //        plotArea.getPlotAreaPainter()
-        //                .paintGridLines(xTicks, yTicks);
-        //        xAxisCanvasRegion.getAxisPainter()
-        //                         .paintTicks(xTicks);
-        //        yAxisCanvasRegion.getAxisPainter()
-        //                         .paintTicks(yTicks);
-    }
-
-    private double calculateValuePerPixel(double valueRange, double pixelRange){
-        return valueRange / pixelRange;
-    }
-
-    private List<Tick> calculateAxisTicks(AxisCanvasRegion axisCanvasRegion, List<Double> tickValues){
-        double valuePerPixel = calculateValuePerPixel(axisCanvasRegion.getAxis()
-                                                                      .getRange()
-                                                                      .calculate(), axisCanvasRegion.getPixelRange());
-        double lowBoundaryCoordinates = axisCanvasRegion.getAxis()
-                                                        .getRange()
-                                                        .getLowBoundary() / valuePerPixel;
-        return tickValues.stream()
-                         .map(tickValue -> {
-                             double pixelsOffset = tickValue / valuePerPixel - lowBoundaryCoordinates;
-                             //                             return new Tick(tickValue, pixelsOffset);
-                             return new Tick(0, 0, null);
-                         })
-                         .collect(Collectors.toList());
-    }
-
-    private double calculatePixelPerValue(double valueRange, double pixelRange){
-        return pixelRange / valueRange;
+    public Axis getYAxis(){
+        return yAxis;
     }
 }

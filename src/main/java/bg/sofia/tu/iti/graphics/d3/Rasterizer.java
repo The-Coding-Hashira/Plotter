@@ -1,10 +1,8 @@
 package bg.sofia.tu.iti.graphics.d3;
 
 import bg.sofia.tu.iti.graphics.d3.geometry.Point4D;
-import javafx.scene.image.Image;
 import javafx.scene.image.PixelFormat;
 import javafx.scene.image.PixelWriter;
-import javafx.scene.image.WritableImage;
 import javafx.scene.paint.Color;
 
 import java.nio.IntBuffer;
@@ -15,33 +13,20 @@ public class Rasterizer{
     private final int[]                  frameBuffer;
     private final double[]               depthBuffer;
     private final double                 maxDepth;
-    private final WritableImage          writableImage;
-    private final PixelWriter            pixelWriter;
     private final PixelFormat<IntBuffer> pixelFormat;
 
     public Rasterizer(int width, int height){
-        this.width    = width;
-        this.height   = height;
-        frameBuffer   = new int[width * height];
-        depthBuffer   = new double[width * height];
-        maxDepth      = Double.POSITIVE_INFINITY;
-        writableImage = new WritableImage(width, height);
-        pixelWriter   = writableImage.getPixelWriter();
-        pixelFormat   = PixelFormat.getIntArgbPreInstance();
-
+        this.width  = width;
+        this.height = height;
+        frameBuffer = new int[width * height];
+        depthBuffer = new double[width * height];
+        maxDepth    = Double.POSITIVE_INFINITY;
+        pixelFormat = PixelFormat.getIntArgbPreInstance();
         clearDepthBuffer();
     }
 
-    private void clearDepthBuffer(){
-        for(int y = 0; y < height; y++){
-            for(int x = 0; x < width; x++){
-                setDepth(x, y, maxDepth);
-            }
-        }
-    }
-
-    private void setDepth(int x, int y, double depth){
-        depthBuffer[x + (y * width)] = depth;
+    public void writePixelData(PixelWriter pixelWriter){
+        pixelWriter.setPixels(0, 0, width, height, pixelFormat, frameBuffer, 0, width);
     }
 
     public void strokeTriangle(Point4D p0, Point4D p1, Point4D p2){
@@ -49,6 +34,10 @@ public class Rasterizer{
         drawLine(p0.getX(), p0.getY(), p0.getZ(), p1.getX(), p1.getY(), p1.getZ(), color);
         drawLine(p1.getX(), p1.getY(), p1.getZ(), p2.getX(), p2.getY(), p2.getZ(), color);
         drawLine(p2.getX(), p2.getY(), p2.getZ(), p0.getX(), p0.getY(), p0.getZ(), color);
+    }
+
+    public void drawLine(Point4D p0, Point4D p1, int color){
+        drawLine(p0.getX(), p0.getY(), p0.getZ(), p1.getX(), p1.getY(), p1.getZ(), color);
     }
 
     public void drawLine(double p0x, double p0y, double p0z, double p1x, double p1y, double p1z, int color){
@@ -98,25 +87,6 @@ public class Rasterizer{
                 }
             }
         }
-    }
-
-    private boolean isValidIndex(int x, int y){
-        if(y < 0 || y >= height){
-            return false;
-        }
-        return x >= 0 && x < width;
-    }
-
-    private boolean isVisible(int x, int y, double depth){
-        return depthBuffer[x + (y * width)] >= depth;
-    }
-
-    private void setPixel(int x, int y, int color){
-        frameBuffer[x + (y * width)] = color;
-    }
-
-    public void drawLine(Point4D p0, Point4D p1, int color){
-        drawLine(p0.getX(), p0.getY(), p0.getZ(), p1.getX(), p1.getY(), p1.getZ(), color);
     }
 
     public void fillTriangle(Point4D p0, Point4D p1, Point4D p2){
@@ -219,9 +189,30 @@ public class Rasterizer{
         }
     }
 
-    public Image toImage(){
-        pixelWriter.setArgb(0, 0, 0xFF00FF00);
-        pixelWriter.setPixels(0, 0, width, height, pixelFormat, frameBuffer, 0, width);
-        return writableImage;
+    private boolean isValidIndex(int x, int y){
+        if(y < 0 || y >= height){
+            return false;
+        }
+        return x >= 0 && x < width;
+    }
+
+    private boolean isVisible(int x, int y, double depth){
+        return depthBuffer[x + (y * width)] >= depth;
+    }
+
+    private void setPixel(int x, int y, int color){
+        frameBuffer[x + (y * width)] = color;
+    }
+
+    private void clearDepthBuffer(){
+        for(int y = 0; y < height; y++){
+            for(int x = 0; x < width; x++){
+                setDepth(x, y, maxDepth);
+            }
+        }
+    }
+
+    private void setDepth(int x, int y, double depth){
+        depthBuffer[x + (y * width)] = depth;
     }
 }

@@ -1,39 +1,25 @@
 package bg.sofia.tu.iti.graphics.d3.world.camera;
 
-import bg.sofia.tu.iti.graphics.d3.geometry.Point4D;
 import bg.sofia.tu.iti.graphics.d3.transform.Matrix4x4;
 import javafx.scene.input.MouseEvent;
 
 public class CameraManager implements CameraMovementEventListener{
-    public static Point4D                    cPos     = new Point4D(-1, 0, 0);
-    public static Point4D                    lookPos  = new Point4D(0, 0, 0);
-    public static Point4D                    upPos    = new Point4D(0, 0, 1, 0);
-    public static Camera                     LECamera = new Camera(cPos, lookPos, upPos);
     private final CameraMovementEventHandler cameraMovementEventHandler;
-    private final Camera                     camera;
-    Matrix4x4 cameraTransform;
-    private       Camera                     tempCamera;
+    private       Camera                     camera;
+    private       Matrix4x4                  cameraTransform;
 
-    public CameraManager(Camera camera){
+    public CameraManager(double cameraXRotation, double cameraYRotation){
+        //TODO fix initial camera
         cameraMovementEventHandler = new CameraMovementEventHandler();
         cameraMovementEventHandler.addListener(this);
-        this.camera     = camera;
-        tempCamera      = camera;
+        camera          = cameraMovementEventHandler.createInitialCamera(cameraXRotation, cameraYRotation);
         cameraTransform = camera.createTransform();
     }
 
     @Override
-    public void onCameraMoved(Matrix4x4 transform){
-        tempCamera      = LECamera;
-        cameraTransform = tempCamera.createTransform();
-        //        Matrix4x4 arg = cameraTransform.invert();
-        //        arg             = arg.multiply(transform);
-        //        cameraTransform = arg.invert();
-        //        tempCamera      = Camera.from(cameraTransform);
-        //        cameraTransform = camera.rotate(transform)
-        //                                .createTransform();
-        //        tempCamera      = Camera.from(cameraTransform);
-        //        cameraTransform = camera.rotate(matrix4x4).createTransform();
+    public void onCameraMoved(Camera camera){
+        this.camera     = camera;
+        cameraTransform = camera.createTransform();
     }
 
     public void onMousePressed(MouseEvent mouseEvent){
@@ -45,10 +31,10 @@ public class CameraManager implements CameraMovementEventListener{
     }
 
     public Camera getCamera(){
-        return tempCamera;
+        return camera;
     }
 
-    public Matrix4x4 createTransform(){
+    public Matrix4x4 getTransform(){
         return cameraTransform;
     }
 }

@@ -18,7 +18,7 @@ public class Graph2DPainter extends Painter2D{
         strokePathForYCoordinates(yCoordinates);
     }
 
-    public void paintLine(List<Point2D> points){
+    public void paintPath(List<Point2D> points){
         if(points.isEmpty()){
             return;
         }

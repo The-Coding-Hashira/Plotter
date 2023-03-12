@@ -6,11 +6,11 @@ import javafx.scene.input.ScrollEvent;
 public interface CanvasRegion{
     boolean containsPoint(double x, double y);
 
-    void paint();
-
     void onMousePressed(MouseEvent mouseEvent);
 
     void onMouseDragged(MouseEvent mouseEvent);
 
     void onMouseScrolled(ScrollEvent scrollEvent);
+
+    void paint();
 }

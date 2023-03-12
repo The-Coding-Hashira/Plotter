@@ -14,17 +14,17 @@ public class World3DEngineFactory{
 
     public World3DEngine create(double width, double height){
         //TODO use camera with proper UP vector
-        Camera camera = createCamera();
+        CameraManager cameraManager = new CameraManager(65, -150);
         return new World3DEngine(createBoundingBox(),
-                                 new CameraManager(camera),
-                                 createWorldTransformManager(camera, width, height));
+                                 cameraManager,
+                                 createWorldTransformManager(cameraManager.getCamera(), width, height));
     }
 
     private Camera createCamera(){
         //@formatter:off
-        return new Camera(worldOrigin.add(new Point4D(-3,-5,0)),
+        return new Camera(worldOrigin.add(new Point4D(0,0,2)),
                           worldOrigin,
-                          new Point4D(0, 0, 1,0));
+                          new Point4D(-1, 0, 0,0));
         //@formatter:on
     }
 

@@ -1,8 +1,7 @@
 package bg.sofia.tu.iti.gui.canvas.region;
 
 import bg.sofia.tu.iti.graph.core.axis.Axis;
-import bg.sofia.tu.iti.graph.core.axis.TickGenerator;
-import bg.sofia.tu.iti.graph.core.range.Range;
+import bg.sofia.tu.iti.graph.core.axis.tick.TickGenerator;
 import bg.sofia.tu.iti.graph.d2.axis.AxisPainter;
 import bg.sofia.tu.iti.gui.event.CanvasRegionEventHandler;
 import bg.sofia.tu.iti.gui.event.axis.AxisEventHandlerFactory;
@@ -14,15 +13,15 @@ public abstract class AxisCanvasRegion implements CanvasRegion{
     private final CanvasRegionEventHandler canvasRegionEventHandler;
     private final AxisPainter              axisPainter;
 
-    public AxisCanvasRegion(int ticks, AxisEventHandlerFactory axisEventHandlerFactory, AxisPainter axisPainter){
-        TickGenerator tickGenerator = new TickGenerator(5);
-        Range         range         = new Range(-10, 10);
-        this.axis                     = new Axis(range, tickGenerator);
+    private final TickGenerator tickGenerator;
+
+    public AxisCanvasRegion(Axis axis, int ticks, AxisEventHandlerFactory axisEventHandlerFactory,
+                            AxisPainter axisPainter){
+        tickGenerator                 = new TickGenerator(ticks);
+        this.axis                     = axis;
         this.canvasRegionEventHandler = axisEventHandlerFactory.create(axis);
         this.axisPainter              = axisPainter;
     }
-
-    public abstract double getPixelRange();
 
     @Override
     public boolean containsPoint(double x, double y){
@@ -33,6 +32,7 @@ public abstract class AxisCanvasRegion implements CanvasRegion{
     @Override
     public void paint(){
         axisPainter.paint();
+        axisPainter.paintTicks(axis.generateTicks(tickGenerator));
     }
 
     @Override
@@ -48,10 +48,6 @@ public abstract class AxisCanvasRegion implements CanvasRegion{
     @Override
     public void onMouseScrolled(ScrollEvent scrollEvent){
         canvasRegionEventHandler.onMouseScrolled(scrollEvent);
-    }
-
-    public Axis getAxis(){
-        return axis;
     }
 
     public AxisPainter getAxisPainter(){

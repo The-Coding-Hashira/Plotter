@@ -4,10 +4,17 @@ import bg.sofia.tu.iti.graphics.d3.geometry.Point4D;
 import bg.sofia.tu.iti.graphics.d3.world.HeatMap;
 import javafx.scene.paint.Color;
 
+import java.text.DecimalFormat;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class GraphUtils{
+    private static final DecimalFormat tickTextFormat = new DecimalFormat("##0.##E0");
+
+    public static String toEngineeringNotation(double value){
+        return tickTextFormat.format(value);
+    }
+
     public static double findParameter(double value, double lowBoundary, double range){
         return (value - lowBoundary) / range;
     }
@@ -37,7 +44,7 @@ public class GraphUtils{
                      .collect(Collectors.toList());
     }
 
-    private static int compareZ(Point4D p1, Point4D p2){
+    public static int compareZ(Point4D p1, Point4D p2){
         if(p1.getZ() > p2.getZ()){
             return 1;
         }

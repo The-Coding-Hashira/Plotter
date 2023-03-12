@@ -17,26 +17,9 @@ public class CanvasRegionManager{
         selectedRegion     = canvasRegions.get(0);
     }
 
-    public void paint(){
-        canvasRegions.forEach(this::paintCanvasRegion);
-    }
-
-    private void paintCanvasRegion(CanvasRegion canvasRegion){
-        canvasRegion.paint();
-    }
-
     public void onMousePressed(MouseEvent mouseEvent){
         selectedRegion = getRegionAt(mouseEvent.getX(), mouseEvent.getY());
         selectedRegion.onMousePressed(mouseEvent);
-    }
-
-    public CanvasRegion getRegionAt(double x, double y){
-        for(CanvasRegion canvasRegion : canvasRegions){
-            if(canvasRegion.containsPoint(x, y)){
-                return canvasRegion;
-            }
-        }
-        throw new RuntimeException("Unknown region at: " + x + ", " + y);
     }
 
     public void onMouseDragged(MouseEvent mouseEvent){
@@ -46,5 +29,18 @@ public class CanvasRegionManager{
     public void onMouseScrolled(ScrollEvent scrollEvent){
         selectedRegion = getRegionAt(scrollEvent.getX(), scrollEvent.getY());
         selectedRegion.onMouseScrolled(scrollEvent);
+    }
+
+    public void paint(){
+        canvasRegions.forEach(CanvasRegion::paint);
+    }
+
+    private CanvasRegion getRegionAt(double x, double y){
+        for(CanvasRegion canvasRegion : canvasRegions){
+            if(canvasRegion.containsPoint(x, y)){
+                return canvasRegion;
+            }
+        }
+        throw new RuntimeException("Unknown region at: " + x + ", " + y);
     }
 }

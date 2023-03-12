@@ -4,5 +4,5 @@ import bg.sofia.tu.iti.graphics.d3.transform.Matrix4x4;
 
 public interface CameraMovementEventListener{
 
-    void onCameraMoved(Matrix4x4 angle);
+    void onCameraMoved(Camera camera);
 }

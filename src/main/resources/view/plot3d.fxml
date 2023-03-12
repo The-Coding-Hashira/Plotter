@@ -2,16 +2,178 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.canvas.Canvas?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.BorderPane?>
-<BorderPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.351"
-            fx:controller="bg.sofia.tu.iti.gui.application.Plotter3D">
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane xmlns="http://javafx.com/javafx/8.0.351" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bg.sofia.tu.iti.gui.application.Plotter3D">
     <center>
-        <Canvas fx:id="plot" height="600.0" nodeOrientation="INHERIT" onMouseDragged="#plotOnMouseDragged"
-                onMousePressed="#plotOnMousePressed" onScroll="#plotOnMouseScrolled" width="700.0"
-                BorderPane.alignment="CENTER">
+        <Canvas fx:id="plot" height="600.0" nodeOrientation="INHERIT" onMouseDragged="#onMouseDraggedOnPlot" onMousePressed="#onMousePressedOnPlot" onScroll="#onMouseScrolledOnPlot" width="700.0" BorderPane.alignment="CENTER">
             <BorderPane.margin>
-                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
             </BorderPane.margin>
         </Canvas>
     </center>
+   <left>
+      <HBox BorderPane.alignment="CENTER">
+         <BorderPane.margin>
+            <Insets bottom="10.0" left="10.0" top="10.0" />
+         </BorderPane.margin>
+         <children>
+            <VBox prefHeight="619.0" prefWidth="201.0">
+               <children>
+                  <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="40.0">
+                     <children>
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Grid resolution:" textAlignment="CENTER" wrappingWidth="102.69754028320312">
+                                 <font>
+                                    <Font name="Calibri" size="16.0" />
+                                 </font>
+                              </Text>
+                              <TextField fx:id="gridResolutionTextField" prefHeight="25.0" prefWidth="64.0" />
+                              <Button mnemonicParsing="false" onAction="#updateGridResolution" prefHeight="25.0" prefWidth="33.0" text="Set" />
+                           </children>
+                        </HBox>
+                        <Button fx:id="autosizeButton" mnemonicParsing="false" onAction="#onAutosizeButtonClicked" prefWidth="95.0" text="Autosize Z axis" textAlignment="CENTER">
+                           <VBox.margin>
+                              <Insets top="5.0" />
+                           </VBox.margin>
+                        </Button>
+                        <Button mnemonicParsing="false" onAction="#toggleWireframe" text="Toggle Wireframe" textAlignment="CENTER" />
+                        <Button fx:id="updateGraphButton" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#onUpdateGraphButtonClicked" prefWidth="95.0" text="Update graph" textAlignment="CENTER" />
+                     </children>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                     <padding>
+                        <Insets bottom="8.0" />
+                     </padding>
+                  </VBox>
+                  <VBox prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <HBox prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Z axis range" textAlignment="CENTER" wrappingWidth="200.993803024292">
+                                 <font>
+                                    <Font name="Calibri" size="16.0" />
+                                 </font>
+                              </Text>
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="243.0" prefWidth="201.0">
+                           <children>
+                              <TextField fx:id="zAxisLowTextField">
+                                 <font>
+                                    <Font name="Calibri" size="15.0" />
+                                 </font>
+                              </TextField>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="-" textAlignment="CENTER" wrappingWidth="24.79879093170166">
+                                 <font>
+                                    <Font name="Calibri" size="15.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets top="5.0" />
+                                 </HBox.margin>
+                              </Text>
+                              <TextField fx:id="zAxisHighTextField" layoutX="10.0" layoutY="10.0">
+                                 <font>
+                                    <Font name="Calibri" size="15.0" />
+                                 </font>
+                              </TextField>
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+                  <VBox layoutX="10.0" layoutY="210.0" prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <HBox prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="X axis range" textAlignment="CENTER" wrappingWidth="200.993803024292">
+                                 <font>
+                                    <Font name="Calibri" size="16.0" />
+                                 </font>
+                              </Text>
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="243.0" prefWidth="201.0">
+                           <children>
+                              <TextField fx:id="xAxisLowTextField">
+                                 <font>
+                                    <Font name="Calibri" size="15.0" />
+                                 </font>
+                              </TextField>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="-" textAlignment="CENTER" wrappingWidth="24.79879093170166">
+                                 <font>
+                                    <Font name="Calibri" size="15.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets top="5.0" />
+                                 </HBox.margin>
+                              </Text>
+                              <TextField layoutX="10.0" layoutY="10.0" fx:id="xAxisHighTextField">
+                                 <font>
+                                    <Font name="Calibri" size="15.0" />
+                                 </font>
+                              </TextField>
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+                  <VBox layoutX="10.0" layoutY="410.0" prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <HBox prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Y axis range" textAlignment="CENTER" wrappingWidth="200.993803024292">
+                                 <font>
+                                    <Font name="Calibri" size="16.0" />
+                                 </font>
+                              </Text>
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="243.0" prefWidth="201.0">
+                           <children>
+                              <TextField fx:id="yAxisLowTextField">
+                                 <font>
+                                    <Font name="Calibri" size="15.0" />
+                                 </font>
+                              </TextField>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="-" textAlignment="CENTER" wrappingWidth="24.79879093170166">
+                                 <font>
+                                    <Font name="Calibri" size="15.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets top="5.0" />
+                                 </HBox.margin>
+                              </Text>
+                              <TextField fx:id="yAxisHighTextField" layoutX="10.0" layoutY="10.0">
+                                 <font>
+                                    <Font name="Calibri" size="15.0" />
+                                 </font>
+                              </TextField>
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </children>
+            </VBox>
+            <Separator orientation="VERTICAL" prefHeight="200.0">
+               <HBox.margin>
+                  <Insets left="5.0" />
+               </HBox.margin>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </Separator>
+         </children>
+      </HBox>
+   </left>
 </BorderPane>

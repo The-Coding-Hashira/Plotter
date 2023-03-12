@@ -15,33 +15,40 @@ public class HorizontalAxisEventHandler implements CanvasRegionEventHandler{
 
     @Override
     public void onMousePressed(MouseEvent mouseEvent){
-        mouseLastDraggedAtX = mouseEvent.getSceneX();
+        mouseLastDraggedAtX = mouseEvent.getX();
     }
 
     @Override
     public void onMouseDragged(MouseEvent mouseEvent){
-        if(mouseEvent.getSceneX() < mouseLastDraggedAtX){
+        if(mouseEvent.getX() < mouseLastDraggedAtX){
             axis.getRange()
-                .expand(1);
+                .expand();
         }
         else{
             axis.getRange()
-                .shrink(1);
+                .shrink();
         }
-        //TODO bring modification ratio here
-        mouseLastDraggedAtX = mouseEvent.getSceneX();
+        mouseLastDraggedAtX = mouseEvent.getX();
     }
 
     @Override
     public void onMouseScrolled(ScrollEvent scrollEvent){
-        double pixels = scrollEvent.getDeltaY();
+        if(scrollEvent.getDeltaY() > 0){
+            onMouseScrolled(scrollEvent.getDeltaY());
+        }
+        else{
+            onMouseScrolled(scrollEvent.getDeltaX());
+        }
+    }
+
+    private void onMouseScrolled(double pixels){
         if(pixels > 0){
             axis.getRange()
-                .shrink(pixels);
+                .shrink();
         }
         else{
             axis.getRange()
-                .expand(-pixels);
+                .expand();
         }
     }
 }

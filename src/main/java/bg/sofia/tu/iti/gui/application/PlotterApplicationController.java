@@ -6,6 +6,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TextArea;
+import javafx.scene.input.KeyEvent;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -22,6 +23,7 @@ public class PlotterApplicationController implements Initializable{
 
     @Override
     public void initialize(URL location, ResourceBundle resources){
+        tabPane.setTabMinWidth(60);
         plotterLoader = new PlotterLoader(findTab(PLOT_TAB));
         plotterLoader.load(expressionTextArea.getText());
     }

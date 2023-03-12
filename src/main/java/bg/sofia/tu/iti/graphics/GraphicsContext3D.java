@@ -17,6 +17,7 @@ public class GraphicsContext3D{
     public GraphicsContext3D(GraphicsContext graphicsContext, Dimension2D canvasDimension){
         this.graphicsContext = graphicsContext;
         this.rasterizer      = new Rasterizer((int) canvasDimension.getWidth(), (int) canvasDimension.getHeight());
+        graphicsContext.setImageSmoothing(true);
     }
 
     public void clear(int color){
@@ -24,12 +25,15 @@ public class GraphicsContext3D{
     }
 
     public void render(){
-        graphicsContext.drawImage(rasterizer.toImage(), 0, 0);
+        rasterizer.writePixelData(graphicsContext.getPixelWriter());
     }
 
-    public void rasterizeTriangleData(List<Point4D> data){
-        Geometry3DUtils.iterateTriangles(data, rasterizer::fillTriangle);
-        Geometry3DUtils.iterateTrianglesAsGrid(data, (p0, p1) -> rasterizer.drawLine(p0, p1, 0xff000000));
+    public void rasterize(List<Point4D> triangles){
+        Geometry3DUtils.iterateTriangles(triangles, rasterizer::fillTriangle);
+    }
+
+    public void rasterizeWireframe(List<Point4D> triangles){
+        Geometry3DUtils.iterateTrianglesAsGrid(triangles, (p0, p1) -> rasterizer.drawLine(p0, p1, 0xff000000));
     }
 
     public void drawLine(Point4D p0, Point4D p1, int color){

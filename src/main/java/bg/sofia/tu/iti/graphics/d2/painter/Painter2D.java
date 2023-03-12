@@ -29,14 +29,25 @@ public class Painter2D{
 
     public void strokePath(List<Point2D> points){
         double startX = dimension.getStartX();
-        double startY = dimension.getStartY();
+        double endY   = dimension.getEndY();
+
+        //TODO create proper path drawing 1/sin(x) is benchmark
+        //        points.forEach(point -> {
+        //            graphicsContext.beginPath();
+        //            graphicsContext.moveTo(startX + point.getX() * getDimension().getWidth(),
+        //                                   endY - point.getY() * getDimension().getHeight());
+        //            graphicsContext.lineTo(startX + point.getX() * getDimension().getWidth(),
+        //                                   endY - point.getY() * getDimension().getHeight());
+        //            graphicsContext.stroke();
+        //        });
 
         graphicsContext.beginPath();
         graphicsContext.moveTo(startX + points.get(0)
-                                              .getX(),
-                               startY + points.get(0)
-                                              .getY());
-        points.forEach(point -> graphicsContext.lineTo(startX + point.getX(), startY + point.getY()));
+                                              .getX() * getDimension().getWidth(),
+                               endY - points.get(0)
+                                            .getY() * getDimension().getHeight());
+        points.forEach(point -> graphicsContext.lineTo(startX + point.getX() * getDimension().getWidth(),
+                                                       endY - point.getY() * getDimension().getHeight()));
         graphicsContext.stroke();
     }
 

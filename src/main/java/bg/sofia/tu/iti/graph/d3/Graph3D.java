@@ -1,7 +1,7 @@
 package bg.sofia.tu.iti.graph.d3;
 
 import bg.sofia.tu.iti.graph.core.axis.Axis;
-import bg.sofia.tu.iti.graph.core.axis.TickGenerator;
+import bg.sofia.tu.iti.graph.core.axis.tick.TickGenerator;
 import bg.sofia.tu.iti.graph.core.range.Range;
 import bg.sofia.tu.iti.graphics.d3.geometry.Point4D;
 import bg.sofia.tu.iti.math.function.Function;
@@ -15,27 +15,41 @@ public class Graph3D{
     private final Axis          xAxis;
     private final Axis          yAxis;
     private final Axis          zAxis;
-    private final List<Point4D> data;
     private final Function      function;
+    private final List<Point4D> data;
+
+    private final TickGenerator tickGenerator;
 
     public Graph3D(Function function){
-        TickGenerator tickGenerator = new TickGenerator(5);
-        Range         range         = new Range(-10, 10);
-        this.xAxis    = new Axis(range, tickGenerator);
-        this.yAxis    = new Axis(range, tickGenerator);
-        this.zAxis    = new Axis(range, tickGenerator);
-        data          = new ArrayList<>();
+        tickGenerator = new TickGenerator(8);
+        this.xAxis    = new Axis(new Range(-10, 10));
+        this.yAxis    = new Axis(new Range(-10, 10));
+        this.zAxis    = new Axis(new Range(-10, 10));
         this.function = function;
+        data          = new ArrayList<>();
+    }
+
+    public void autosizeZAxis(int gridResolution){
+        calculateData(gridResolution);
+        List<Point4D> sortedData = data.stream()
+                                       .sorted(GraphUtils::compareZ)
+                                       .collect(Collectors.toList());
+        double minZ = sortedData.get(0)
+                                .getZ();
+        double maxZ = sortedData.get(sortedData.size() - 1)
+                                .getZ();
+        zAxis.setRange(new Range(minZ + (minZ * 0.1), maxZ + (maxZ * 0.1)));
     }
 
     public TickData generateTickData(){
-        return new TickData(xAxis.generateTicks(), yAxis.generateTicks(), zAxis.generateTicks());
+        return new TickData(xAxis.generateTicks(tickGenerator),
+                            yAxis.generateTicks(tickGenerator),
+                            zAxis.generateTicks(tickGenerator));
     }
 
-    public void calculateData(){
+    public void calculateData(int gridResolution){
         //TODO add a proper parameterized function to generate points
         //TODO make a button to set Z range from max to min and render with proper heatmap
-        int gridResolution = 50;
         double xLowBoundary = xAxis.getRange()
                                    .getLowBoundary();
         double xStep = xAxis.getRange()
@@ -77,5 +91,17 @@ public class Graph3D{
                                              GraphUtils.findParameter(point.getY(), yLowBoundary, yRange),
                                              GraphUtils.findParameter(point.getZ(), zLowBoundary, zRange)))
                    .collect(Collectors.toList());
+    }
+
+    public Axis getXAxis(){
+        return xAxis;
+    }
+
+    public Axis getYAxis(){
+        return yAxis;
+    }
+
+    public Axis getZAxis(){
+        return zAxis;
     }
 }

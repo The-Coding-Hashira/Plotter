@@ -1,8 +1,6 @@
 package bg.sofia.tu.iti.graphics.d3.world.camera;
 
 import bg.sofia.tu.iti.graphics.d3.geometry.Point4D;
-import bg.sofia.tu.iti.graphics.d3.transform.Matrix4x4;
-import bg.sofia.tu.iti.graphics.d3.transform.TransformFactory;
 import javafx.scene.input.MouseEvent;
 
 import java.util.ArrayList;
@@ -12,27 +10,34 @@ import java.util.function.Consumer;
 public class CameraMovementEventHandler{
     private final List<CameraMovementEventListener>     listeners;
     private final Consumer<CameraMovementEventListener> listenersNotifier;
-    private final TransformFactory                      transformFactory;
     private final double                                sensitivity;
+    private final double                                sphereRadius;
+    private final Point4D                               lookAt   = new Point4D(0, 0, 0);
+    private final Point4D                               cameraUp = new Point4D(0, 0, 1, 0);
 
-    private double    mouseLastDraggedAtX;
-    private double    mouseLastDraggedAtY;
-    private double    xRotation;
-    private double    yRotation;
-    private Matrix4x4 rotation;
+    private double mouseLastDraggedAtX;
+    private double mouseLastDraggedAtY;
+    private double xRotation;
+    private double yRotation;
+    private Camera camera;
 
     public CameraMovementEventHandler(){
         listeners         = new ArrayList<>();
         listenersNotifier = this::notifyListeners;
-        transformFactory  = new TransformFactory();
         sensitivity       = 0.008;
         xRotation         = 0;
         yRotation         = 0;
-        rotation          = Matrix4x4.generateIdentity();
+        sphereRadius      = 3;
+        camera            = new Camera(createCameraPosition(), lookAt, new Point4D(-1, 0, 0, 0));
     }
 
-    private void notifyListeners(CameraMovementEventListener cameraMovementEventListener){
-        cameraMovementEventListener.onCameraMoved(rotation);
+    public Camera createInitialCamera(double deltaX, double deltaY){
+        xRotation += Math.toRadians(deltaX);
+        onXRotation();
+        deltaY = Math.toRadians(deltaY);
+        yRotation += deltaY;
+        onYRotation(deltaY);
+        return camera;
     }
 
     public void addListener(CameraMovementEventListener listener){
@@ -44,52 +49,18 @@ public class CameraMovementEventHandler{
         mouseLastDraggedAtY = mouseEvent.getSceneY();
     }
 
-    //    public void onMouseDragged(MouseEvent mouseEvent){
-    //        if(mouseEvent.getSceneX() != mouseLastDraggedAtX){
-    //            yRotation = calculateRotation(mouseLastDraggedAtX - mouseEvent.getSceneX());
-    //        }
-    //        if(mouseEvent.getSceneY() != mouseLastDraggedAtY){
-    //            xRotation = calculateRotation(mouseLastDraggedAtY - mouseEvent.getSceneY());
-    //        }
-    //        mouseLastDraggedAtX = mouseEvent.getSceneX();
-    //        mouseLastDraggedAtY = mouseEvent.getSceneY();
-    //
-    //        rotation = createRotation();
-    //        listeners.forEach(listenersNotifier);
-    //    }
     public void onMouseDragged(MouseEvent mouseEvent){
-        double r = 2;
         if(mouseEvent.getSceneX() != mouseLastDraggedAtX){
-            yRotation += calculateRotation(mouseLastDraggedAtX - mouseEvent.getSceneX());
-            CameraManager.cPos     = new Point4D(r * Math.sin(xRotation) * Math.cos(yRotation),
-                                                 r * Math.sin(xRotation) * Math.sin(yRotation),
-                                                 r * Math.cos(xRotation));
-            CameraManager.LECamera = new Camera(CameraManager.cPos, CameraManager.lookPos, CameraManager.upPos);
+            double deltaY = calculateRotation(mouseLastDraggedAtX - mouseEvent.getSceneX());
+            yRotation += deltaY;
+            onYRotation(deltaY);
         }
         if(mouseEvent.getSceneY() != mouseLastDraggedAtY){
             xRotation += calculateRotation(mouseLastDraggedAtY - mouseEvent.getSceneY());
-            if(xRotation < 0.001){
-                xRotation = 0.001;
-            }
-            else if(xRotation > Math.PI - 0.001){
-                xRotation = Math.PI - 0.001;
-            }
-            CameraManager.cPos = new Point4D(r * Math.sin(xRotation) * Math.cos(yRotation),
-                                             r * Math.sin(xRotation) * Math.sin(yRotation),
-                                             r * Math.cos(xRotation));
-            Point4D w = CameraManager.lookPos.subtract(CameraManager.cPos)
-                                             .negate()
-                                             .normalize();
-            CameraManager.LECamera = new Camera(CameraManager.cPos,
-                                                CameraManager.LECamera.getU(),
-                                                CameraManager.LECamera.getU()
-                                                                      .crossProduct(w)
-                                                                      .negate(),
-                                                w);
+            onXRotation();
         }
         mouseLastDraggedAtX = mouseEvent.getSceneX();
         mouseLastDraggedAtY = mouseEvent.getSceneY();
-        //        rotation = createRotation();
         listeners.forEach(listenersNotifier);
     }
 
@@ -97,8 +68,37 @@ public class CameraMovementEventHandler{
         return pixelDistance * sensitivity;
     }
 
-    private Matrix4x4 createRotation(){
-        return transformFactory.createRotationY(yRotation)
-                               .multiply(transformFactory.createRotationX(xRotation));
+    private void onYRotation(double deltaY){
+        camera = new Camera(createCameraPosition(), lookAt, cameraUp);
+    }
+
+    private void onXRotation(){
+        if(xRotation < 0.001){
+            xRotation = 0.001;
+        }
+        else if(xRotation > Math.PI - 0.001){
+            xRotation = Math.PI - 0.001;
+        }
+        Point4D cameraPosition = createCameraPosition();
+        Point4D w = lookAt.subtract(cameraPosition)
+                          .negate()
+                          .normalize();
+        camera = new Camera(cameraPosition,
+                            camera.getU(),
+                            camera.getU()
+                                  .crossProduct(w)
+                                  .negate()
+                                  .normalize(),
+                            w);
+    }
+
+    private Point4D createCameraPosition(){
+        return new Point4D(sphereRadius * Math.sin(xRotation) * Math.cos(yRotation),
+                           sphereRadius * Math.sin(xRotation) * Math.sin(yRotation),
+                           sphereRadius * Math.cos(xRotation));
+    }
+
+    private void notifyListeners(CameraMovementEventListener cameraMovementEventListener){
+        cameraMovementEventListener.onCameraMoved(camera);
     }
 }

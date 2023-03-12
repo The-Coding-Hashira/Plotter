@@ -1,5 +1,7 @@
 package bg.sofia.tu.iti.graph.core.axis.tick;
 
+import bg.sofia.tu.iti.graph.d2.axis.AxisPainter;
+
 public class Tick{
     private final double value;
     private final double normalizedValue;
@@ -21,5 +23,9 @@ public class Tick{
 
     public String getText(){
         return text;
+    }
+    public void paint(AxisPainter axisPainter){
+        axisPainter.strokeTickLineNormalized(normalizedValue);
+        axisPainter.fillTickTextNormalized(text, normalizedValue);
     }
 }

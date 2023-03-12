@@ -15,33 +15,41 @@ public class VerticalAxisEventHandler implements CanvasRegionEventHandler{
 
     @Override
     public void onMousePressed(MouseEvent mouseEvent){
-        mouseLastDraggedAtY = mouseEvent.getSceneY();
+        mouseLastDraggedAtY = mouseEvent.getY();
     }
 
     @Override
     public void onMouseDragged(MouseEvent mouseEvent){
-        if(mouseEvent.getSceneY() > mouseLastDraggedAtY){
+        if(mouseEvent.getY() > mouseLastDraggedAtY){
             axis.getRange()
-                .expand(10);
+                .expand();
         }
         else{
             axis.getRange()
-                .shrink(10);
+                .shrink();
         }
         //TODO fix mod ratio same as horizontal
-        mouseLastDraggedAtY = mouseEvent.getSceneY();
+        mouseLastDraggedAtY = mouseEvent.getY();
     }
 
     @Override
     public void onMouseScrolled(ScrollEvent scrollEvent){
-        double pixels = scrollEvent.getDeltaY();
+        if(scrollEvent.getDeltaY() > 0){
+            onMouseScrolled(scrollEvent.getDeltaY());
+        }
+        else{
+            onMouseScrolled(scrollEvent.getDeltaX());
+        }
+    }
+
+    private void onMouseScrolled(double pixels){
         if(pixels > 0){
             axis.getRange()
-                .shrink(pixels);
+                .shrink();
         }
         else{
             axis.getRange()
-                .expand(-pixels);
+                .expand();
         }
     }
 }

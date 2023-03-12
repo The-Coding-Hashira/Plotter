@@ -10,8 +10,5 @@ public interface CanvasManager{
 
     void onMouseScrolled(ScrollEvent scrollEvent);
 
-    //TODO not setGraph, but from factory get CanvasManager based on func
-    //void setGraph(GraphFactory graphFactory);
-
     void paint();
 }
