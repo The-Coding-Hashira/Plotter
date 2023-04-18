@@ -2,7 +2,6 @@ package bg.sofia.tu.iti.math.expression.input.token.evaluator;
 
 import bg.sofia.tu.iti.math.core.input.evaluator.TokenEvaluator;
 import bg.sofia.tu.iti.math.core.input.token.Token;
-import bg.sofia.tu.iti.math.function.Integral;
 import bg.sofia.tu.iti.math.function.type.FunctionCalculatorType;
 
 import java.util.List;

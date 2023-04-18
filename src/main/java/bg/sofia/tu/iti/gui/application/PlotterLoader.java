@@ -5,10 +5,7 @@ import bg.sofia.tu.iti.math.expression.input.FunctionFactory;
 import bg.sofia.tu.iti.math.function.AnonymousFunction;
 import bg.sofia.tu.iti.math.function.Function;
 import bg.sofia.tu.iti.math.function.Integral;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Tab;
-
-import java.util.Stack;
 
 public class PlotterLoader{
     private static final String PLOT_2D_VIEW = "plot2d";
