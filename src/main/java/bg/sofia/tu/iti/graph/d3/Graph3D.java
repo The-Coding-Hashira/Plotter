@@ -38,7 +38,10 @@ public class Graph3D{
                                 .getZ();
         double maxZ = sortedData.get(sortedData.size() - 1)
                                 .getZ();
-        zAxis.setRange(new Range(minZ + (minZ * 0.1), maxZ + (maxZ * 0.1)));
+        double delta = Math.abs((maxZ-minZ)*0.1);
+        zAxis.setRange(new Range(minZ -delta, maxZ + delta));
+        //TODO fix no value present error when Z is out of range of the 3D graph, user case is clicks autosize Z axis
+        // to find where the graph is
     }
 
     public TickData generateTickData(){

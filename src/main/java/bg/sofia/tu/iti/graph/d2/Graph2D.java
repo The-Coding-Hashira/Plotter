@@ -29,13 +29,15 @@ public class Graph2D{
     public void autosizeYAxis(double xPoints){
         calculateData(xPoints);
         List<Point2D> sortedData = data.stream()
+                                       .filter(point -> !Double.isNaN(point.getY()))
                                        .sorted(Comparator.comparingDouble(Point2D::getY))
                                        .collect(Collectors.toList());
         double minY = sortedData.get(0)
                                 .getY();
         double maxY = sortedData.get(sortedData.size() - 1)
                                 .getY();
-        yAxis.setRange(new Range(minY * 1.1, maxY * 1.1));
+        double delta = Math.abs((maxY-minY)*0.1);
+        yAxis.setRange(new Range(minY - delta, maxY + delta));
     }
 
     public void calculateData(double xPoints){
