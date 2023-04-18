@@ -3,6 +3,7 @@ package bg.sofia.tu.iti.math.expression.input.token;
 import bg.sofia.tu.iti.math.core.input.token.extractor.RegexTokenValueExtractor;
 import bg.sofia.tu.iti.math.expression.input.extractor.BracketTokenValueExtractor;
 import bg.sofia.tu.iti.math.expression.input.token.evaluator.DummyTokenEvaluator;
+import bg.sofia.tu.iti.math.expression.input.token.evaluator.IdentifierTokenEvaluator;
 import bg.sofia.tu.iti.math.expression.input.token.evaluator.NumberTokenEvaluator;
 import bg.sofia.tu.iti.math.expression.input.token.parser.BracketParser;
 import bg.sofia.tu.iti.math.expression.input.token.parser.IdentifierParser;
@@ -62,7 +63,7 @@ public class TokenTypeFactory{
     private TokenType createIdentifierTokenType(List<Function> functions){
         return new TokenType.Builder().withType(MathElementType.IDENTIFIER)
                                       .withExtractor(new RegexTokenValueExtractor("[A-Za-z]+"))
-                                      .withEvaluator(new DummyTokenEvaluator())
+                                      .withEvaluator(new IdentifierTokenEvaluator())
                                       .withParser(new IdentifierParser(functions))
                                       .build();
     }

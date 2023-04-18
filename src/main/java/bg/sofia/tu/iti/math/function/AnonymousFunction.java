@@ -29,4 +29,8 @@ public class AnonymousFunction extends Function{
         ExpressionResult result = new ExpressionInterpreter().interpretCompiledCalculators(expression);
         return new Calculation(result.getFullDescription(), result.get());
     }
+
+    public List<Calculator> getExpression(){
+        return expression;
+    }
 }

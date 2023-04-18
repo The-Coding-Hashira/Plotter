@@ -2,11 +2,14 @@ package bg.sofia.tu.iti.math.expression.input.parser;
 
 import bg.sofia.tu.iti.math.core.calculator.Calculator;
 import bg.sofia.tu.iti.math.core.calculator.spec.CalculatorSpec;
+import bg.sofia.tu.iti.math.core.input.token.Token;
 import bg.sofia.tu.iti.math.expression.VariableValueSupplier;
 import bg.sofia.tu.iti.math.expression.compiler.InfixToPostfixNotationExpressionCompiler;
 import bg.sofia.tu.iti.math.expression.input.Tokenizer;
 import bg.sofia.tu.iti.math.expression.input.token.TokenType;
 import bg.sofia.tu.iti.math.function.AnonymousFunction;
+import bg.sofia.tu.iti.math.function.Function;
+import bg.sofia.tu.iti.math.function.Integral;
 import bg.sofia.tu.iti.math.function.Variable;
 import bg.sofia.tu.iti.math.operator.type.OperatorType;
 
@@ -26,6 +29,17 @@ public class AnonymousFunctionExpressionParser{
     public AnonymousFunction parse(String expression){
         List<Calculator>            calculators            = process(expression);
         List<VariableValueSupplier> variableValueSuppliers = extractVariableValueSuppliers(calculators);
+        if(calculators.size() == 1 && calculators.get(0) instanceof Integral){
+            Integral integral = ((Integral) calculators.get(0));
+            integral.setIntegrand(parseIntegrand(integral.getTokenizedIntegrand()));
+        }
+        return new AnonymousFunction(variableValueSuppliers, calculators);
+    }
+
+    private Function parseIntegrand(List<Token> tokenizedIntegrand){
+        List<Calculator>            calculators            = compileExpression(new ExpressionParser(tokenTypes).parse(
+                tokenizedIntegrand));
+        List<VariableValueSupplier> variableValueSuppliers = extractVariableValueSuppliers(calculators);
         return new AnonymousFunction(variableValueSuppliers, calculators);
     }
 
@@ -38,7 +52,11 @@ public class AnonymousFunctionExpressionParser{
         List<VariableValueSupplier> variableValueSuppliers = new ArrayList<>();
         tryToExtractVariableValueSupplier("x", variables, variableValueSuppliers);
         tryToExtractVariableValueSupplier("y", variables, variableValueSuppliers);
-        if(variableValueSuppliers.size() == 0 || variableValueSuppliers.size() > 2){
+        if(calculators.size() == 1 && calculators.get(0) instanceof Integral){
+            variableValueSuppliers.add(((Integral) calculators.get(0)).getVariableValueSupplier());
+            return variableValueSuppliers;
+        }
+        if(variableValueSuppliers.isEmpty() || variableValueSuppliers.size() > 2){
             throw new RuntimeException("Invalid number of variables in expression. Must be 1 or 2.");
         }
         return variableValueSuppliers;

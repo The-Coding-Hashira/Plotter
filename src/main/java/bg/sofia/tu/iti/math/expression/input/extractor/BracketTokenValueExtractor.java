@@ -16,6 +16,8 @@ public class BracketTokenValueExtractor implements TokenValueExtractor{
         List<TokenValueExtractor> extractors = new ArrayList<>();
         extractors.add(new RegexTokenValueExtractor("[" + BracketType.OPEN_BRACKET.getNotation() + "]"));
         extractors.add(new RegexTokenValueExtractor("[" + BracketType.CLOSE_BRACKET.getNotation() + "]"));
+        extractors.add(new RegexTokenValueExtractor("[\\" + BracketType.OPEN_SQUARE_BRACKET.getNotation() + "]"));
+        extractors.add(new RegexTokenValueExtractor("[\\" + BracketType.CLOSE_SQUARE_BRACKET.getNotation() + "]"));
         extractor = new NestedTokenValueExtractor(extractors);
     }
 

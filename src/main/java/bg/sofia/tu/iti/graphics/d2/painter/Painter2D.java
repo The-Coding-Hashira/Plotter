@@ -28,18 +28,14 @@ public class Painter2D{
     }
 
     public void strokePath(List<Point2D> points){
+        walkPath(points);
+        graphicsContext.stroke();
+        //TODO create proper path drawing 1/sin(x) is benchmark
+    }
+
+    public void walkPath(List<Point2D> points){
         double startX = dimension.getStartX();
         double endY   = dimension.getEndY();
-
-        //TODO create proper path drawing 1/sin(x) is benchmark
-        //        points.forEach(point -> {
-        //            graphicsContext.beginPath();
-        //            graphicsContext.moveTo(startX + point.getX() * getDimension().getWidth(),
-        //                                   endY - point.getY() * getDimension().getHeight());
-        //            graphicsContext.lineTo(startX + point.getX() * getDimension().getWidth(),
-        //                                   endY - point.getY() * getDimension().getHeight());
-        //            graphicsContext.stroke();
-        //        });
 
         graphicsContext.beginPath();
         graphicsContext.moveTo(startX + points.get(0)
@@ -48,7 +44,6 @@ public class Painter2D{
                                             .getY() * getDimension().getHeight());
         points.forEach(point -> graphicsContext.lineTo(startX + point.getX() * getDimension().getWidth(),
                                                        endY - point.getY() * getDimension().getHeight()));
-        graphicsContext.stroke();
     }
 
     public void strokeVerticalLine(double x, double y, double length){

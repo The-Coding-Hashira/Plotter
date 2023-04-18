@@ -13,7 +13,9 @@ import bg.sofia.tu.iti.gui.canvas.region.CanvasRegionManager;
 import bg.sofia.tu.iti.gui.canvas.region.HorizontalAxisCanvasRegion;
 import bg.sofia.tu.iti.gui.canvas.region.PlotAreaCanvasRegion;
 import bg.sofia.tu.iti.gui.canvas.region.VerticalAxisCanvasRegion;
+import bg.sofia.tu.iti.math.function.AnonymousFunction;
 import bg.sofia.tu.iti.math.function.Function;
+import bg.sofia.tu.iti.math.function.Integral;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
@@ -132,10 +134,14 @@ public class Plotter2D extends Plotter{
     }
 
     public void onUpdateGraphButtonClicked(ActionEvent actionEvent){
-        updateAxisRange(graph.getXAxis(), xAxisLowTextField, xAxisHighTextField);
-        updateAxisRange(graph.getYAxis(), yAxisLowTextField, yAxisHighTextField);
-        paint();
-        updateTextFields();
+//        updateAxisRange(graph.getXAxis(), xAxisLowTextField, xAxisHighTextField);
+//        updateAxisRange(graph.getYAxis(), yAxisLowTextField, yAxisHighTextField);
+//        paint();
+//        updateTextFields();
+        if(((AnonymousFunction) getFunction()).getExpression().get(0) instanceof Integral){
+            System.out.println(((Integral) ((AnonymousFunction) getFunction()).getExpression()
+                                                                              .get(0)).integrate().getResult());
+        }
         actionEvent.consume();
     }
 

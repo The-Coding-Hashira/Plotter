@@ -79,4 +79,8 @@ public class Graph2D{
     public Axis getYAxis(){
         return yAxis;
     }
+
+    public Function getFunction(){
+        return function;
+    }
 }

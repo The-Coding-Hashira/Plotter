@@ -5,7 +5,7 @@ import bg.sofia.tu.iti.math.operator.type.OperatorType;
 
 public abstract class Function implements Calculator{
     private final String identifier;
-    private final int    numberOfParameters;
+    private       int    numberOfParameters;
 
     public Function(String identifier, int numberOfParameters){
         this.identifier         = identifier;
@@ -20,6 +20,10 @@ public abstract class Function implements Calculator{
     @Override
     public int getNumberOfParameters(){
         return numberOfParameters;
+    }
+
+    public void setNumberOfParameters(int numberOfParameters){
+        this.numberOfParameters = numberOfParameters;
     }
 
     public String getIdentifier(){

@@ -12,15 +12,19 @@ import java.util.Stack;
 public class BracketParser implements TokenParser{
     @Override
     public Calculator parse(int tokenIndex, List<Token> tokens){
-        if(tokens.get(tokenIndex)
-                 .getValue()
-                 .equals(BracketType.OPEN_BRACKET.getNotation())){
+        String tokenValue = tokens.get(tokenIndex)
+                                  .getValue();
+        if(tokenValue.equals(BracketType.OPEN_BRACKET.getNotation())){
             return createBracket(BracketType.OPEN_BRACKET.toString());
         }
-        if(tokens.get(tokenIndex)
-                 .getValue()
-                 .equals(BracketType.CLOSE_BRACKET.getNotation())){
+        if(tokenValue.equals(BracketType.CLOSE_BRACKET.getNotation())){
             return createBracket(BracketType.CLOSE_BRACKET.toString());
+        }
+        if(tokenValue.equals(BracketType.OPEN_SQUARE_BRACKET.getNotation())){
+            return createBracket(BracketType.OPEN_SQUARE_BRACKET.toString());
+        }
+        if(tokenValue.equals(BracketType.CLOSE_SQUARE_BRACKET.getNotation())){
+            return createBracket(BracketType.CLOSE_SQUARE_BRACKET.toString());
         }
         throw new RuntimeException("Unknown bracket");
     }

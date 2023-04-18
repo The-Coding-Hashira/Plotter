@@ -5,11 +5,17 @@ import bg.sofia.tu.iti.graph.d2.Graph2D;
 import bg.sofia.tu.iti.graph.d2.painter.Graph2DPainter;
 import bg.sofia.tu.iti.graph.d2.plot.PlotAreaColorScheme;
 import bg.sofia.tu.iti.graph.d2.plot.PlotAreaPainter;
+import bg.sofia.tu.iti.graphics.d2.geometry.Point2D;
 import bg.sofia.tu.iti.graphics.d2.world.Dimension2D;
 import bg.sofia.tu.iti.gui.event.PlaneEventHandler;
+import bg.sofia.tu.iti.math.function.AnonymousFunction;
+import bg.sofia.tu.iti.math.function.Integral;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class PlotAreaCanvasRegion implements CanvasRegion{
     private final PlotAreaPainter   plotAreaPainter;
@@ -40,7 +46,14 @@ public class PlotAreaCanvasRegion implements CanvasRegion{
                                               .generateTicks(new TickGenerator(10)));
         graph2D.calculateData(plotAreaPainter.getDimension()
                                              .getWidth());
-        graph2DPainter.paintPath(graph2D.normalizeDataPoints());
+        List<Point2D> points = graph2D.normalizeDataPoints()
+                                      .stream()
+                                      .filter(point2D -> !Double.isNaN(point2D.getY()))
+                                      .collect(Collectors.toList());
+        graph2DPainter.paintPath(points);
+        if(((AnonymousFunction) graph2D.getFunction()).getExpression().get(0) instanceof Integral){
+            graph2DPainter.paintArea(points,graph2D.getYAxis().getRange());
+        }
     }
 
     @Override

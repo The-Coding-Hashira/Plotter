@@ -16,11 +16,11 @@ public class ExpressionParser{
     }
 
     public List<Calculator> parse(List<Token> tokens){
-        List<Calculator> calculations = new ArrayList<>();
+        List<Calculator> calculators = new ArrayList<>();
         for(int i = 0; i < tokens.size(); i++){
-            calculations.add(parseToken(i, tokens));
+            calculators.add(parseToken(i, tokens));
         }
-        return calculations;
+        return calculators;
     }
 
     private Calculator parseToken(int tokenIndex, List<Token> tokens){

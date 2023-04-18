@@ -14,8 +14,4 @@ public class VariableValueSupplier{
     public void supply(double value){
         consumers.forEach(variable -> variable.setValue(value));
     }
-
-    public List<Variable> getConsumers(){
-        return consumers;
-    }
 }

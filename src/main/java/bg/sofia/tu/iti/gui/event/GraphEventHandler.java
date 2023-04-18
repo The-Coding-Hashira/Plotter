@@ -3,8 +3,6 @@ package bg.sofia.tu.iti.gui.event;
 import bg.sofia.tu.iti.graph.d3.Graph3D;
 import bg.sofia.tu.iti.graphics.d2.world.Dimension2D;
 import bg.sofia.tu.iti.gui.event.axis.AxisTraverseEventHandler;
-import bg.sofia.tu.iti.gui.event.PlaneEventHandler;
-import bg.sofia.tu.iti.gui.event.axis.HorizontalAxisEventHandler;
 import bg.sofia.tu.iti.gui.event.axis.VerticalAxisEventHandler;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
