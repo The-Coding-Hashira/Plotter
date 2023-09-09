@@ -40,8 +40,6 @@ public class Graph3D{
                                 .getZ();
         double delta = Math.abs((maxZ-minZ)*0.1);
         zAxis.setRange(new Range(minZ -delta, maxZ + delta));
-        //TODO fix no value present error when Z is out of range of the 3D graph, user case is clicks autosize Z axis
-        // to find where the graph is
     }
 
     public TickData generateTickData(){
@@ -51,8 +49,6 @@ public class Graph3D{
     }
 
     public void calculateData(int gridResolution){
-        //TODO add a proper parameterized function to generate points
-        //TODO make a button to set Z range from max to min and render with proper heatmap
         double xLowBoundary = xAxis.getRange()
                                    .getLowBoundary();
         double xStep = xAxis.getRange()

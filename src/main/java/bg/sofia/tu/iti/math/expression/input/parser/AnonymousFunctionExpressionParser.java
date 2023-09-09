@@ -33,14 +33,21 @@ public class AnonymousFunctionExpressionParser{
             Integral integral = ((Integral) calculators.get(0));
             integral.setIntegrand(parseIntegrand(integral.getTokenizedIntegrand()));
         }
-        return new AnonymousFunction(variableValueSuppliers, calculators);
+        return new AnonymousFunction(variableValueSuppliers, calculators, expression);
     }
 
     private Function parseIntegrand(List<Token> tokenizedIntegrand){
-        List<Calculator>            calculators            = compileExpression(new ExpressionParser(tokenTypes).parse(
-                tokenizedIntegrand));
+        List<Calculator> calculators = compileExpression(new ExpressionParser(tokenTypes).parse(tokenizedIntegrand));
         List<VariableValueSupplier> variableValueSuppliers = extractVariableValueSuppliers(calculators);
-        return new AnonymousFunction(variableValueSuppliers, calculators);
+        return new AnonymousFunction(variableValueSuppliers,
+                                     calculators,
+                                     generateIntegrandDefinition(tokenizedIntegrand));
+    }
+
+    private String generateIntegrandDefinition(List<Token> integrand){
+        StringBuilder definition = new StringBuilder();
+        integrand.stream().map(Token::getValue).forEach(definition::append);
+        return definition.toString();
     }
 
     private List<Calculator> process(String expression){

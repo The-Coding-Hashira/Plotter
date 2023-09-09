@@ -49,43 +49,4 @@ public abstract class AxisCanvasRegion implements CanvasRegion{
     public void onMouseScrolled(ScrollEvent scrollEvent){
         canvasRegionEventHandler.onMouseScrolled(scrollEvent);
     }
-
-    public AxisPainter getAxisPainter(){
-        return axisPainter;
-    }
-    //    @Override
-    //    public void tickValuesUpdated(List<Double> values){
-    //        tickCoordinates.clear();
-    //        Range  axisRange              = axisTicksManager.getRange();
-    //        double valuePerPixel          = axisRange.calculate() / getPixelRange();
-    //        double lowBoundaryCoordinates = axisRange.getLowBoundary() / valuePerPixel;
-    //        for(double tickValue : values){
-    //            double pixelsOffset = tickValue / valuePerPixel - lowBoundaryCoordinates;
-    //            tickCoordinates.put(tickValue, pixelsOffset);
-    //        }
-    //    }
-
-    //TODO when scrolling set an equal value change for both axes, cuz now Y has less pixels so value is higher
-    // and changes more than X. Also maybe make Square canvas, or when constructing x range should be
-    // pixels*verticalValuePerPixel so that it is technically square but looking from 16:9 canvas
-
-    //    @Override
-    //    public void moveRange(double pixels){
-    //        double horizontalMoveValue = pixels * getValuePerPixel();
-    //        super.moveRange(-horizontalMoveValue);
-    //    }
-    //
-    //    @Override
-    //    public void expandRange(double pixels){
-    //        super.expandRange(pixels * getValuePerPixel());
-    //    }
-    //
-    //    @Override
-    //    public void shrinkRange(double pixels){
-    //        super.shrinkRange(pixels * getValuePerPixel());
-    //    }
-
-    //    private double getValuePerPixel(){
-    //        return getRangeValue() / getPixelRange();
-    //    }
 }

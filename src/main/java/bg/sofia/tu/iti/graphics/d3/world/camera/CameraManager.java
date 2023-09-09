@@ -9,7 +9,6 @@ public class CameraManager implements CameraMovementEventListener{
     private       Matrix4x4                  cameraTransform;
 
     public CameraManager(double cameraXRotation, double cameraYRotation){
-        //TODO fix initial camera
         cameraMovementEventHandler = new CameraMovementEventHandler();
         cameraMovementEventHandler.addListener(this);
         camera          = cameraMovementEventHandler.createInitialCamera(cameraXRotation, cameraYRotation);

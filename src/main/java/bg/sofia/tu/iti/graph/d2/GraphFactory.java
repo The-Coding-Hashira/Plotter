@@ -12,7 +12,6 @@ public class GraphFactory{
     }
 
     public Graph createGraph(GraphicsContext graphicsContext, Dimension2D plotAreaDimension){
-        //TODO if integral new AreaGraph else LineGraph
         return new AreaGraph(graphicsContext, plotAreaDimension, function, -10, 10);
     }
 }

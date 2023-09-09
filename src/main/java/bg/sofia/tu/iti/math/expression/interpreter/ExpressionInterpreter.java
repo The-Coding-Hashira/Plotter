@@ -64,7 +64,7 @@ public class ExpressionInterpreter{
         return description.toString();
     }
 
-    public ExpressionResult interpretCompiledCalculators(List<Calculator> calculators){
-        return buildExpressionResult("", postfixExpressionInterpreter.interpret(calculators));
+    public ExpressionResult interpretCompiledCalculators(String expression, List<Calculator> calculators){
+        return buildExpressionResult(expression, postfixExpressionInterpreter.interpret(calculators));
     }
 }

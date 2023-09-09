@@ -28,7 +28,6 @@ public class VerticalAxisEventHandler implements CanvasRegionEventHandler{
             axis.getRange()
                 .shrink();
         }
-        //TODO fix mod ratio same as horizontal
         mouseLastDraggedAtY = mouseEvent.getY();
     }
 

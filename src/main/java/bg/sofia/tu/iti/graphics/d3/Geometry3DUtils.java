@@ -36,7 +36,6 @@ public class Geometry3DUtils{
     }
 
     public static void iterateTrianglesAsGrid(List<Point4D> points, LineConsumer lineConsumer){
-        //TODO check handedness of clipped triangles, so that when iterate as grid it works better
         final int[] lowerTriangle = {1};
         iterateTriangles(points, (p0, p1, p2) -> {
             if(lowerTriangle[0] == 1){

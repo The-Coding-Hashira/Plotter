@@ -3,7 +3,6 @@ package bg.sofia.tu.iti.graphics.d3.world;
 import javafx.scene.paint.Color;
 
 public class HeatMap{
-    //TODO rework this class, make the gen method accept the range and points
     private final Color  lowBoundaryColor;
     private final Color  highBoundaryColor;
     private final double lowBoundary;
@@ -17,6 +16,9 @@ public class HeatMap{
     }
 
     public Color generateColor(double value){
+        if(range == 0){
+            return lowBoundaryColor;
+        }
         double t = (value - lowBoundary) / range;
         //        if(t < 0.5){
         //            return Color.BLUE.interpolate(Color.YELLOW, t * 2);

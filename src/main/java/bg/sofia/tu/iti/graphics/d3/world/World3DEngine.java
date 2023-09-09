@@ -62,7 +62,6 @@ public class World3DEngine{
     }
 
     public void renderTickData(TickData tickData, GraphicsContext3D graphicsContext3D){
-        //TODO maybe make 3d tick text smaller
         tickDataRenderer.render(transformTick3DData(boundsBinder.bindTickData(tickData, cameraManager.getCamera())),
                                 graphicsContext3D,
                                 cameraManager.getCamera());

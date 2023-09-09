@@ -33,13 +33,13 @@ public class FunctionDefinitionParser{
             List<String>                parameterIdentifiers   = extractParameterIdentifiers(tokens);
             List<Calculator>            expression             = extractExpression(tokens);
             List<VariableValueSupplier> variableValueSuppliers = setUpParameters(parameterIdentifiers, expression);
-            return new CustomFunction(identifier, variableValueSuppliers, expression);
+            return new CustomFunction(identifier, variableValueSuppliers, expression,definition);
         }
         else{
             List<String>                parameterIdentifiers   = Arrays.asList("x", "y");
             List<Calculator>            expression             = new ExpressionParser(tokenTypes).parse(tokens);
             List<VariableValueSupplier> variableValueSuppliers = setUpParameters(parameterIdentifiers, expression);
-            return new CustomFunction("", variableValueSuppliers, expression);
+            return new CustomFunction("", variableValueSuppliers, expression,definition);
         }
     }
 

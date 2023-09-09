@@ -13,7 +13,6 @@ public class World3DEngineFactory{
     private static final Point4D worldOrigin = new Point4D(0, 0, 0);
 
     public World3DEngine create(double width, double height){
-        //TODO use camera with proper UP vector
         CameraManager cameraManager = new CameraManager(65, -150);
         return new World3DEngine(createBoundingBox(),
                                  cameraManager,

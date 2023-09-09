@@ -41,8 +41,6 @@ public class Graph2D{
     }
 
     public void calculateData(double xPoints){
-        //TODO add a proper parameterized function to generate points
-        //TODO make a button to set Z range from max to min and render with proper heatmap
         Stack<Double> args = new Stack<>();
         data = new ArrayList<>((int) xPoints);
         CalculationRange calculationRange = new CalculationRange(xAxis.getRange()

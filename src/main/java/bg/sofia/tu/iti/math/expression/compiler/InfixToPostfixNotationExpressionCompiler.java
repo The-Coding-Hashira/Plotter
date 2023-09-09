@@ -17,12 +17,26 @@ public class InfixToPostfixNotationExpressionCompiler{
     public InfixToPostfixNotationExpressionCompiler(List<CalculatorSpec> calculatorSpecList){
         this.calculatorSpecList = calculatorSpecList;
         compileHandlers         = new HashMap<>();
-        //TODO sort this mess out with the different enums here
         compileHandlers.put(MathElementType.NUMBER.toString(), this::handleConstantCalculation);
         compileHandlers.put(OperatorType.VARIABLE.toString(), this::handleConstantCalculation);
         compileHandlers.put(OperatorType.FUNCTION.toString(), this::handleFunctionCalculation);
         compileHandlers.put(BracketType.OPEN_BRACKET.toString(), this::handleOpenBracketCalculation);
         compileHandlers.put(BracketType.CLOSE_BRACKET.toString(), this::handleCloseBracketCalculation);
+    }
+
+    public List<Calculator> compile(List<Calculator> calculators){
+        QueueCompiler queueCompiler = new QueueCompiler();
+        for(Calculator calculator : calculators){
+            if(compileHandlers.containsKey(calculator.getType())){
+                compileHandlers.get(calculator.getType())
+                               .handle(queueCompiler, calculator);
+            }
+            else{
+                handleOperatorCalculation(queueCompiler, calculator);
+            }
+        }
+        queueCompiler.consumeQueue();
+        return queueCompiler.getConsumedCalculators();
     }
 
     private void handleConstantCalculation(QueueCompiler queueCompiler, Calculator calculator){
@@ -48,21 +62,6 @@ public class InfixToPostfixNotationExpressionCompiler{
             break;
         }
         queueCompiler.discardQueueTop();
-    }
-
-    public List<Calculator> compile(List<Calculator> calculators){
-        QueueCompiler queueCompiler = new QueueCompiler();
-        for(Calculator calculator : calculators){
-            if(compileHandlers.containsKey(calculator.getType())){
-                compileHandlers.get(calculator.getType())
-                               .handle(queueCompiler, calculator);
-            }
-            else{
-                handleOperatorCalculation(queueCompiler, calculator);
-            }
-        }
-        queueCompiler.consumeQueue();
-        return queueCompiler.getConsumedCalculators();
     }
 
     private void handleOperatorCalculation(QueueCompiler queueCompiler, Calculator calculator){

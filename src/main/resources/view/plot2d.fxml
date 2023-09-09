@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.canvas.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.canvas.Canvas?>
 <?import javafx.scene.control.Button?>
@@ -10,7 +16,8 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
-<BorderPane xmlns="http://javafx.com/javafx/8.0.351" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bg.sofia.tu.iti.gui.application.Plotter2D">
+
+<BorderPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bg.sofia.tu.iti.gui.application.Plotter2D">
     <center>
         <Canvas fx:id="plot" height="600.0" nodeOrientation="INHERIT" onMouseDragged="#plotOnMouseDragged" onMousePressed="#plotOnMousePressed" onScroll="#plotOnMouseScrolled" width="700.0" BorderPane.alignment="CENTER">
             <BorderPane.margin>
@@ -42,7 +49,10 @@
                                 </HBox>
                                 <HBox prefHeight="100.0" prefWidth="200.0">
                                     <children>
-                                        <TextField fx:id="yAxisLowTextField" />
+                                        <TextField fx:id="yAxisLowTextField">
+                                 <font>
+                                    <Font name="Calibri" size="16.0" />
+                                 </font></TextField>
                                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="-" textAlignment="CENTER" wrappingWidth="27.44940185546875">
                                             <font>
                                                 <Font name="Calibri" size="15.0" />
@@ -51,7 +61,10 @@
                                                 <Insets top="5.0" />
                                             </HBox.margin>
                                         </Text>
-                                        <TextField fx:id="yAxisHighTextField" layoutX="10.0" layoutY="10.0" />
+                                        <TextField fx:id="yAxisHighTextField" layoutX="10.0" layoutY="10.0">
+                                 <font>
+                                    <Font name="Calibri" size="16.0" />
+                                 </font></TextField>
                                     </children>
                                 </HBox>
                             </children>
@@ -69,7 +82,10 @@
                                 </HBox>
                                 <HBox prefHeight="100.0" prefWidth="200.0">
                                     <children>
-                                        <TextField fx:id="xAxisLowTextField" />
+                                        <TextField fx:id="xAxisLowTextField">
+                                 <font>
+                                    <Font name="Calibri" size="16.0" />
+                                 </font></TextField>
                                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="-" textAlignment="CENTER" wrappingWidth="27.44940185546875">
                                             <font>
                                                 <Font name="Calibri" size="15.0" />
@@ -78,7 +94,10 @@
                                                 <Insets top="5.0" />
                                             </HBox.margin>
                                         </Text>
-                                        <TextField layoutX="10.0" layoutY="10.0" fx:id="xAxisHighTextField" />
+                                        <TextField layoutX="10.0" layoutY="10.0" fx:id="xAxisHighTextField">
+                                 <font>
+                                    <Font name="Calibri" size="16.0" />
+                                 </font></TextField>
                                     </children>
                                 </HBox>
                             </children>

@@ -93,7 +93,6 @@ public class AreaGraph extends Graph{
                     break;
                 }
             }
-            //TODO add if !isNaN cuz some functions will return NaN like division by zero or sqrt(<0)
         }
     }
 

@@ -15,7 +15,6 @@ public class WorldTransformManager{
     private       Matrix4x4        totalTransform;
 
     public WorldTransformManager(Builder builder){
-        //TODO fix this somehow :) just make it work
         this.transformFactory = builder.transformFactory;
         this.cameraTransform  = builder.cameraTransform;
         this.projection       = builder.projection;

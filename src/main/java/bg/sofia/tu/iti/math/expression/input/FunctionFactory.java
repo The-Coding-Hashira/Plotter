@@ -11,24 +11,5 @@ public class FunctionFactory{
         MathContext mathContext = new MathContextFactory().createMathContext();
         return new AnonymousFunctionExpressionParser(mathContext.getTokenTypes(),
                                                      mathContext.getCalculatorSpecs()).parse(expression);
-        //TODO make the plotter plot the integrand from low to high and thats it, the integral will take in 1 parameter
-
-        //        return new Function("", 2){
-        //            private final Sine sin = new Sine();
-        //
-        //            private final Cosine cos = new Cosine();
-        //
-        //            double calc(double y, double x){
-        //                return Math.sin(x) + Math.cos(y);
-        //            }
-        //
-        //            @Override
-        //            public Calculation calculate(Stack<Double> arguments){
-        //                return new Calculation("mock up func",
-        //                                       cos.calculate(arguments)
-        //                                          .getResult() + sin.calculate(arguments)
-        //                                                            .getResult());
-        //            }
-        //        };
     }
 }

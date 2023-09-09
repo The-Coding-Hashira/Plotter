@@ -14,12 +14,6 @@ public class Graph2DPainter extends Painter2D{
         super(plotAreaPainter.getGraphicsContext(), plotAreaPainter.getDimension());
     }
 
-    public void paintLineForCoordinates(List<Double> yCoordinates){
-        getGraphicsContext().setStroke(Color.DODGERBLUE);
-        getGraphicsContext().setLineDashes(0);
-        strokePathForYCoordinates(yCoordinates);
-    }
-
     public void paintPath(List<Point2D> points){
         if(points.isEmpty()){
             return;

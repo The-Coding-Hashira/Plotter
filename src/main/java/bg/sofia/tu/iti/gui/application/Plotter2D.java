@@ -28,6 +28,7 @@ import javafx.scene.input.ScrollEvent;
 import java.net.URL;
 import java.util.Arrays;
 import java.util.ResourceBundle;
+import java.util.Stack;
 
 public class Plotter2D extends Plotter{
     private final Graph2D              graph;
@@ -75,9 +76,9 @@ public class Plotter2D extends Plotter{
                                                                                   axisColorScheme,
                                                                                   tickLength);
         plotArea = new PlotAreaCanvasRegion(graph,
-                                                                 plotAreaDimension,
-                                                                 graphicsContext,
-                                                                 new PlotAreaColorSchemeFactory().createDefaultPlotAreaColorScheme());
+                                            plotAreaDimension,
+                                            graphicsContext,
+                                            new PlotAreaColorSchemeFactory().createDefaultPlotAreaColorScheme());
 
         canvasRegionManager = new CanvasRegionManager(Arrays.asList(plotArea, xAxisCanvasRegion, yAxisCanvasRegion));
         updateTextFields();
@@ -104,11 +105,9 @@ public class Plotter2D extends Plotter{
     }
 
     private void paint(){
-        //TODO remove yellow
         graphicsContext.setFill(ColorScheme.BEIGE_YELLOWISH);
         graphicsContext.fillRect(0, 0, canvasDimension.getWidth(), canvasDimension.getHeight());
         canvasRegionManager.paint();
-        System.out.println("DONE - 2D");
     }
 
     private Dimension2D createPlotAreaDimension(Dimension2D canvasDimension){
@@ -134,14 +133,10 @@ public class Plotter2D extends Plotter{
     }
 
     public void onUpdateGraphButtonClicked(ActionEvent actionEvent){
-//        updateAxisRange(graph.getXAxis(), xAxisLowTextField, xAxisHighTextField);
-//        updateAxisRange(graph.getYAxis(), yAxisLowTextField, yAxisHighTextField);
-//        paint();
-//        updateTextFields();
-        if(((AnonymousFunction) getFunction()).getExpression().get(0) instanceof Integral){
-            System.out.println(((Integral) ((AnonymousFunction) getFunction()).getExpression()
-                                                                              .get(0)).integrate().getResult());
-        }
+        updateAxisRange(graph.getXAxis(), xAxisLowTextField, xAxisHighTextField);
+        updateAxisRange(graph.getYAxis(), yAxisLowTextField, yAxisHighTextField);
+        paint();
+        updateTextFields();
         actionEvent.consume();
     }
 

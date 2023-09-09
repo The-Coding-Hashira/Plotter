@@ -45,7 +45,6 @@ public class Plotter3D extends Plotter{
     public Plotter3D(Function function){
         super(function);
         graph3D = new Graph3D(function);
-        //TODO add heatmap visual
     }
 
     @Override

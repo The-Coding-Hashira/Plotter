@@ -24,18 +24,22 @@ public class GraphUtils{
     }
 
     public static List<Point4D> mapToHeat(List<Point4D> points){
-        //TODO sort the points and have a safe get cuz it blew up
-        HeatMap heatMap = new HeatMap(Color.BLUE,
-                                      Color.RED,
-                                      points.stream()
-                                            .min(GraphUtils::compareZ)
-                                            .get()
-                                            .getZ(),
-                                      points.stream()
-                                            .max(GraphUtils::compareZ)
-                                            .get()
-                                            .getZ());
-        //TODO figure out the heatmap thingy maybe refactoring will make things a lot easier
+        double heatMapLow = points.stream()
+                                  .min(GraphUtils::compareZ)
+                                  .orElse(new Point4D(0, 0, 0))
+                                  .getZ();
+        double heatMapHigh = points.stream()
+                                   .max(GraphUtils::compareZ)
+                                   .orElse(new Point4D(0, 0, 0))
+                                   .getZ();
+        Color heatMapLowColor  = Color.BLUE;
+        Color heatMapHighColor = Color.RED;
+        if(heatMapLow == heatMapHigh){
+            Color planeColor = Color.KHAKI.saturate();
+            heatMapLowColor  = planeColor;
+            heatMapHighColor = planeColor;
+        }
+        HeatMap heatMap = new HeatMap(heatMapLowColor, heatMapHighColor, heatMapLow, heatMapHigh);
         return points.stream()
                      .map(point -> new Point4D(point.getX(),
                                                point.getY(),
@@ -48,8 +52,9 @@ public class GraphUtils{
         if(p1.getZ() > p2.getZ()){
             return 1;
         }
-        else{
+        else if(p1.getZ() < p2.getZ()){
             return -1;
         }
+        return 0;
     }
 }

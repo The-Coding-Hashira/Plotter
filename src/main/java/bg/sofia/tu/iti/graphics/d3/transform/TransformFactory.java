@@ -30,7 +30,6 @@ public class TransformFactory{
 
     public Matrix4x4 createViewport(double width, double height){
         //@formatter:off
-        //TODO check if z should be 0.5 0.5
         return new Matrix4x4(new double[]{width / 2, 0, 0, width / 2,
                                           0, -height / 2, 0, height / 2,
                                           0, 0, 1, 0,

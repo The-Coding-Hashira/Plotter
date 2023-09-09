@@ -77,7 +77,6 @@ public class LineGraph extends Graph{
             yValues.add(getFunction().calculate(arguments)
                                      .getResult());
             xValues.add(argument);
-            //TODO add if !isNaN cuz some functions will return NaN like division by zero or sqrt(<0)
         }
     }
 

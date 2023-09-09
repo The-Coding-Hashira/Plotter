@@ -4,8 +4,10 @@ import bg.sofia.tu.iti.graph.core.range.Range;
 import bg.sofia.tu.iti.math.core.Calculation;
 import bg.sofia.tu.iti.math.core.input.token.Token;
 import bg.sofia.tu.iti.math.expression.VariableValueSupplier;
+import bg.sofia.tu.iti.math.expression.result.ExpressionResult;
 import bg.sofia.tu.iti.math.function.type.FunctionCalculatorType;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Stack;
@@ -35,14 +37,14 @@ public class Integral extends Function{
         return new Calculation("", Double.NaN);
     }
 
-    public Calculation integrate(){
+    public ExpressionResult integrate(){
         if(steps % 2 == 0){
             throw new RuntimeException("The number of integration steps must be odd!");
         }
         double          rangeLow        = range.getLowBoundary();
         double          rangeHigh       = range.getHighBoundary();
         double          rangeValue      = range.calculate();
-        double          dx              = rangeValue / (steps-1);
+        double          dx              = rangeValue / (steps - 1);
         double          dx2             = 2 * dx;
         IntegrandHelper integrandHelper = new IntegrandHelper();
         double          result          = integrandHelper.valueOf(rangeLow) + integrandHelper.valueOf(rangeHigh);
@@ -52,7 +54,18 @@ public class Integral extends Function{
         for(double x = rangeLow + dx2; x < rangeHigh; x += dx2){
             result += 2 * integrandHelper.valueOf(x);
         }
-        return new Calculation("Int: ", result * dx / 3);
+        String description = getIdentifier() + "[" + rangeLow + "," + rangeHigh + "](" + generateIntegrandDefinition(
+                tokenizedIntegrand) + ")";
+        result *= dx / 3;
+        return new ExpressionResult(description, Collections.singletonList(new Calculation(description, result)), result);
+    }
+
+    private String generateIntegrandDefinition(List<Token> integrand){
+        StringBuilder definition = new StringBuilder();
+        integrand.stream()
+                 .map(Token::getValue)
+                 .forEach(definition::append);
+        return definition.toString();
     }
 
     public Range getRange(){

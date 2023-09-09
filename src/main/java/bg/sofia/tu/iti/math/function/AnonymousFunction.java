@@ -11,12 +11,15 @@ import java.util.Stack;
 
 public class AnonymousFunction extends Function{
     private final List<VariableValueSupplier> variableValueSuppliers;
-    private final List<Calculator>            expression;
+    private final List<Calculator> expression;
+    private final String           expressionDefinition;
 
-    public AnonymousFunction(List<VariableValueSupplier> variableValueSuppliers, List<Calculator> expression){
+    public AnonymousFunction(List<VariableValueSupplier> variableValueSuppliers, List<Calculator> expression,
+                             String expressionDefinition){
         super(AnonymousFunction.class.getSimpleName(), variableValueSuppliers.size());
         this.variableValueSuppliers = variableValueSuppliers;
         this.expression             = expression;
+        this.expressionDefinition   = expressionDefinition;
     }
 
     @Override
@@ -25,8 +28,8 @@ public class AnonymousFunction extends Function{
             variableValueSuppliers.get(i)
                                   .supply(arguments.pop());
         }
-        //TODO calculators can be precompiled, so only interpreting is left to be done here, when calculate() is called
-        ExpressionResult result = new ExpressionInterpreter().interpretCompiledCalculators(expression);
+        ExpressionResult result = new ExpressionInterpreter().interpretCompiledCalculators(expressionDefinition,
+                                                                                           expression);
         return new Calculation(result.getFullDescription(), result.get());
     }
 

@@ -15,22 +15,9 @@ public class Painter2D{
         this.dimension       = dimension;
     }
 
-    public void strokePathForYCoordinates(List<Double> yCoordinates){
-        double startX = dimension.getStartX();
-        double startY = dimension.getStartY();
-
-        graphicsContext.beginPath();
-        graphicsContext.moveTo(startX, startY + yCoordinates.get(0));
-        for(int i = 0, size = yCoordinates.size(); i < size; i++){
-            graphicsContext.lineTo(startX + i, startY + yCoordinates.get(i));
-        }
-        graphicsContext.stroke();
-    }
-
     public void strokePath(List<Point2D> points){
         walkPath(points);
         graphicsContext.stroke();
-        //TODO create proper path drawing 1/sin(x) is benchmark
     }
 
     public void walkPath(List<Point2D> points){

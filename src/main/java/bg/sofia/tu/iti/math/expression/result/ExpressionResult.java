@@ -16,11 +16,7 @@ public class ExpressionResult{
     }
 
     public String getFullDescription(){
-        return "Expression: " + getExpression() + '\n' + "Result: " + get() + '\n' + "Calculation " + "Steps:" + '\n' + getCalculationStepsDescription();
-    }
-
-    public String getExpression(){
-        return expression;
+        return "Expression: " + expression + '\n' + "Result: " + result + "\n\n" + "Calculation " + "Steps:" + '\n' + getCalculationStepsDescription();
     }
 
     public double get(){
@@ -29,16 +25,19 @@ public class ExpressionResult{
 
     public String getCalculationStepsDescription(){
         StringBuilder calculationSteps = new StringBuilder();
-        for(Calculation calculation : getCalculations()){
+        for(Calculation calculation : calculations){
+            if(calculation.getDescription().contentEquals(String.valueOf(calculation.getResult()))){
+                continue;
+            }
+            if(calculation.getDescription().contentEquals("")){
+                continue;
+            }
+            calculationSteps.append('\t');
             calculationSteps.append(calculation.getDescription())
                             .append(" = ")
                             .append(calculation.getResult());
             calculationSteps.append('\n');
         }
         return calculationSteps.toString();
-    }
-
-    public List<Calculation> getCalculations(){
-        return calculations;
     }
 }

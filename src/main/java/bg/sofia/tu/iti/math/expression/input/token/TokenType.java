@@ -10,7 +10,6 @@ import java.util.List;
 import java.util.Map;
 
 public class TokenType{
-    //TODO consider making this an enum
     private final MathElementType     type;
     private final TokenValueExtractor extractor;
     private final TokenEvaluator      evaluator;

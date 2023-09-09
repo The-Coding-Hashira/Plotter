@@ -12,12 +12,14 @@ import java.util.Stack;
 public class CustomFunction extends Function implements Calculator{
     private final List<VariableValueSupplier> variableValueSuppliers;
     private final List<Calculator>            expression;
+    private final String                      definition;
 
     public CustomFunction(String identifier, List<VariableValueSupplier> variableValueSuppliers,
-                          List<Calculator> expression){
+                          List<Calculator> expression, String definition){
         super(identifier, variableValueSuppliers.size());
         this.variableValueSuppliers = variableValueSuppliers;
         this.expression             = expression;
+        this.definition             = definition;
     }
 
     @Override
@@ -26,8 +28,7 @@ public class CustomFunction extends Function implements Calculator{
             variableValueSuppliers.get(i)
                                   .supply(arguments.pop());
         }
-        //TODO this guy has not precompiled its calculators so it explodes
-        ExpressionResult result = new ExpressionInterpreter().interpretCompiledCalculators(expression);
+        ExpressionResult result = new ExpressionInterpreter().interpretCompiledCalculators(definition, expression);
         return new Calculation(result.getFullDescription(), result.get());
     }
 }

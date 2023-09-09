@@ -22,7 +22,6 @@ public class MathContextFactory{
     }
 
     private List<Function> createFunctions(){
-        TokenTypeFactory tokenTypeFactory = new TokenTypeFactory();
         List<Function>   functions        = new ArrayList<>();
         //@formatter:off
         functions.add(new Sine());
@@ -30,8 +29,6 @@ public class MathContextFactory{
         functions.add(new DegreesToRadiansConverter());
         functions.add(new Logarithm());
         functions.add(new Integral());
-        functions.add(new FunctionDefinitionParser(tokenTypeFactory.createTokenTypes(functions)).parse("fuck(x)=sin(rad(30))+x"));
-        functions.add(new FunctionDefinitionParser(tokenTypeFactory.createTokenTypes(functions)).parse("dick(x,y)=fuck(x)*2/fuck(y)"));
         //@formatter:on
         return functions;
     }

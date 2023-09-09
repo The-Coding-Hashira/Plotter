@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.canvas.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.canvas.Canvas?>
 <?import javafx.scene.control.Button?>
@@ -10,7 +16,8 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
-<BorderPane xmlns="http://javafx.com/javafx/8.0.351" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bg.sofia.tu.iti.gui.application.Plotter3D">
+
+<BorderPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bg.sofia.tu.iti.gui.application.Plotter3D">
     <center>
         <Canvas fx:id="plot" height="600.0" nodeOrientation="INHERIT" onMouseDragged="#onMouseDraggedOnPlot" onMousePressed="#onMousePressedOnPlot" onScroll="#onMouseScrolledOnPlot" width="700.0" BorderPane.alignment="CENTER">
             <BorderPane.margin>
@@ -35,17 +42,32 @@
                                     <Font name="Calibri" size="16.0" />
                                  </font>
                               </Text>
-                              <TextField fx:id="gridResolutionTextField" prefHeight="25.0" prefWidth="64.0" />
-                              <Button mnemonicParsing="false" onAction="#updateGridResolution" prefHeight="25.0" prefWidth="33.0" text="Set" />
+                              <TextField fx:id="gridResolutionTextField" prefHeight="30.0" prefWidth="63.0">
+                                 <font>
+                                    <Font name="Calibri" size="16.0" />
+                                 </font></TextField>
+                              <Button mnemonicParsing="false" onAction="#updateGridResolution" prefHeight="30.0" prefWidth="49.0" text="Set">
+                                 <font>
+                                    <Font name="Calibri" size="14.0" />
+                                 </font></Button>
                            </children>
                         </HBox>
-                        <Button fx:id="autosizeButton" mnemonicParsing="false" onAction="#onAutosizeButtonClicked" prefWidth="95.0" text="Autosize Z axis" textAlignment="CENTER">
+                        <Button fx:id="autosizeButton" mnemonicParsing="false" onAction="#onAutosizeButtonClicked" prefHeight="28.0" prefWidth="114.0" text="Autosize Z axis" textAlignment="CENTER">
                            <VBox.margin>
                               <Insets top="5.0" />
                            </VBox.margin>
+                           <font>
+                              <Font name="Calibri" size="15.0" />
+                           </font>
                         </Button>
-                        <Button mnemonicParsing="false" onAction="#toggleWireframe" text="Toggle Wireframe" textAlignment="CENTER" />
-                        <Button fx:id="updateGraphButton" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#onUpdateGraphButtonClicked" prefWidth="95.0" text="Update graph" textAlignment="CENTER" />
+                        <Button mnemonicParsing="false" onAction="#toggleWireframe" prefHeight="28.0" prefWidth="136.0" text="Toggle Wireframe" textAlignment="CENTER">
+                           <font>
+                              <Font name="Calibri" size="15.0" />
+                           </font></Button>
+                        <Button fx:id="updateGraphButton" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#onUpdateGraphButtonClicked" prefHeight="28.0" prefWidth="108.0" text="Update graph" textAlignment="CENTER">
+                           <font>
+                              <Font name="Calibri" size="15.0" />
+                           </font></Button>
                      </children>
                      <opaqueInsets>
                         <Insets />

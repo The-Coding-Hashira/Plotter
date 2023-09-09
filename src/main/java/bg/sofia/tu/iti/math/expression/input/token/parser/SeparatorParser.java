@@ -23,7 +23,6 @@ public class SeparatorParser implements TokenParser{
                 return 0;
             }
 
-            //TODO return Double.NaN in such situations
             @Override
             public Calculation calculate(Stack<Double> arguments){
                 return new Calculation(getType(), 1.0);

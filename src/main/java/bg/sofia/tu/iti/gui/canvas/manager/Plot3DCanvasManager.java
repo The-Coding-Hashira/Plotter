@@ -100,7 +100,6 @@ public class Plot3DCanvasManager implements CanvasManager{
 
         graphicsContext3D.render();
         world3DEngine.renderTickData(graph3D.generateTickData(), graphicsContext3D);
-        System.out.println("DONE - 3D");
     }
 
     public void update(){

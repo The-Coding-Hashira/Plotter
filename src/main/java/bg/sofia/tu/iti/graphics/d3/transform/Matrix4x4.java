@@ -147,7 +147,6 @@ public class Matrix4x4{
         return elements;
     }
 
-    //TODO remove description methods
     @Override
     public String toString(){
         return "Matrix4x4:\n" + generateContentsDescription();
