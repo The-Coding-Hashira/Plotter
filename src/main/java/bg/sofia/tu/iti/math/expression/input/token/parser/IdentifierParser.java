@@ -1,11 +1,14 @@
 package bg.sofia.tu.iti.math.expression.input.token.parser;
 
 import bg.sofia.tu.iti.graph.core.range.Range;
+import bg.sofia.tu.iti.math.constant.EConstant;
+import bg.sofia.tu.iti.math.constant.PIConstant;
 import bg.sofia.tu.iti.math.core.calculator.Calculator;
 import bg.sofia.tu.iti.math.core.input.token.Token;
 import bg.sofia.tu.iti.math.core.input.token.TokenParser;
 import bg.sofia.tu.iti.math.expression.input.token.MathElementType;
 import bg.sofia.tu.iti.math.expression.input.token.type.BracketType;
+import bg.sofia.tu.iti.math.expression.input.token.type.ConstantType;
 import bg.sofia.tu.iti.math.expression.input.token.type.SeparatorType;
 import bg.sofia.tu.iti.math.function.Function;
 import bg.sofia.tu.iti.math.function.Integral;
@@ -14,14 +17,20 @@ import bg.sofia.tu.iti.math.function.type.FunctionCalculatorType;
 import bg.sofia.tu.iti.math.operator.notation.OperatorNotation;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.function.Consumer;
 
 public class IdentifierParser implements TokenParser{
-    private final List<Function> functions;
+    private final List<Function>          functions;
+    private final Map<String, Calculator> calculatorsForConstantNotation;
 
     public IdentifierParser(List<Function> functions){
-        this.functions = functions;
+        this.functions                 = functions;
+        calculatorsForConstantNotation = new HashMap<>();
+        calculatorsForConstantNotation.put(ConstantType.E.getNotation(), new EConstant());
+        calculatorsForConstantNotation.put(ConstantType.PI.getNotation(), new PIConstant());
     }
 
     @Override
@@ -32,6 +41,9 @@ public class IdentifierParser implements TokenParser{
                        .contentEquals(token.getValue())){
                 return doParse(function, tokenIndex, tokens);
             }
+        }
+        if(calculatorsForConstantNotation.containsKey(token.getValue())){
+            return calculatorsForConstantNotation.get(token.getValue());
         }
         return new Variable(token.getValue());
     }
@@ -45,8 +57,8 @@ public class IdentifierParser implements TokenParser{
     }
 
     private Calculator parseIntegral(Integral integral, int tokenIndex, List<Token> tokens){
-        double[] intLow       = new double[]{1,1};
-        double[] intHigh      = new double[]{1,1};
+        double[] intLow       = new double[]{1, 1};
+        double[] intHigh      = new double[]{1, 1};
         int      currentIndex = tokenIndex;
 
         currentIndex++;
@@ -55,8 +67,10 @@ public class IdentifierParser implements TokenParser{
                      .getValue());
 
         currentIndex++;
-        if(tokens.get(currentIndex).getValue().contentEquals(OperatorNotation.MINUS.getNotation())){
-            intLow[1]*=-1;
+        if(tokens.get(currentIndex)
+                 .getValue()
+                 .contentEquals(OperatorNotation.MINUS.getNotation())){
+            intLow[1] *= -1;
             currentIndex++;
         }
         consumeExpectedTokenType(MathElementType.NUMBER.toString(),
@@ -69,8 +83,10 @@ public class IdentifierParser implements TokenParser{
                      .getValue());
 
         currentIndex++;
-        if(tokens.get(currentIndex).getValue().contentEquals(OperatorNotation.MINUS.getNotation())){
-            intHigh[1]*=-1;
+        if(tokens.get(currentIndex)
+                 .getValue()
+                 .contentEquals(OperatorNotation.MINUS.getNotation())){
+            intHigh[1] *= -1;
             currentIndex++;
         }
         consumeExpectedTokenType(MathElementType.NUMBER.toString(),
@@ -93,10 +109,10 @@ public class IdentifierParser implements TokenParser{
         for(int i = 0; i < lengthOfIntegral - 1; i++){
             tokens.remove(tokenIndex + 1);
         }
-        if(intLow[0]*intLow[1] > intHigh[0]*intHigh[1]){
+        if(intLow[0] * intLow[1] > intHigh[0] * intHigh[1]){
             throw new RuntimeException("Invalid boundaries for Integral.");
         }
-        integral.setRange(new Range(intLow[0]*intLow[1], intHigh[0]*intHigh[1]));
+        integral.setRange(new Range(intLow[0] * intLow[1], intHigh[0] * intHigh[1]));
         integral.setTokenizedIntegrand(integrand);
         return integral;
     }
