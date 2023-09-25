@@ -2,14 +2,18 @@ package bg.sofia.tu.iti.math.context;
 
 import bg.sofia.tu.iti.math.core.calculator.spec.CalculatorAssociativity;
 import bg.sofia.tu.iti.math.core.calculator.spec.CalculatorSpec;
-import bg.sofia.tu.iti.math.expression.input.parser.FunctionDefinitionParser;
 import bg.sofia.tu.iti.math.expression.input.token.TokenTypeFactory;
+import bg.sofia.tu.iti.math.function.Absolute;
 import bg.sofia.tu.iti.math.function.Cosine;
 import bg.sofia.tu.iti.math.function.DegreesToRadiansConverter;
 import bg.sofia.tu.iti.math.function.Function;
 import bg.sofia.tu.iti.math.function.Integral;
-import bg.sofia.tu.iti.math.function.Logarithm;
+import bg.sofia.tu.iti.math.function.NaturalLogarithm;
+import bg.sofia.tu.iti.math.function.Signum;
 import bg.sofia.tu.iti.math.function.Sine;
+import bg.sofia.tu.iti.math.function.CommonLogarithm;
+import bg.sofia.tu.iti.math.function.SquareRoot;
+import bg.sofia.tu.iti.math.function.Tangent;
 import bg.sofia.tu.iti.math.operator.type.OperatorType;
 
 import java.util.ArrayList;
@@ -26,9 +30,14 @@ public class MathContextFactory{
         //@formatter:off
         functions.add(new Sine());
         functions.add(new Cosine());
+        functions.add(new Tangent());
         functions.add(new DegreesToRadiansConverter());
-        functions.add(new Logarithm());
+        functions.add(new NaturalLogarithm());
+        functions.add(new CommonLogarithm());
         functions.add(new Integral());
+        functions.add(new Absolute());
+        functions.add(new Signum());
+        functions.add(new SquareRoot());
         //@formatter:on
         return functions;
     }

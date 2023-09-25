@@ -20,8 +20,9 @@ public class Tokenizer{
     }
 
     public List<Token> tokenize(String expression){
-        List<Token> tokens = tokenizeExpression(stripWhitespace(expression));
-        evaluator.evaluate(tokens, expression);
+        String cleanExpression = stripWhitespace(expression);
+        List<Token> tokens = tokenizeExpression(cleanExpression);
+        evaluator.evaluate(tokens, cleanExpression);
         return tokens;
     }
 

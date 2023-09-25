@@ -5,14 +5,14 @@ import bg.sofia.tu.iti.math.function.type.FunctionCalculatorType;
 
 import java.util.Stack;
 
-public class Logarithm extends Function{
-    public Logarithm() {
-        super(FunctionCalculatorType.LOGARITHM.getNotation(), 1);
+public class NaturalLogarithm extends Function{
+    public NaturalLogarithm() {
+        super(FunctionCalculatorType.NATURAL_LOGARITHM.getNotation(), 1);
     }
 
     @Override
     public Calculation calculate(Stack<Double> arguments) {
         double operand = arguments.pop();
-        return new Calculation("log(" + operand + ")", Math.log(operand));
+        return new Calculation("ln(" + operand + ")", Math.log(operand));
     }
 }

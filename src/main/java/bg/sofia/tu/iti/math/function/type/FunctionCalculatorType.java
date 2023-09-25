@@ -5,9 +5,14 @@ import bg.sofia.tu.iti.math.core.Notation;
 public enum FunctionCalculatorType implements Notation{
     SINE("sin"),
     COSINE("cos"),
+    TANGENT("tan"),
     TO_RADIANS("rad"),
-    LOGARITHM("log"),
-    INTEGRAL("Int");
+    NATURAL_LOGARITHM("ln"),
+    COMMON_LOGARITHM("lg"),
+    INTEGRAL("Int"),
+    ABSOLUTE("abs"),
+    SIGNUM("sign"),
+    SQRT("sqrt");
 
     private final String notation;
 
